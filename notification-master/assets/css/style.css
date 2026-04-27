@@ -1,0 +1,129 @@
+.ntfm-subscribe-btn{
+	border: none;
+	display: inline-block;
+	cursor: pointer;
+    box-sizing: border-box;
+	line-height: normal;
+	transition: all 0.3s;
+    text-align: center;
+}
+
+.notification-master-unsubscribe, .notification-master-unsubscribe.ntfm-subscribe-floating-btn{
+    display: none;
+}
+
+.ntfm-subscribe-btn.subscribed{
+    filter: drop-shadow(0 2px 4px rgb(34 36 38 / .35));
+    opacity: .5;
+}
+
+.ntfm-subscribe-floating-btn{
+    position: fixed;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none !important;
+    cursor: pointer;
+    text-align: center;
+}
+
+.ntfm-subscribe-floating-btn.subscribed {
+    filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));
+    opacity: 0.5;
+}
+
+.ntfm-subscribe-floating-btn.subscribed {
+    filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));
+    opacity: 0.5;
+}
+
+.ntfm-subscribe-floating-btn svg {
+    width: 30px;
+    height: 30px;
+}
+
+.ntfm-subscribe-floating-btn.animated:not(.subscribed) svg{
+	animation: moveButton 1s ease-in-out infinite;	
+}
+
+.ntfm-subscribe-floating-btn-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px 10px;
+    position: absolute;
+    bottom: 60px; /* Distance above the button */
+    right: 50%;
+    transform: translateX(50%);
+    white-space: nowrap;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
+    z-index: 9998;
+}
+
+.ntfm-subscribe-floating-btn:hover .ntfm-subscribe-floating-btn-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.ntfm-subscribe-floating-btn-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+@keyframes moveButton {
+    0% { transform: translateX(2px); }
+    50% { transform: translateX(-2px); }
+    100% { transform: translateX(2px); }
+}
+
+.ntfm-subscribe-floating-btn.animated:not(.subscribed)::before, .ntfm-subscribe-floating-btn.animated:not(.subscribed)::after {
+	content: '';
+	position: absolute;
+	border-radius: 50%;
+	background: rgb(181 82 20 / 30%);
+	z-index: -1;
+	transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.ntfm-subscribe-floating-btn::before {
+	width: 60px;
+	height: 60px;
+	bottom: -5px;
+	right: -5px;
+	animation: backgroundCircle1 2s infinite;
+}
+
+.ntfm-subscribe-floating-btn::after {
+	width: 70px;
+	height: 70px;
+	bottom: -10px;
+	right: -9px;
+	animation: backgroundCircle2 2s infinite;
+}
+
+@keyframes backgroundCircle1 {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.2; }
+    100% { transform: scale(1); opacity: 0.5; }
+}
+
+@keyframes backgroundCircle2 {
+    0% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 0.3; }
+}

@@ -1,0 +1,3206 @@
+# Copyright (C) 2025 Notification Master
+# This file is distributed under the GNU General Public License v3.0 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Notification Master 1.6.9\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/notification-master\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-12-08T09:30:10+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: notification-master\n"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+#: C:/laragon/www/wordpress/wp-content/plugins/notification-master/notifications-master.php
+#: includes/admin/class-admin.php:161
+#: includes/admin/class-admin.php:162
+#: includes/admin/class-review-notice.php:106
+msgid "Notification Master"
+msgstr ""
+
+#. Description of the plugin
+#: C:/laragon/www/wordpress/wp-content/plugins/notification-master/notifications-master.php
+msgid "Enhance user engagement. Trigger notifications for events, support multiple channels like email and Discord, and personalize with dynamic merge tags. Easy setup and customization."
+msgstr ""
+
+#. Author URI of the plugin
+#: C:/laragon/www/wordpress/wp-content/plugins/notification-master/notifications-master.php
+msgid "https://notification-master.com"
+msgstr ""
+
+#. translators: %s: Media name
+#: includes/abstracts/class-media-trigger.php:55
+msgid "Media %s"
+msgstr ""
+
+#. translators: %s: Media name
+#: includes/abstracts/class-media-trigger.php:78
+msgid "Triggered when %s media."
+msgstr ""
+
+#. translators: %s: Plugin name
+#: includes/abstracts/class-plugin-trigger.php:46
+msgid "Plugin %s"
+msgstr ""
+
+#. translators: %s: Theme name
+#: includes/abstracts/class-theme-trigger.php:55
+msgid "Theme %s"
+msgstr ""
+
+#. translators: %s: User name
+#: includes/abstracts/class-user-trigger.php:55
+msgid "User %s"
+msgstr ""
+
+#: includes/admin/class-admin.php:182
+#: includes/admin/class-admin.php:183
+#: dist/index.js:38
+msgid "Home"
+msgstr ""
+
+#: includes/admin/class-admin.php:191
+#: includes/admin/class-admin.php:192
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Notifications"
+msgstr ""
+
+#: includes/admin/class-admin.php:200
+#: includes/admin/class-admin.php:201
+#: dist/index.js:42
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-admin.php:209
+#: includes/admin/class-admin.php:210
+#: dist/index.js:42
+msgid "Subscriptions"
+msgstr ""
+
+#: includes/admin/class-admin.php:218
+#: includes/admin/class-admin.php:219
+#: dist/index.js:42
+msgid "Notification Log"
+msgstr ""
+
+#: includes/admin/class-admin.php:227
+#: includes/admin/class-admin.php:228
+#: dist/index.js:42
+msgid "Debug Log"
+msgstr ""
+
+#: includes/admin/class-review-notice.php:110
+msgid "Enjoying Notification Master?"
+msgstr ""
+
+#: includes/admin/class-review-notice.php:115
+msgid "If you like this plugin, please leave me a <strong>★★★★★</strong> rating to support continued development. Thanks a bunch!"
+msgstr ""
+
+#: includes/admin/class-review-notice.php:122
+msgid "Rate Plugin"
+msgstr ""
+
+#: includes/admin/class-review-notice.php:125
+msgid "Maybe Later"
+msgstr ""
+
+#: includes/admin/class-review-notice.php:128
+msgid "I already did this"
+msgstr ""
+
+#: includes/class-notifications.php:65
+msgctxt "post type general name"
+msgid "Notifications"
+msgstr ""
+
+#: includes/class-notifications.php:66
+msgctxt "post type singular name"
+msgid "Notification"
+msgstr ""
+
+#: includes/class-notifications.php:67
+msgctxt "admin menu"
+msgid "Notifications"
+msgstr ""
+
+#: includes/class-notifications.php:68
+msgctxt "add new on admin bar"
+msgid "Notification"
+msgstr ""
+
+#: includes/class-notifications.php:69
+msgctxt "notification"
+msgid "Add New"
+msgstr ""
+
+#: includes/class-notifications.php:70
+#: dist/index.js:38
+msgid "Add New Notification"
+msgstr ""
+
+#: includes/class-notifications.php:71
+#: dist/index.js:42
+msgid "New Notification"
+msgstr ""
+
+#: includes/class-notifications.php:72
+#: dist/index.js:42
+msgid "Edit Notification"
+msgstr ""
+
+#: includes/class-notifications.php:73
+msgid "View Notification"
+msgstr ""
+
+#: includes/class-notifications.php:74
+msgid "All Notifications"
+msgstr ""
+
+#: includes/class-notifications.php:75
+msgid "Search Notifications"
+msgstr ""
+
+#: includes/class-notifications.php:76
+msgid "Parent Notifications:"
+msgstr ""
+
+#: includes/class-notifications.php:77
+msgid "No notifications found."
+msgstr ""
+
+#: includes/class-notifications.php:78
+msgid "No notifications found in Trash."
+msgstr ""
+
+#: includes/class-notifications.php:83
+msgid "Description."
+msgstr ""
+
+#: includes/class-notifications.php:115
+msgid "Notification trigger."
+msgstr ""
+
+#: includes/class-notifications.php:132
+msgid "Notification connection."
+msgstr ""
+
+#: includes/class-notifications.php:137
+msgid "Connection enabled."
+msgstr ""
+
+#: includes/class-notifications.php:141
+msgid "Connection name."
+msgstr ""
+
+#: includes/class-notifications.php:145
+msgid "Connection integration."
+msgstr ""
+
+#: includes/class-notifications.php:149
+msgid "Connection settings."
+msgstr ""
+
+#: includes/class-plugin.php:228
+msgid "Running cleanup task for failed subscriptions..."
+msgstr ""
+
+#: includes/class-plugin.php:236
+msgid "Auto-delete is disabled. Skipping cleanup."
+msgstr ""
+
+#. translators: %d: number of deleted subscriptions
+#: includes/class-plugin.php:249
+msgid "Cleaned up %d old failed subscriptions."
+msgstr ""
+
+#: includes/class-plugin.php:256
+msgid "No old failed subscriptions found to clean up."
+msgstr ""
+
+#: includes/class-utils.php:98
+#: includes/class-utils.php:126
+msgid "Comment"
+msgstr ""
+
+#: includes/class-utils.php:99
+#: includes/class-utils.php:127
+msgid "Pingback"
+msgstr ""
+
+#: includes/class-utils.php:100
+#: includes/class-utils.php:128
+msgid "Trackback"
+msgstr ""
+
+#: includes/class-utils.php:207
+msgid "Media"
+msgstr ""
+
+#: includes/class-utils.php:214
+#: includes/merge-tags/user/class-user.php:47
+#: dist/index.js:1
+msgid "User"
+msgstr ""
+
+#: includes/class-utils.php:221
+msgid "Theme"
+msgstr ""
+
+#: includes/class-utils.php:228
+msgid "Plugin"
+msgstr ""
+
+#: includes/class-utils.php:235
+#: dist/index.js:1
+msgid "Privacy"
+msgstr ""
+
+#. translators: %1$s: endpoint, %2$d: failure count
+#: includes/db/models/class-subscription-model.php:470
+msgid "Auto-deleted subscription %1$s after %2$d failed attempts."
+msgstr ""
+
+#: includes/integrations/class-discord-integration.php:62
+#: includes/integrations/class-email-integration.php:172
+#: includes/integrations/class-instagram-integration.php:383
+#: includes/integrations/class-webhook-integration.php:62
+msgid "Invalid attributes."
+msgstr ""
+
+#: includes/integrations/class-discord-integration.php:120
+#: includes/integrations/class-discord-integration.php:136
+#: includes/integrations/class-webhook-integration.php:128
+msgid "Error sending request."
+msgstr ""
+
+#: includes/integrations/class-discord-integration.php:148
+msgid "Request sent successfully."
+msgstr ""
+
+#: includes/integrations/class-email-integration.php:78
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: includes/integrations/class-email-integration.php:88
+msgid "Email is required."
+msgstr ""
+
+#: includes/integrations/class-email-integration.php:98
+msgid "Subject is required."
+msgstr ""
+
+#: includes/integrations/class-email-integration.php:108
+msgid "Body is required."
+msgstr ""
+
+#: includes/integrations/class-email-integration.php:125
+#: includes/integrations/class-email-integration.php:238
+msgid "Email sent successfully."
+msgstr ""
+
+#: includes/integrations/class-email-integration.php:131
+#: includes/integrations/class-email-integration.php:225
+msgid "Failed to send email."
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:89
+#: includes/integrations/class-instagram-integration.php:98
+#: includes/integrations/class-instagram-integration.php:208
+#: includes/integrations/class-instagram-integration.php:213
+msgid "Error, Unable to get Instagram account."
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:120
+#: includes/integrations/class-instagram-integration.php:163
+msgid "Error, There is no authorize code passed!"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:132
+msgid "Authorization Complete"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:135
+msgid "The account is added successfully. If this window isn't closed automatically."
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:185
+#: includes/integrations/class-instagram-integration.php:194
+msgid "Error, Unable to generate access token."
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:202
+#: includes/integrations/class-instagram-integration.php:269
+#: includes/integrations/class-instagram-integration.php:276
+msgid "Error, Unable to generate long lived token."
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:310
+#: includes/integrations/class-instagram-integration.php:318
+msgid "Error refreshing access token."
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:422
+msgid "Missing required credentials (access_token, app_id, or app_secret)."
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:434
+msgid "Missing required image URL."
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:469
+msgid "Error creating media container"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:484
+msgid "Failed to create media container"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:513
+msgid "Error publishing media"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:531
+msgid "Successfully published to Instagram"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:543
+msgid "Failed to publish to Instagram"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:596
+msgid "Instagram App ID"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:602
+msgid "Instagram App Secret"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:608
+msgid "Instagram Access Token"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:617
+msgid "Instagram User ID"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:623
+msgid "Post caption"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:629
+msgid "Image alt text for accessibility"
+msgstr ""
+
+#: includes/integrations/class-instagram-integration.php:635
+msgid "URL of the image to post"
+msgstr ""
+
+#: includes/integrations/class-loader.php:162
+msgid "Facebook"
+msgstr ""
+
+#: includes/integrations/class-loader.php:163
+msgid "Send notifications to Facebook."
+msgstr ""
+
+#: includes/integrations/class-loader.php:167
+msgid "X"
+msgstr ""
+
+#: includes/integrations/class-loader.php:168
+msgid "Send notifications to TwitterX."
+msgstr ""
+
+#: includes/integrations/class-loader.php:172
+msgid "Twilio"
+msgstr ""
+
+#: includes/integrations/class-loader.php:173
+msgid "Send notifications to twilio."
+msgstr ""
+
+#: includes/integrations/class-loader.php:177
+msgid "Slack"
+msgstr ""
+
+#: includes/integrations/class-loader.php:178
+msgid "Send notifications to Slack."
+msgstr ""
+
+#: includes/integrations/class-loader.php:182
+msgid "Zapier"
+msgstr ""
+
+#: includes/integrations/class-loader.php:183
+msgid "Send notifications to Zapier."
+msgstr ""
+
+#: includes/integrations/class-loader.php:187
+msgid "Make"
+msgstr ""
+
+#: includes/integrations/class-loader.php:188
+msgid "Send notifications to Make."
+msgstr ""
+
+#: includes/integrations/class-loader.php:192
+msgid "WhatsApp"
+msgstr ""
+
+#: includes/integrations/class-loader.php:193
+msgid "Send your notifications to WhatsApp."
+msgstr ""
+
+#: includes/integrations/class-webhook-integration.php:142
+#: includes/integrations/class-webpush-integration.php:314
+msgid "Notification sent successfully."
+msgstr ""
+
+#: includes/integrations/class-webpush-integration.php:88
+msgid "WebPush is not configured."
+msgstr ""
+
+#: includes/integrations/class-webpush-integration.php:101
+msgid "Invalid attributes"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment-author.php:31
+msgid "%s Author"
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment-author.php:55
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:54
+msgid "Author IP"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment-author.php:57
+msgid "The IP of the author of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment-author.php:60
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:59
+msgid "Author Agent"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment-author.php:62
+msgid "The agent of the author of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment-author.php:65
+#: includes/merge-tags/media/class-attachment-author.php:60
+msgid "Author ID"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment-author.php:67
+msgid "The ID of the author of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment-author.php:70
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:64
+msgid "Author Name"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment-author.php:72
+msgid "The name of the author of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment-author.php:75
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:69
+#: includes/merge-tags/media/class-attachment-author.php:72
+msgid "Author Email"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment-author.php:77
+msgid "The email of the author of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment-author.php:80
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:74
+msgid "Author URL"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment-author.php:82
+msgid "The URL of the author of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment-author.php:85
+msgid "Author Avatar URL"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment-author.php:87
+msgid "The avatar of the author of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:53
+#: includes/merge-tags/comment-type/class-parent-comment.php:54
+#: includes/merge-tags/post-type/class-post-author.php:54
+#: includes/merge-tags/post-type/class-post-last-editor.php:54
+#: includes/merge-tags/post-type/class-post.php:52
+#: includes/merge-tags/post-type/traits/class-post-user.php:28
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "ID"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment.php:55
+msgid "The ID of the %1s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:58
+#: includes/merge-tags/comment-type/class-parent-comment.php:59
+#: includes/merge-tags/post-type/class-post.php:62
+#: dist/index.js:1
+msgid "Content"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment.php:60
+msgid "The content of the %1s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:63
+#: includes/merge-tags/comment-type/class-parent-comment.php:64
+#: includes/merge-tags/post-type/class-post.php:102
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Status"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment.php:65
+msgid "The status of the %1s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:68
+#: includes/merge-tags/comment-type/class-parent-comment.php:69
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Type"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment.php:70
+msgid "The type of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:73
+msgid "Date/Time"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-comment.php:75
+msgid "The date/time of the %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:103
+#: includes/merge-tags/comment-type/class-parent-comment.php:104
+msgid "Approved"
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:105
+#: includes/merge-tags/comment-type/class-parent-comment.php:106
+msgid "Pending"
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:107
+#: includes/merge-tags/comment-type/class-parent-comment.php:108
+msgid "Spam"
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:109
+#: includes/merge-tags/comment-type/class-parent-comment.php:110
+msgid "Trash"
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-comment.php:111
+#: includes/merge-tags/comment-type/class-parent-comment.php:112
+msgid "Unknown"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:30
+msgid "Parent %s Author"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:56
+msgid "The IP of the author of the parent %s."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:61
+msgid "The agent of the author of the parent %s."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:66
+msgid "The name of the author of the parent %s."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:71
+msgid "The email of the author of the parent %s."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:76
+msgid "The URL of the author of the parent %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:79
+#: includes/merge-tags/media/class-attachment-author.php:88
+msgid "Author Avatar"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment-author.php:81
+msgid "The avatar of the author of the parent %s."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment.php:30
+msgid "Parent %s"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment.php:56
+msgid "The ID of the parent %s."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment.php:61
+msgid "The content of the parent %s."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment.php:66
+msgid "The status of the parent %s."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment.php:71
+msgid "The type of the parent %s."
+msgstr ""
+
+#: includes/merge-tags/comment-type/class-parent-comment.php:74
+msgid "Date Time"
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/merge-tags/comment-type/class-parent-comment.php:76
+msgid "The date time of the parent %s."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:51
+msgid "Blog Name"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:52
+msgid "The name of the blog."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:55
+msgid "Blog Description"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:56
+msgid "The description of the blog."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:59
+msgid "Blog URL"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:60
+msgid "The URL of the blog."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:63
+msgid "Admin Email"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:64
+msgid "The email address of the admin."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:67
+msgid "Admin URL"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:68
+msgid "The URL of the admin."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:71
+msgid "Home URL"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:72
+msgid "The URL of the home page."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:75
+msgid "Site URL"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:76
+msgid "The URL of the site."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:79
+msgid "Site Icon"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:80
+msgid "The site icon."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:83
+msgid "WordPress Version"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:84
+msgid "The version of WordPress."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:87
+msgid "WordPress Language"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:88
+msgid "The language of WordPress."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:91
+msgid "Current Time"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:92
+msgid "The current time."
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:95
+msgid "Current Date"
+msgstr ""
+
+#: includes/merge-tags/general/class-general.php:96
+msgid "The current date."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:61
+msgid "The ID of the author."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:64
+msgid "Author Display Name"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:65
+msgid "The display name of the author."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:68
+msgid "Author User Login"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:69
+msgid "The user login of the author."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:73
+msgid "The email of the author."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:76
+msgid "Author First Name"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:77
+msgid "The first name of the author."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:80
+msgid "Author Last Name"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:81
+msgid "The last name of the author."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:84
+msgid "Author Nickname"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:85
+msgid "The nickname of the author."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment-author.php:89
+msgid "The avatar of the author."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:58
+msgid "Attachment ID"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:59
+msgid "The ID of the attachment."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:62
+msgid "Attachment URL"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:63
+msgid "The URL of the attachment."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:66
+msgid "Attachment Name"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:67
+msgid "The name of the attachment."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:70
+msgid "Attachment Type"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:71
+msgid "The type of the attachment."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:74
+msgid "Attachment Size"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:75
+msgid "The size of the attachment."
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:78
+msgid "Attachment Date"
+msgstr ""
+
+#: includes/merge-tags/media/class-attachment.php:79
+msgid "The date of the attachment."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:60
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:83
+#: includes/merge-tags/theme/traits/class-theme.php:27
+#: dist/index.js:1
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Name"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:61
+msgid "The name of the plugin."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:64
+#: includes/merge-tags/theme/traits/class-theme.php:31
+msgid "Version"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:65
+msgid "The version of the plugin."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:68
+#: includes/merge-tags/theme/traits/class-theme.php:35
+#: dist/index.js:1
+msgid "Author"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:69
+msgid "The author of the plugin."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:72
+#: includes/merge-tags/theme/traits/class-theme.php:39
+msgid "Author URI"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:73
+msgid "The author URI of the plugin."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:76
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:68
+#: includes/merge-tags/theme/traits/class-theme.php:43
+#: dist/index.js:1
+msgid "Description"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:77
+msgid "The description of the plugin."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:80
+msgid "Plugin URI"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:81
+msgid "The plugin URI of the plugin."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:84
+#: includes/merge-tags/theme/traits/class-theme.php:55
+msgid "Text Domain"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:85
+msgid "The text domain of the plugin."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:88
+#: includes/merge-tags/theme/traits/class-theme.php:59
+msgid "Domain Path"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:89
+msgid "The domain path of the plugin."
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:92
+msgid "File"
+msgstr ""
+
+#: includes/merge-tags/plugin/class-plugin.php:93
+msgid "The file of the plugin."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-acf-fields.php:59
+msgid "%s ACF Fields"
+msgstr ""
+
+#. translators: %1$s: Field type, %2$s: Field name
+#: includes/merge-tags/post-type/class-post-acf-fields.php:137
+#: includes/merge-tags/user/class-user-acf-fields.php:157
+msgid "ACF field of type %1$s with name %2$s."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:30
+msgid "%1s Author"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:56
+msgid "The ID of the %s author."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post-author.php:59
+#: includes/merge-tags/post-type/class-post-last-editor.php:59
+#: includes/merge-tags/post-type/traits/class-post-user.php:33
+#: includes/merge-tags/user/class-user.php:85
+msgid "Display Name"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:61
+msgid "The display name of the %s author."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post-author.php:64
+#: includes/merge-tags/post-type/class-post-last-editor.php:64
+#: includes/merge-tags/post-type/traits/class-post-user.php:38
+#: includes/merge-tags/user/class-user.php:77
+msgid "Username"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:66
+msgid "The username of the %s author."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post-author.php:69
+#: includes/merge-tags/post-type/class-post-last-editor.php:69
+#: includes/merge-tags/post-type/traits/class-post-user.php:43
+#: includes/merge-tags/user/class-user.php:81
+msgid "Email"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:71
+msgid "The email of the %s author."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post-author.php:74
+#: includes/merge-tags/post-type/class-post-last-editor.php:74
+#: includes/merge-tags/post-type/traits/class-post-user.php:48
+#: includes/merge-tags/user/class-user.php:89
+msgid "First Name"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:76
+msgid "The first name of the %s author."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post-author.php:79
+#: includes/merge-tags/post-type/class-post-last-editor.php:79
+#: includes/merge-tags/post-type/traits/class-post-user.php:53
+#: includes/merge-tags/user/class-user.php:93
+msgid "Last Name"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:81
+msgid "The last name of the %s author."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post-author.php:84
+#: includes/merge-tags/post-type/class-post-last-editor.php:84
+#: includes/merge-tags/post-type/traits/class-post-user.php:58
+msgid "Nickname"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:86
+msgid "The nickname of the %s author."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post-author.php:89
+#: includes/merge-tags/post-type/class-post-last-editor.php:89
+#: includes/merge-tags/post-type/traits/class-post-user.php:63
+#: includes/merge-tags/user/class-user.php:101
+msgid "Avatar"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-author.php:91
+msgid "The avatar of the %s author."
+msgstr ""
+
+#. translators: %s Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:30
+msgid "%s Last Editor"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:56
+msgid "The ID of the %s last editor."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:61
+msgid "The display name of the %s last editor."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:66
+msgid "The username of the %s last editor."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:71
+msgid "The email of the %s last editor."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:76
+msgid "The first name of the %s last editor."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:81
+msgid "The last name of the %s last editor."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:86
+msgid "The nickname of the %s last editor."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post-last-editor.php:91
+msgid "The avatar of the %s last editor."
+msgstr ""
+
+#. translators: %s Post type singular name
+#: includes/merge-tags/post-type/class-post-publishing-user.php:31
+msgid "%s Publishing User"
+msgstr ""
+
+#. translators: %s Post type singular name
+#: includes/merge-tags/post-type/class-post-scheduling-user.php:31
+msgid "%s Scheduling User"
+msgstr ""
+
+#. translators: %s Post type singular name
+#: includes/merge-tags/post-type/class-post-trashing-user.php:31
+msgid "%s Trashing User"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:54
+msgid "The ID of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:57
+#: dist/index.js:1
+#: dist/index.js:11
+#: dist/index.js:38
+msgid "Title"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:59
+msgid "The title of the %s."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:64
+msgid "The content of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:67
+msgid "Excerpt"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:69
+msgid "The excerpt of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:72
+msgid "Featured Image ID"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:74
+msgid "The featured image ID of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:77
+msgid "Featured Image URL"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:79
+msgid "The featured image URL of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:82
+msgid "Thumbnail URL"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:84
+msgid "The thumbnail URL of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:87
+#: dist/index.js:1
+msgid "Format"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:89
+msgid "The format of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:92
+msgid "Permalink"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:94
+msgid "The permalink of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:97
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:87
+msgid "Slug"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:99
+msgid "The slug of the %s."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:104
+msgid "The status of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:107
+msgid "Published Date"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:109
+msgid "The published date of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:112
+msgid "Modified Date"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:114
+msgid "The modified date of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:122
+msgid "Categories"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:124
+msgid "The categories of the %s."
+msgstr ""
+
+#: includes/merge-tags/post-type/class-post.php:131
+msgid "Tags"
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/class-post.php:133
+msgid "The tags of the %s."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/traits/class-post-user.php:30
+msgid "The ID of the %s user."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/traits/class-post-user.php:35
+msgid "The display name of the %s user."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/traits/class-post-user.php:40
+msgid "The username of the %s user."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/traits/class-post-user.php:45
+msgid "The email of the %s user."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/traits/class-post-user.php:50
+msgid "The first name of the %s user."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/traits/class-post-user.php:55
+msgid "The last name of the %s user."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/traits/class-post-user.php:60
+msgid "The nickname of the %s user."
+msgstr ""
+
+#. translators: %s: Post type singular name
+#: includes/merge-tags/post-type/traits/class-post-user.php:65
+msgid "The avatar of the %s user."
+msgstr ""
+
+#: includes/merge-tags/privacy/class-archive.php:60
+msgid "Archive Pathname"
+msgstr ""
+
+#: includes/merge-tags/privacy/class-archive.php:61
+msgid "The pathname of the archive."
+msgstr ""
+
+#: includes/merge-tags/privacy/class-archive.php:64
+msgid "Archive URL"
+msgstr ""
+
+#: includes/merge-tags/privacy/class-archive.php:65
+msgid "The URL of the archive."
+msgstr ""
+
+#: includes/merge-tags/privacy/class-archive.php:68
+msgid "HTML Report Pathname"
+msgstr ""
+
+#: includes/merge-tags/privacy/class-archive.php:69
+msgid "The pathname of the HTML report."
+msgstr ""
+
+#: includes/merge-tags/privacy/class-archive.php:72
+msgid "JSON Report Pathname"
+msgstr ""
+
+#: includes/merge-tags/privacy/class-archive.php:73
+msgid "The pathname of the JSON report."
+msgstr ""
+
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:53
+msgid "Term ID"
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:55
+msgid "The ID of the %s term."
+msgstr ""
+
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:58
+msgid "Term Name"
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:60
+msgid "The name of the %s term."
+msgstr ""
+
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:63
+msgid "Term Slug"
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:65
+msgid "The slug of the %s term."
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:70
+msgid "The description of the %s term."
+msgstr ""
+
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:73
+#: dist/index.js:1
+msgid "URL"
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:75
+msgid "The URL of the %s term."
+msgstr ""
+
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:78
+msgid "Action Date"
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:80
+msgid "The date of the action for the %s term."
+msgstr ""
+
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:84
+msgid "The Taxonomy name."
+msgstr ""
+
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:88
+msgid "The Taxonomy slug."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:28
+msgid "The name of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:32
+msgid "The version of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:36
+msgid "The author of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:40
+msgid "The author URI of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:44
+msgid "The description of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:47
+msgid "Template"
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:48
+msgid "The template of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:51
+msgid "Stylesheet"
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:52
+msgid "The stylesheet of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:56
+msgid "The text domain of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:60
+msgid "The domain path of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:63
+msgid "Theme URI"
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:64
+msgid "The theme URI of the theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:67
+msgid "Is Child Theme"
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:68
+msgid "Whether the theme is a child theme."
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:71
+msgid "Parent Theme"
+msgstr ""
+
+#: includes/merge-tags/theme/traits/class-theme.php:72
+msgid "The parent theme of the theme."
+msgstr ""
+
+#: includes/merge-tags/user/class-user-acf-fields.php:66
+msgid "User ACF Fields"
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:73
+msgid "User ID"
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:74
+msgid "The ID of the user."
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:78
+msgid "The username of the user."
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:82
+msgid "The email address of the user."
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:86
+msgid "The display name of the user."
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:90
+msgid "The first name of the user."
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:94
+msgid "The last name of the user."
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:97
+msgid "Bio"
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:98
+msgid "The bio of the user."
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:102
+msgid "The avatar of the user."
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:105
+#: dist/index.js:1
+msgid "Role"
+msgstr ""
+
+#: includes/merge-tags/user/class-user.php:106
+msgid "The role of the user."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-logs-controller.php:51
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:51
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:50
+msgid "Current page."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-logs-controller.php:56
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:56
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:55
+msgid "Number of items per page."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-logs-controller.php:61
+msgid "Log type."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-logs-controller.php:73
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:73
+msgid "Log IDs."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:51
+msgid "Trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:61
+msgid "Log status."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:79
+msgid "Enable background processing."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:84
+msgid "Post status change trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:88
+msgid "Post types."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:95
+msgid "Taxonomy term change trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:99
+msgid "Taxonomies."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:106
+msgid "Comment change trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:110
+msgid "Comment types."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:117
+msgid "User change trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:121
+msgid "Theme change trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:125
+msgid "Plugin change trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:129
+msgid "Media change trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:133
+msgid "Privacy trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:137
+msgid "WooCommerce change trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:141
+msgid "Delete logs every."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:145
+msgid "Notifications delete logs every."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:149
+msgid "Web Push Public Key."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:153
+msgid "Web Push Private Key."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:157
+msgid "Web Push Action Type."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:161
+msgid "Enable automatic deletion of failed subscriptions."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:165
+msgid "Number of consecutive failures before auto-deleting subscription."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:171
+msgid "Auto delete subscription after failed attempts."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:195
+#: includes/webpush/class-loader.php:347
+msgid "Subscribe to Notifications!"
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:203
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:210
+#: includes/webpush/class-loader.php:355
+#: includes/webpush/class-loader.php:392
+#: includes/webpush/class-loader.php:791
+msgid "Unsubscribe!"
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:209
+#: includes/webpush/class-loader.php:391
+msgid "Subscribe!"
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:244
+#: includes/webpush/class-loader.php:100
+msgid "Welcome!"
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:245
+#: includes/webpush/class-loader.php:101
+msgid "Thanks for subscribing to our notifications!"
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:60
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:111
+msgid "Status."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:72
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:159
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:179
+msgid "Endpoint."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:77
+msgid "Auth."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:82
+msgid "P256dh."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:94
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:106
+msgid "Subscription IDs."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:125
+msgid "Subscription ID."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:267
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:364
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:400
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:433
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:467
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:501
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:538
+msgid "Invalid data."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/triggers/comment/class-comment-added.php:60
+msgid "When a %s - comment is added."
+msgstr ""
+
+#. translators: %s: Comment type name
+#: includes/triggers/comment/class-comment-trashed.php:60
+msgid "When a %s - comment is trashed."
+msgstr ""
+
+#: includes/triggers/plugin/class-plugin-activated.php:70
+msgid "This trigger fires when a plugin is activated."
+msgstr ""
+
+#: includes/triggers/plugin/class-plugin-deactivated.php:70
+msgid "This trigger fires when a plugin is deactivated."
+msgstr ""
+
+#: includes/triggers/plugin/class-plugin-installed.php:72
+msgid "This trigger fires when a plugin is installed."
+msgstr ""
+
+#: includes/triggers/plugin/class-plugin-updated.php:89
+msgid "Old Version"
+msgstr ""
+
+#: includes/triggers/plugin/class-plugin-updated.php:90
+msgid "The old version of the plugin."
+msgstr ""
+
+#: includes/triggers/plugin/class-plugin-updated.php:108
+msgid "This trigger fires when a plugin is updated."
+msgstr ""
+
+#. translators: %s: Trigger name
+#: includes/triggers/post/class-post-published-privately.php:67
+msgid "When a %s is published privately."
+msgstr ""
+
+#. translators: %s: Trigger name
+#: includes/triggers/post/class-post-published.php:68
+msgid "This trigger will send a notification when a %s is published."
+msgstr ""
+
+#. translators: %s: Trigger name
+#: includes/triggers/post/class-post-scheduled.php:67
+msgid "When a %s is scheduled."
+msgstr ""
+
+#. translators: %s: Trigger name
+#: includes/triggers/post/class-post-sent-to-review.php:67
+msgid "When a %s is sent to review."
+msgstr ""
+
+#. translators: %s: Trigger name
+#: includes/triggers/post/class-post-trashed.php:68
+msgid "When a %s is trashed."
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/triggers/taxonomy/class-taxonomy-created.php:67
+msgid "This trigger will be fired when a new %s is created."
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/triggers/taxonomy/class-taxonomy-deleted.php:67
+msgid "When a %s is deleted."
+msgstr ""
+
+#: includes/triggers/taxonomy/class-taxonomy-deleted.php:91
+msgid "N/A"
+msgstr ""
+
+#. translators: %s: Taxonomy singular name
+#: includes/triggers/taxonomy/class-taxonomy-updated.php:67
+msgid "When a %s is updated."
+msgstr ""
+
+#: includes/triggers/theme/class-theme-installed.php:56
+msgid "This trigger will be fired when a theme is installed."
+msgstr ""
+
+#: includes/triggers/theme/class-theme-switched.php:65
+msgid "This trigger fires when a theme is switched."
+msgstr ""
+
+#: includes/triggers/theme/class-theme-updated.php:65
+msgid "This trigger will be fired when a theme is updated."
+msgstr ""
+
+#: includes/triggers/user/class-user-login.php:86
+msgid "IP Address"
+msgstr ""
+
+#: includes/triggers/user/class-user-login.php:87
+msgid "The IP address of the user."
+msgstr ""
+
+#: includes/triggers/user/class-user-registration.php:86
+msgid "Password Set Link"
+msgstr ""
+
+#: includes/triggers/user/class-user-registration.php:87
+msgid "The link to set the user's password."
+msgstr ""
+
+#. translators: %1$s: role name, %2$d: users count.
+#: includes/users/class-users.php:66
+msgid "All users with the role %1$s. (%2$d)"
+msgstr ""
+
+#: includes/webpush/class-loader.php:160
+msgid "Welcome notification sent successfully."
+msgstr ""
+
+#: includes/webpush/class-loader.php:744
+msgid "Invalid response."
+msgstr ""
+
+#: includes/webpush/class-loader.php:792
+msgid "Your browser does not support push notifications, if you are using iPhone/iPad, please add this website to your home screen to receive notifications."
+msgstr ""
+
+#: includes/webpush/class-loader.php:793
+msgid "You have denied the permission to send notifications. Please allow it to subscribe to push notifications."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select a user"
+msgstr ""
+
+#: dist/index.js:1
+msgid "No users found"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select Type"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Custom"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Email Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to set up email notifications."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Find out more"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Email Addresses"
+msgstr ""
+
+#: dist/index.js:1
+msgid "You can use merge tags. For example, you can use {{general.admin_email}} to send the email to the admin email address."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select Role"
+msgstr ""
+
+#: dist/index.js:1
+msgid "example@domain.com or {{general.admin_email}}"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add Email"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Exclude Email Addresses"
+msgstr ""
+
+#: dist/index.js:1
+msgid "You can use merge tags. For example, you can use {{general.admin_email}} to exclude the admin email address."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Subject"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:11
+msgid "Message"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Merge Tags"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Webhook Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to setup webhooks."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Method"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Headers"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Key"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Value"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add Header"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Body"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add Field"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select Format"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Show Empty Fields"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Discord Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to setup Discord Webhook."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Title Link"
+msgstr ""
+
+#: dist/index.js:1
+msgid "This will be the main content of the message."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Allows you to add dynamic content to the author."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Icon URL"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Fields"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Label"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Inline"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Notification Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to setup webpush notifications."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Send To"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select who to send the notification to"
+msgstr ""
+
+#: dist/index.js:1
+msgid "All Users"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Specific Users"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Note: User should have subscribed to web push notifications to receive the notification."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add New User"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Merge Tag / ID"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the ID of the user or a merge tag e.g. {{order.customer_id}}"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Please select a user or enter a merge tag."
+msgstr ""
+
+#: dist/index.js:1
+msgid "User is already added."
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Add"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add User"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the title of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the message of the notification"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Icon"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the icon URL of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Image"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the image URL of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the URL of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Urgency"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select the urgency of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Very Low"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Low"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Normal"
+msgstr ""
+
+#: dist/index.js:1
+msgid "High"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Access token generated successfully."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Please enter your App ID and App Secret"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Instagram Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Please make sure your WordPress admin URL is SSL secured. Instagram requires SSL for the redirect URL."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to get the access token."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Redirect URL"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Click to copy"
+msgstr ""
+
+#: dist/index.js:1
+msgid "App ID"
+msgstr ""
+
+#: dist/index.js:1
+msgid "App Secret"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Loading..."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Regenerate Access Token"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Generate Access Token"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Caption"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter your post text"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Image URL"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Alt Text"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter your post alt text"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Documentation"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Supercharge Your Notifications Today 🚀"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Elevate your experience with Notification Master Pro! Unlock advanced features, seamless integrations, and take your notifications to the next level. Join the pro community now and transform how you communicate 🔥."
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:42
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Pro"
+msgstr ""
+
+#: dist/index.js:1
+msgid "WooCommerce"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the WooCommerce product, review, or order changes."
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Enable"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:11
+#: dist/index.js:38
+msgid "On"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:11
+#: dist/index.js:38
+msgid "Off"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Post status change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the post status changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Post types"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select the post types for which you want to send notifications when the post status changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select post types"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Taxonomy term change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the taxonomy term changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Taxonomies"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select the taxonomies for which you want to send notifications when the taxonomy term changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select taxonomies"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Comment change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the comment status changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Comment types"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select the comment types for which you want to send notifications when the comment status changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select comment types"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Media change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the media changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "User change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the user changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Theme change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the theme changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Plugin change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the plugin changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Process notifications in the background"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, notifications will be processed in the background. This will improve the performance of your website."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Delete Notification Logs Older Than: "
+msgstr ""
+
+#. translators: %s: Number of days
+#: dist/index.js:4
+msgid "All notification logs older than {%s} days will be deleted."
+msgstr ""
+
+#: dist/index.js:4
+msgid "Delete Debug Logs Older Than: "
+msgstr ""
+
+#. translators: %s: Number of days
+#: dist/index.js:7
+msgid "All debug logs older than {%s} days will be deleted."
+msgstr ""
+
+#: dist/index.js:7
+msgid "Important Setup Instructions:"
+msgstr ""
+
+#: dist/index.js:7
+msgid "Make sure you have allowed notifications in your browser and operating system settings."
+msgstr ""
+
+#: dist/index.js:7
+msgid "Check that you have enabled notifications for this site in your browser."
+msgstr ""
+
+#: dist/index.js:7
+msgid "If your device has \"Do Not Disturb\" mode enabled, please disable it to allow notifications."
+msgstr ""
+
+#: dist/index.js:7
+msgid "If you’re having trouble generating the keys, try temporarily disabling any caching plugins and try again."
+msgstr ""
+
+#. translators: %s is the contact form url
+#: dist/index.js:9
+msgid "If you face any issues with key generation or receiving notifications, please contact us via our <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Contact Form</a>."
+msgstr ""
+
+#. translators: %s is the documentation url
+#: dist/index.js:11
+msgid "For detailed instructions, please refer to the <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">documentation</a>."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Web Push Public Key"
+msgstr ""
+
+#: dist/index.js:11
+msgid "This key is used to identify your web push service. use your own key or generate a new one."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Web Push Private Key"
+msgstr ""
+
+#: dist/index.js:11
+msgid "This key is used to authenticate your web push service. use your own key or generate a new one."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Keys generated successfully"
+msgstr ""
+
+#: dist/index.js:11
+#: dist/index.js:42
+msgid "An error occurred"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Generate Keys"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Automatically save the keys after generating."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Welcome Notification"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Enable Welcome Notification"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Auto-Delete Failed Subscriptions"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Automatically remove subscriptions that fail repeatedly to keep your database clean and improve delivery performance."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Enable Auto-Delete"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Failure Threshold"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Number of consecutive failed notification attempts before automatically deleting the subscription. Recommended: 3-5 failures."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Enter number of failures (1-50)"
+msgstr ""
+
+#: dist/index.js:11
+msgid "How it works:"
+msgstr ""
+
+#: dist/index.js:11
+msgid "• When a notification successfully reaches a subscriber, their failure count resets to 0"
+msgstr ""
+
+#: dist/index.js:11
+msgid "• When a notification fails (invalid endpoint, expired subscription, etc.), the failure count increases by 1"
+msgstr ""
+
+#: dist/index.js:11
+msgid "• When the failure count reaches your threshold, the subscription is automatically deleted"
+msgstr ""
+
+#: dist/index.js:11
+msgid "• This helps maintain a clean subscriber list and improves overall delivery rates"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Subscribe Buttons"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Normal Button"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Use this shortcode to display the subscribe button:"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Text"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Unsubscribe Text"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Colors"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Color"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Background Color"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Hover"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Hover Color"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Hover Background Color"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Spacing"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Padding"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Top"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Right"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Bottom"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Left"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Margin"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Border"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Border Radius"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Advanced"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Extra Class"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Add extra class to the button for custom styling."
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Add ID to the button for custom styling."
+msgstr ""
+
+#: dist/index.js:20
+msgid "Floating Button"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Enable floating button to show a subscribe button on the all pages."
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "OR"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Use this shortcode to display the floating button on a specific page:"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Custom Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Icon Type"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Default"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Custom SVG Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Upload a custom SVG icon for the floating button. The icon will support color customization."
+msgstr ""
+
+#: dist/index.js:38
+msgid "WordPress Media Library is not available"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Select SVG Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Use this icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Please select an SVG file."
+msgstr ""
+
+#: dist/index.js:38
+msgid "Change Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Select Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Custom Icon Preview"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Remove"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Tooltip"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enable tooltip to show a message when user hover on the button. (Hover Effect will be shown in frontend)"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enable Tooltip"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Subscribe Text"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Animation"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enable Animation"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Animation Color"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Position"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Top Left"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Top Right"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Bottom Left"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Bottom Right"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Top Offset"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Bottom Offset (PX)"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Left Offset (PX)"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Right Offset"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Z-Index"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Icon Color"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Hover Icon Color"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Size"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Width"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Height"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Responsive"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Hide on Desktop"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Hide on Tablet"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Hide on Mobile"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Auto Display Web Push Prompt"
+msgstr ""
+
+#: dist/index.js:38
+msgid "If enabled, the web push prompt will be displayed automatically after user click on the page."
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Trigger"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Date"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Actions"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Is equal to"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Is not equal to"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Contains"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Does not contain"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Starts with"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Ends with"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Is greater than"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Is less than"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enable conditional logic"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Conditions"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Merge Tag"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Operator"
+msgstr ""
+
+#: dist/index.js:38
+msgid "AND"
+msgstr ""
+
+#: dist/index.js:38
+msgid "New connection"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Connection name is required"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Integration is required"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Please fill in all required fields"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Cancel"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Next"
+msgstr ""
+
+#: dist/index.js:38
+msgid "All changes will be lost. Are you sure?"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Yes"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "No"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Back"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Save"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Add connection"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Select integration"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Select the integration you'd like to use to send your notifications."
+msgstr ""
+
+#: dist/index.js:38
+msgid "Each integration has its own settings and requirements."
+msgstr ""
+
+#: dist/index.js:38
+msgid "This integration is not configured yet, please configure it first."
+msgstr ""
+
+#: dist/index.js:38
+msgid "Go to settings"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Connection name"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enable connection"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Invalid settings"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Close"
+msgstr ""
+
+#: dist/index.js:38
+msgid "No connections yet."
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Are you sure?"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Name:"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Integration:"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Failed to load merge tags"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Search merge tags"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Plugin Dependency Required"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Copy"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Copied to clipboard"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Connections"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enabled"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Delete"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Update"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Saved"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Action"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "View"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Integration"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Total"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Statistics"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Overview"
+msgstr ""
+
+#: dist/index.js:38
+msgid "View all logs to see more details"
+msgstr ""
+
+#: dist/index.js:38
+msgid "View all"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Success"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Failed"
+msgstr ""
+
+#: dist/index.js:38
+msgid "All"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Active"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Inactive"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Sort by"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Order"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Descending"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Ascending"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Search"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Bulk Actions"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Deactive"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Activate"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Notifications deleted successfully"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Notifications inactivated successfully"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Notifications activated successfully"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Could not apply bulk action"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Please select at least one notification"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:42
+msgid "Apply"
+msgstr ""
+
+#: dist/index.js:38
+msgid "None"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Notification status changed successfully"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Could not change notification status"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Trigger disabled from settings"
+msgstr ""
+
+#. translators: %s: date
+#: dist/index.js:40
+msgid "Published on %s"
+msgstr ""
+
+#: dist/index.js:40
+msgid "Edit"
+msgstr ""
+
+#: dist/index.js:40
+msgid "Duplicate"
+msgstr ""
+
+#. translators: %s: post title
+#: dist/index.js:42
+msgid "(Copy) %s"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Notification duplicated successfully"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Could not duplicate notification"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Notification deleted successfully"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Could not delete notification"
+msgstr ""
+
+#: dist/index.js:42
+msgid "No notifications found"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Are you sure you want to leave this page?"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Notification saved successfully"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Failed to save notification"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Failed to delete notification"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Back to Notifications"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Manage Web Push Subscriptions"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Total Subscriptions"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Transform Your Notifications Like Never Before 🚀"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Upgrade to Notification Master Pro and experience next-level notifications! Unlock exclusive features, seamless integrations, and powerful capabilities designed to keep you ahead. Take the leap today and redefine your communication strategy 🔥."
+msgstr ""
+
+#: dist/index.js:42
+msgid "General"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Triggers"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Web Push"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Settings saved successfully"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Failed to save settings"
+msgstr ""
+
+#: dist/index.js:42
+msgid "No logs found."
+msgstr ""
+
+#: dist/index.js:42
+msgid "Please select a log."
+msgstr ""
+
+#: dist/index.js:42
+msgid "Delete All"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Log Details"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Details"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Email Content"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Export All"
+msgstr ""
+
+#: dist/index.js:42
+msgid "Help"
+msgstr ""
