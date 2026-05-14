@@ -4,7 +4,7 @@
  *
  * Description: Enhance user engagement. Trigger notifications for events, support multiple channels like email and Discord, and personalize with dynamic merge tags. Easy setup and customization.
  *
- * Version: 1.6.9
+ * Version: 1.7.0
  *
  * Author: Notification Master
  *
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define notification-master constants.
-define( 'NOTIFICATION_MASTER_VERSION', '1.6.9' );
+define( 'NOTIFICATION_MASTER_VERSION', '1.7.0' );
 define( 'NOTIFICATION_MASTER_FILE', __FILE__ );
 define( 'NOTIFICATION_MASTER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'NOTIFICATION_MASTER_URL', plugin_dir_url( __FILE__ ) );

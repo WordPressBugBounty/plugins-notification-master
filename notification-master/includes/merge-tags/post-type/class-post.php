@@ -107,11 +107,13 @@ class Post extends Post_Merge_Tags_Group {
 					'name'        => __( 'Published Date', 'notification-master' ),
 					/* translators: %s: Post type singular name */
 					'description' => sprintf( __( 'The published date of the %s.', 'notification-master' ), $this->post_type_object->labels->singular_name ),
+					'type'        => 'datetime',
 				),
 				'modified_date'      => array(
 					'name'        => __( 'Modified Date', 'notification-master' ),
 					/* translators: %s: Post type singular name */
 					'description' => sprintf( __( 'The modified date of the %s.', 'notification-master' ), $this->post_type_object->labels->singular_name ),
+					'type'        => 'datetime',
 				),
 			)
 		);
@@ -360,6 +362,32 @@ class Post extends Post_Merge_Tags_Group {
 	 */
 	public function get_modified_date() {
 		return get_the_modified_date( '', $this->post->ID );
+	}
+
+	/**
+	 * Resolve date-typed tags to a UNIX timestamp using the underlying post
+	 * timestamps directly, avoiding the locale-formatted string round-trip.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $key Tag key.
+	 * @return int|null
+	 */
+	public function get_value_timestamp( $key ) {
+		if ( ! $this->post ) {
+			return parent::get_value_timestamp( $key );
+		}
+
+		switch ( $key ) {
+			case 'published_date':
+				$ts = get_post_timestamp( $this->post->ID, 'date' );
+				return false === $ts ? null : (int) $ts;
+			case 'modified_date':
+				$ts = get_post_timestamp( $this->post->ID, 'modified' );
+				return false === $ts ? null : (int) $ts;
+		}
+
+		return parent::get_value_timestamp( $key );
 	}
 
 	/**

@@ -1,22 +1,22 @@
-# Copyright (C) 2025 Notification Master
+# Copyright (C) 2026 Notification Master
 # This file is distributed under the GNU General Public License v3.0 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Notification Master 1.6.9\n"
+"Project-Id-Version: Notification Master 1.7.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/notification-master\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-08T09:30:10+00:00\n"
+"POT-Creation-Date: 2026-05-14T12:47:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: notification-master\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
-#: C:/laragon/www/wordpress/wp-content/plugins/notification-master/notifications-master.php
+#: notifications-master.php
 #: includes/admin/class-admin.php:161
 #: includes/admin/class-admin.php:162
 #: includes/admin/class-review-notice.php:106
@@ -24,74 +24,72 @@ msgid "Notification Master"
 msgstr ""
 
 #. Description of the plugin
-#: C:/laragon/www/wordpress/wp-content/plugins/notification-master/notifications-master.php
+#: notifications-master.php
 msgid "Enhance user engagement. Trigger notifications for events, support multiple channels like email and Discord, and personalize with dynamic merge tags. Easy setup and customization."
 msgstr ""
 
 #. Author URI of the plugin
-#: C:/laragon/www/wordpress/wp-content/plugins/notification-master/notifications-master.php
+#: notifications-master.php
 msgid "https://notification-master.com"
 msgstr ""
 
 #. translators: %s: Media name
 #: includes/abstracts/class-media-trigger.php:55
+#, php-format
 msgid "Media %s"
 msgstr ""
 
 #. translators: %s: Media name
 #: includes/abstracts/class-media-trigger.php:78
+#, php-format
 msgid "Triggered when %s media."
 msgstr ""
 
 #. translators: %s: Plugin name
 #: includes/abstracts/class-plugin-trigger.php:46
+#, php-format
 msgid "Plugin %s"
 msgstr ""
 
 #. translators: %s: Theme name
 #: includes/abstracts/class-theme-trigger.php:55
+#, php-format
 msgid "Theme %s"
 msgstr ""
 
 #. translators: %s: User name
 #: includes/abstracts/class-user-trigger.php:55
+#, php-format
 msgid "User %s"
 msgstr ""
 
 #: includes/admin/class-admin.php:182
 #: includes/admin/class-admin.php:183
-#: dist/index.js:38
 msgid "Home"
 msgstr ""
 
 #: includes/admin/class-admin.php:191
 #: includes/admin/class-admin.php:192
-#: dist/index.js:38
-#: dist/index.js:42
 msgid "Notifications"
 msgstr ""
 
 #: includes/admin/class-admin.php:200
 #: includes/admin/class-admin.php:201
-#: dist/index.js:42
 msgid "Settings"
 msgstr ""
 
 #: includes/admin/class-admin.php:209
 #: includes/admin/class-admin.php:210
-#: dist/index.js:42
 msgid "Subscriptions"
 msgstr ""
 
 #: includes/admin/class-admin.php:218
 #: includes/admin/class-admin.php:219
-#: dist/index.js:42
 msgid "Notification Log"
 msgstr ""
 
 #: includes/admin/class-admin.php:227
 #: includes/admin/class-admin.php:228
-#: dist/index.js:42
 msgid "Debug Log"
 msgstr ""
 
@@ -141,17 +139,14 @@ msgid "Add New"
 msgstr ""
 
 #: includes/class-notifications.php:70
-#: dist/index.js:38
 msgid "Add New Notification"
 msgstr ""
 
 #: includes/class-notifications.php:71
-#: dist/index.js:42
 msgid "New Notification"
 msgstr ""
 
 #: includes/class-notifications.php:72
-#: dist/index.js:42
 msgid "Edit Notification"
 msgstr ""
 
@@ -207,20 +202,25 @@ msgstr ""
 msgid "Connection settings."
 msgstr ""
 
-#: includes/class-plugin.php:228
+#: includes/class-notifications.php:154
+msgid "Per-connection scheduling settings."
+msgstr ""
+
+#: includes/class-plugin.php:231
 msgid "Running cleanup task for failed subscriptions..."
 msgstr ""
 
-#: includes/class-plugin.php:236
+#: includes/class-plugin.php:239
 msgid "Auto-delete is disabled. Skipping cleanup."
 msgstr ""
 
 #. translators: %d: number of deleted subscriptions
-#: includes/class-plugin.php:249
+#: includes/class-plugin.php:252
+#, php-format
 msgid "Cleaned up %d old failed subscriptions."
 msgstr ""
 
-#: includes/class-plugin.php:256
+#: includes/class-plugin.php:259
 msgid "No old failed subscriptions found to clean up."
 msgstr ""
 
@@ -245,7 +245,6 @@ msgstr ""
 
 #: includes/class-utils.php:214
 #: includes/merge-tags/user/class-user.php:47
-#: dist/index.js:1
 msgid "User"
 msgstr ""
 
@@ -258,12 +257,12 @@ msgid "Plugin"
 msgstr ""
 
 #: includes/class-utils.php:235
-#: dist/index.js:1
 msgid "Privacy"
 msgstr ""
 
 #. translators: %1$s: endpoint, %2$d: failure count
 #: includes/db/models/class-subscription-model.php:470
+#, php-format
 msgid "Auto-deleted subscription %1$s after %2$d failed attempts."
 msgstr ""
 
@@ -473,6 +472,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment-author.php:31
+#, php-format
 msgid "%s Author"
 msgstr ""
 
@@ -483,6 +483,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment-author.php:57
+#, php-format
 msgid "The IP of the author of the %s."
 msgstr ""
 
@@ -493,6 +494,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment-author.php:62
+#, php-format
 msgid "The agent of the author of the %s."
 msgstr ""
 
@@ -503,6 +505,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment-author.php:67
+#, php-format
 msgid "The ID of the author of the %s."
 msgstr ""
 
@@ -513,6 +516,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment-author.php:72
+#, php-format
 msgid "The name of the author of the %s."
 msgstr ""
 
@@ -524,6 +528,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment-author.php:77
+#, php-format
 msgid "The email of the author of the %s."
 msgstr ""
 
@@ -534,6 +539,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment-author.php:82
+#, php-format
 msgid "The URL of the author of the %s."
 msgstr ""
 
@@ -543,6 +549,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment-author.php:87
+#, php-format
 msgid "The avatar of the author of the %s."
 msgstr ""
 
@@ -552,50 +559,47 @@ msgstr ""
 #: includes/merge-tags/post-type/class-post-last-editor.php:54
 #: includes/merge-tags/post-type/class-post.php:52
 #: includes/merge-tags/post-type/traits/class-post-user.php:28
-#: dist/index.js:20
-#: dist/index.js:38
 msgid "ID"
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment.php:55
+#, php-format
 msgid "The ID of the %1s."
 msgstr ""
 
 #: includes/merge-tags/comment-type/class-comment.php:58
 #: includes/merge-tags/comment-type/class-parent-comment.php:59
 #: includes/merge-tags/post-type/class-post.php:62
-#: dist/index.js:1
 msgid "Content"
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment.php:60
+#, php-format
 msgid "The content of the %1s."
 msgstr ""
 
 #: includes/merge-tags/comment-type/class-comment.php:63
 #: includes/merge-tags/comment-type/class-parent-comment.php:64
 #: includes/merge-tags/post-type/class-post.php:102
-#: dist/index.js:38
-#: dist/index.js:42
 msgid "Status"
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment.php:65
+#, php-format
 msgid "The status of the %1s."
 msgstr ""
 
 #: includes/merge-tags/comment-type/class-comment.php:68
 #: includes/merge-tags/comment-type/class-parent-comment.php:69
-#: dist/index.js:1
-#: dist/index.js:38
 msgid "Type"
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment.php:70
+#, php-format
 msgid "The type of the %s."
 msgstr ""
 
@@ -605,61 +609,68 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment.php:75
+#, php-format
 msgid "The date/time of the %s."
 msgstr ""
 
-#: includes/merge-tags/comment-type/class-comment.php:103
+#: includes/merge-tags/comment-type/class-comment.php:104
 #: includes/merge-tags/comment-type/class-parent-comment.php:104
 msgid "Approved"
 msgstr ""
 
-#: includes/merge-tags/comment-type/class-comment.php:105
+#: includes/merge-tags/comment-type/class-comment.php:106
 #: includes/merge-tags/comment-type/class-parent-comment.php:106
 msgid "Pending"
 msgstr ""
 
-#: includes/merge-tags/comment-type/class-comment.php:107
+#: includes/merge-tags/comment-type/class-comment.php:108
 #: includes/merge-tags/comment-type/class-parent-comment.php:108
 msgid "Spam"
 msgstr ""
 
-#: includes/merge-tags/comment-type/class-comment.php:109
+#: includes/merge-tags/comment-type/class-comment.php:110
 #: includes/merge-tags/comment-type/class-parent-comment.php:110
 msgid "Trash"
 msgstr ""
 
-#: includes/merge-tags/comment-type/class-comment.php:111
+#: includes/merge-tags/comment-type/class-comment.php:112
 #: includes/merge-tags/comment-type/class-parent-comment.php:112
 msgid "Unknown"
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment-author.php:30
+#, php-format
 msgid "Parent %s Author"
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment-author.php:56
+#, php-format
 msgid "The IP of the author of the parent %s."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment-author.php:61
+#, php-format
 msgid "The agent of the author of the parent %s."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment-author.php:66
+#, php-format
 msgid "The name of the author of the parent %s."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment-author.php:71
+#, php-format
 msgid "The email of the author of the parent %s."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment-author.php:76
+#, php-format
 msgid "The URL of the author of the parent %s."
 msgstr ""
 
@@ -670,31 +681,37 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment-author.php:81
+#, php-format
 msgid "The avatar of the author of the parent %s."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment.php:30
+#, php-format
 msgid "Parent %s"
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment.php:56
+#, php-format
 msgid "The ID of the parent %s."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment.php:61
+#, php-format
 msgid "The content of the parent %s."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment.php:66
+#, php-format
 msgid "The status of the parent %s."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment.php:71
+#, php-format
 msgid "The type of the parent %s."
 msgstr ""
 
@@ -704,6 +721,7 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-parent-comment.php:76
+#, php-format
 msgid "The date time of the parent %s."
 msgstr ""
 
@@ -795,11 +813,11 @@ msgstr ""
 msgid "The current time."
 msgstr ""
 
-#: includes/merge-tags/general/class-general.php:95
+#: includes/merge-tags/general/class-general.php:96
 msgid "Current Date"
 msgstr ""
 
-#: includes/merge-tags/general/class-general.php:96
+#: includes/merge-tags/general/class-general.php:97
 msgid "The current date."
 msgstr ""
 
@@ -906,9 +924,6 @@ msgstr ""
 #: includes/merge-tags/plugin/class-plugin.php:60
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:83
 #: includes/merge-tags/theme/traits/class-theme.php:27
-#: dist/index.js:1
-#: dist/index.js:38
-#: dist/index.js:42
 msgid "Name"
 msgstr ""
 
@@ -927,7 +942,6 @@ msgstr ""
 
 #: includes/merge-tags/plugin/class-plugin.php:68
 #: includes/merge-tags/theme/traits/class-theme.php:35
-#: dist/index.js:1
 msgid "Author"
 msgstr ""
 
@@ -947,7 +961,6 @@ msgstr ""
 #: includes/merge-tags/plugin/class-plugin.php:76
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:68
 #: includes/merge-tags/theme/traits/class-theme.php:43
-#: dist/index.js:1
 msgid "Description"
 msgstr ""
 
@@ -991,22 +1004,26 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-acf-fields.php:59
+#, php-format
 msgid "%s ACF Fields"
 msgstr ""
 
 #. translators: %1$s: Field type, %2$s: Field name
 #: includes/merge-tags/post-type/class-post-acf-fields.php:137
 #: includes/merge-tags/user/class-user-acf-fields.php:157
+#, php-format
 msgid "ACF field of type %1$s with name %2$s."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:30
+#, php-format
 msgid "%1s Author"
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:56
+#, php-format
 msgid "The ID of the %s author."
 msgstr ""
 
@@ -1019,6 +1036,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:61
+#, php-format
 msgid "The display name of the %s author."
 msgstr ""
 
@@ -1031,6 +1049,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:66
+#, php-format
 msgid "The username of the %s author."
 msgstr ""
 
@@ -1043,6 +1062,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:71
+#, php-format
 msgid "The email of the %s author."
 msgstr ""
 
@@ -1055,6 +1075,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:76
+#, php-format
 msgid "The first name of the %s author."
 msgstr ""
 
@@ -1067,6 +1088,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:81
+#, php-format
 msgid "The last name of the %s author."
 msgstr ""
 
@@ -1078,6 +1100,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:86
+#, php-format
 msgid "The nickname of the %s author."
 msgstr ""
 
@@ -1090,88 +1113,101 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:91
+#, php-format
 msgid "The avatar of the %s author."
 msgstr ""
 
 #. translators: %s Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:30
+#, php-format
 msgid "%s Last Editor"
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:56
+#, php-format
 msgid "The ID of the %s last editor."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:61
+#, php-format
 msgid "The display name of the %s last editor."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:66
+#, php-format
 msgid "The username of the %s last editor."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:71
+#, php-format
 msgid "The email of the %s last editor."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:76
+#, php-format
 msgid "The first name of the %s last editor."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:81
+#, php-format
 msgid "The last name of the %s last editor."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:86
+#, php-format
 msgid "The nickname of the %s last editor."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-last-editor.php:91
+#, php-format
 msgid "The avatar of the %s last editor."
 msgstr ""
 
 #. translators: %s Post type singular name
 #: includes/merge-tags/post-type/class-post-publishing-user.php:31
+#, php-format
 msgid "%s Publishing User"
 msgstr ""
 
 #. translators: %s Post type singular name
 #: includes/merge-tags/post-type/class-post-scheduling-user.php:31
+#, php-format
 msgid "%s Scheduling User"
 msgstr ""
 
 #. translators: %s Post type singular name
 #: includes/merge-tags/post-type/class-post-trashing-user.php:31
+#, php-format
 msgid "%s Trashing User"
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:54
+#, php-format
 msgid "The ID of the %s."
 msgstr ""
 
 #: includes/merge-tags/post-type/class-post.php:57
-#: dist/index.js:1
-#: dist/index.js:11
-#: dist/index.js:38
 msgid "Title"
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:59
+#, php-format
 msgid "The title of the %s."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:64
+#, php-format
 msgid "The content of the %s."
 msgstr ""
 
@@ -1181,6 +1217,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:69
+#, php-format
 msgid "The excerpt of the %s."
 msgstr ""
 
@@ -1190,6 +1227,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:74
+#, php-format
 msgid "The featured image ID of the %s."
 msgstr ""
 
@@ -1199,6 +1237,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:79
+#, php-format
 msgid "The featured image URL of the %s."
 msgstr ""
 
@@ -1208,16 +1247,17 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:84
+#, php-format
 msgid "The thumbnail URL of the %s."
 msgstr ""
 
 #: includes/merge-tags/post-type/class-post.php:87
-#: dist/index.js:1
 msgid "Format"
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:89
+#, php-format
 msgid "The format of the %s."
 msgstr ""
 
@@ -1227,6 +1267,7 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:94
+#, php-format
 msgid "The permalink of the %s."
 msgstr ""
 
@@ -1237,11 +1278,13 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:99
+#, php-format
 msgid "The slug of the %s."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:104
+#, php-format
 msgid "The status of the %s."
 msgstr ""
 
@@ -1251,73 +1294,85 @@ msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post.php:109
+#, php-format
 msgid "The published date of the %s."
 msgstr ""
 
-#: includes/merge-tags/post-type/class-post.php:112
+#: includes/merge-tags/post-type/class-post.php:113
 msgid "Modified Date"
 msgstr ""
 
 #. translators: %s: Post type singular name
-#: includes/merge-tags/post-type/class-post.php:114
+#: includes/merge-tags/post-type/class-post.php:115
+#, php-format
 msgid "The modified date of the %s."
 msgstr ""
 
-#: includes/merge-tags/post-type/class-post.php:122
+#: includes/merge-tags/post-type/class-post.php:124
 msgid "Categories"
 msgstr ""
 
 #. translators: %s: Post type singular name
-#: includes/merge-tags/post-type/class-post.php:124
+#: includes/merge-tags/post-type/class-post.php:126
+#, php-format
 msgid "The categories of the %s."
 msgstr ""
 
-#: includes/merge-tags/post-type/class-post.php:131
+#: includes/merge-tags/post-type/class-post.php:133
 msgid "Tags"
 msgstr ""
 
 #. translators: %s: Post type singular name
-#: includes/merge-tags/post-type/class-post.php:133
+#: includes/merge-tags/post-type/class-post.php:135
+#, php-format
 msgid "The tags of the %s."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/traits/class-post-user.php:30
+#, php-format
 msgid "The ID of the %s user."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/traits/class-post-user.php:35
+#, php-format
 msgid "The display name of the %s user."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/traits/class-post-user.php:40
+#, php-format
 msgid "The username of the %s user."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/traits/class-post-user.php:45
+#, php-format
 msgid "The email of the %s user."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/traits/class-post-user.php:50
+#, php-format
 msgid "The first name of the %s user."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/traits/class-post-user.php:55
+#, php-format
 msgid "The last name of the %s user."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/traits/class-post-user.php:60
+#, php-format
 msgid "The nickname of the %s user."
 msgstr ""
 
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/traits/class-post-user.php:65
+#, php-format
 msgid "The avatar of the %s user."
 msgstr ""
 
@@ -1359,6 +1414,7 @@ msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:55
+#, php-format
 msgid "The ID of the %s term."
 msgstr ""
 
@@ -1368,6 +1424,7 @@ msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:60
+#, php-format
 msgid "The name of the %s term."
 msgstr ""
 
@@ -1377,21 +1434,23 @@ msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:65
+#, php-format
 msgid "The slug of the %s term."
 msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:70
+#, php-format
 msgid "The description of the %s term."
 msgstr ""
 
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:73
-#: dist/index.js:1
 msgid "URL"
 msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:75
+#, php-format
 msgid "The URL of the %s term."
 msgstr ""
 
@@ -1401,6 +1460,7 @@ msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:80
+#, php-format
 msgid "The date of the action for the %s term."
 msgstr ""
 
@@ -1525,7 +1585,6 @@ msgid "The avatar of the user."
 msgstr ""
 
 #: includes/merge-tags/user/class-user.php:105
-#: dist/index.js:1
 msgid "Role"
 msgstr ""
 
@@ -1560,6 +1619,14 @@ msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:61
 msgid "Log status."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-scheduled-controller.php:141
+msgid "Could not cancel the scheduled action."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-scheduled-controller.php:158
+msgid "Could not dispatch the scheduled action."
 msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-settings-controller.php:79
@@ -1714,11 +1781,13 @@ msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/triggers/comment/class-comment-added.php:60
+#, php-format
 msgid "When a %s - comment is added."
 msgstr ""
 
 #. translators: %s: Comment type name
 #: includes/triggers/comment/class-comment-trashed.php:60
+#, php-format
 msgid "When a %s - comment is trashed."
 msgstr ""
 
@@ -1748,36 +1817,43 @@ msgstr ""
 
 #. translators: %s: Trigger name
 #: includes/triggers/post/class-post-published-privately.php:67
+#, php-format
 msgid "When a %s is published privately."
 msgstr ""
 
 #. translators: %s: Trigger name
 #: includes/triggers/post/class-post-published.php:68
+#, php-format
 msgid "This trigger will send a notification when a %s is published."
 msgstr ""
 
 #. translators: %s: Trigger name
 #: includes/triggers/post/class-post-scheduled.php:67
+#, php-format
 msgid "When a %s is scheduled."
 msgstr ""
 
 #. translators: %s: Trigger name
 #: includes/triggers/post/class-post-sent-to-review.php:67
+#, php-format
 msgid "When a %s is sent to review."
 msgstr ""
 
 #. translators: %s: Trigger name
 #: includes/triggers/post/class-post-trashed.php:68
+#, php-format
 msgid "When a %s is trashed."
 msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/triggers/taxonomy/class-taxonomy-created.php:67
+#, php-format
 msgid "This trigger will be fired when a new %s is created."
 msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/triggers/taxonomy/class-taxonomy-deleted.php:67
+#, php-format
 msgid "When a %s is deleted."
 msgstr ""
 
@@ -1787,6 +1863,7 @@ msgstr ""
 
 #. translators: %s: Taxonomy singular name
 #: includes/triggers/taxonomy/class-taxonomy-updated.php:67
+#, php-format
 msgid "When a %s is updated."
 msgstr ""
 
@@ -1820,6 +1897,7 @@ msgstr ""
 
 #. translators: %1$s: role name, %2$d: users count.
 #: includes/users/class-users.php:66
+#, php-format
 msgid "All users with the role %1$s. (%2$d)"
 msgstr ""
 
@@ -1837,1370 +1915,4 @@ msgstr ""
 
 #: includes/webpush/class-loader.php:793
 msgid "You have denied the permission to send notifications. Please allow it to subscribe to push notifications."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select a user"
-msgstr ""
-
-#: dist/index.js:1
-msgid "No users found"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select Type"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Custom"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Email Settings"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Read the documentation to learn more about how to set up email notifications."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Find out more"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Email Addresses"
-msgstr ""
-
-#: dist/index.js:1
-msgid "You can use merge tags. For example, you can use {{general.admin_email}} to send the email to the admin email address."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select Role"
-msgstr ""
-
-#: dist/index.js:1
-msgid "example@domain.com or {{general.admin_email}}"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Add Email"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Exclude Email Addresses"
-msgstr ""
-
-#: dist/index.js:1
-msgid "You can use merge tags. For example, you can use {{general.admin_email}} to exclude the admin email address."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Subject"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:11
-msgid "Message"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Merge Tags"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Webhook Settings"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Read the documentation to learn more about how to setup webhooks."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Method"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Headers"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Key"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Value"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Add Header"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Body"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Add Field"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select Format"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Show Empty Fields"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Discord Settings"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Read the documentation to learn more about how to setup Discord Webhook."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Title Link"
-msgstr ""
-
-#: dist/index.js:1
-msgid "This will be the main content of the message."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Allows you to add dynamic content to the author."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Icon URL"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Fields"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Label"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Inline"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Notification Settings"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Read the documentation to learn more about how to setup webpush notifications."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Send To"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select who to send the notification to"
-msgstr ""
-
-#: dist/index.js:1
-msgid "All Users"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Specific Users"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Note: User should have subscribed to web push notifications to receive the notification."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Add New User"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Merge Tag / ID"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the ID of the user or a merge tag e.g. {{order.customer_id}}"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Please select a user or enter a merge tag."
-msgstr ""
-
-#: dist/index.js:1
-msgid "User is already added."
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Add"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Add User"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the title of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the message of the notification"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Icon"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the icon URL of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Image"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the image URL of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the URL of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Urgency"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select the urgency of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Very Low"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Low"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Normal"
-msgstr ""
-
-#: dist/index.js:1
-msgid "High"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Access token generated successfully."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Please enter your App ID and App Secret"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Instagram Settings"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Please make sure your WordPress admin URL is SSL secured. Instagram requires SSL for the redirect URL."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Read the documentation to learn more about how to get the access token."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Redirect URL"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Click to copy"
-msgstr ""
-
-#: dist/index.js:1
-msgid "App ID"
-msgstr ""
-
-#: dist/index.js:1
-msgid "App Secret"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Loading..."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Regenerate Access Token"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Generate Access Token"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Caption"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter your post text"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Image URL"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Alt Text"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter your post alt text"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Documentation"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Supercharge Your Notifications Today 🚀"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Elevate your experience with Notification Master Pro! Unlock advanced features, seamless integrations, and take your notifications to the next level. Join the pro community now and transform how you communicate 🔥."
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:42
-msgid "Upgrade to Pro"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Pro"
-msgstr ""
-
-#: dist/index.js:1
-msgid "WooCommerce"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the WooCommerce product, review, or order changes."
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Enable"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:11
-#: dist/index.js:38
-msgid "On"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:11
-#: dist/index.js:38
-msgid "Off"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Post status change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the post status changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Post types"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select the post types for which you want to send notifications when the post status changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select post types"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Taxonomy term change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the taxonomy term changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Taxonomies"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select the taxonomies for which you want to send notifications when the taxonomy term changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select taxonomies"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Comment change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the comment status changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Comment types"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select the comment types for which you want to send notifications when the comment status changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select comment types"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Media change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the media changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "User change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the user changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Theme change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the theme changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Plugin change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the plugin changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Process notifications in the background"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, notifications will be processed in the background. This will improve the performance of your website."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Delete Notification Logs Older Than: "
-msgstr ""
-
-#. translators: %s: Number of days
-#: dist/index.js:4
-msgid "All notification logs older than {%s} days will be deleted."
-msgstr ""
-
-#: dist/index.js:4
-msgid "Delete Debug Logs Older Than: "
-msgstr ""
-
-#. translators: %s: Number of days
-#: dist/index.js:7
-msgid "All debug logs older than {%s} days will be deleted."
-msgstr ""
-
-#: dist/index.js:7
-msgid "Important Setup Instructions:"
-msgstr ""
-
-#: dist/index.js:7
-msgid "Make sure you have allowed notifications in your browser and operating system settings."
-msgstr ""
-
-#: dist/index.js:7
-msgid "Check that you have enabled notifications for this site in your browser."
-msgstr ""
-
-#: dist/index.js:7
-msgid "If your device has \"Do Not Disturb\" mode enabled, please disable it to allow notifications."
-msgstr ""
-
-#: dist/index.js:7
-msgid "If you’re having trouble generating the keys, try temporarily disabling any caching plugins and try again."
-msgstr ""
-
-#. translators: %s is the contact form url
-#: dist/index.js:9
-msgid "If you face any issues with key generation or receiving notifications, please contact us via our <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Contact Form</a>."
-msgstr ""
-
-#. translators: %s is the documentation url
-#: dist/index.js:11
-msgid "For detailed instructions, please refer to the <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">documentation</a>."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Web Push Public Key"
-msgstr ""
-
-#: dist/index.js:11
-msgid "This key is used to identify your web push service. use your own key or generate a new one."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Web Push Private Key"
-msgstr ""
-
-#: dist/index.js:11
-msgid "This key is used to authenticate your web push service. use your own key or generate a new one."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Keys generated successfully"
-msgstr ""
-
-#: dist/index.js:11
-#: dist/index.js:42
-msgid "An error occurred"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Generate Keys"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Automatically save the keys after generating."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Welcome Notification"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Enable Welcome Notification"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Auto-Delete Failed Subscriptions"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Automatically remove subscriptions that fail repeatedly to keep your database clean and improve delivery performance."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Enable Auto-Delete"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Failure Threshold"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Number of consecutive failed notification attempts before automatically deleting the subscription. Recommended: 3-5 failures."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Enter number of failures (1-50)"
-msgstr ""
-
-#: dist/index.js:11
-msgid "How it works:"
-msgstr ""
-
-#: dist/index.js:11
-msgid "• When a notification successfully reaches a subscriber, their failure count resets to 0"
-msgstr ""
-
-#: dist/index.js:11
-msgid "• When a notification fails (invalid endpoint, expired subscription, etc.), the failure count increases by 1"
-msgstr ""
-
-#: dist/index.js:11
-msgid "• When the failure count reaches your threshold, the subscription is automatically deleted"
-msgstr ""
-
-#: dist/index.js:11
-msgid "• This helps maintain a clean subscriber list and improves overall delivery rates"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Subscribe Buttons"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Normal Button"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Use this shortcode to display the subscribe button:"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Text"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Unsubscribe Text"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Colors"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Color"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Background Color"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Hover"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Hover Color"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Hover Background Color"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Spacing"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Padding"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Top"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Right"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Bottom"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Left"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Margin"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Border"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Border Radius"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Advanced"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Extra Class"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Add extra class to the button for custom styling."
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Add ID to the button for custom styling."
-msgstr ""
-
-#: dist/index.js:20
-msgid "Floating Button"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Enable floating button to show a subscribe button on the all pages."
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "OR"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Use this shortcode to display the floating button on a specific page:"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Custom Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Icon Type"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Default"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Custom SVG Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Upload a custom SVG icon for the floating button. The icon will support color customization."
-msgstr ""
-
-#: dist/index.js:38
-msgid "WordPress Media Library is not available"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Select SVG Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Use this icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Please select an SVG file."
-msgstr ""
-
-#: dist/index.js:38
-msgid "Change Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Select Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Custom Icon Preview"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Remove"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Tooltip"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enable tooltip to show a message when user hover on the button. (Hover Effect will be shown in frontend)"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enable Tooltip"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Subscribe Text"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Animation"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enable Animation"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Animation Color"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Position"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Top Left"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Top Right"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Bottom Left"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Bottom Right"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Top Offset"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Bottom Offset (PX)"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Left Offset (PX)"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Right Offset"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Z-Index"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Icon Color"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Hover Icon Color"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Size"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Width"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Height"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Responsive"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Hide on Desktop"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Hide on Tablet"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Hide on Mobile"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Auto Display Web Push Prompt"
-msgstr ""
-
-#: dist/index.js:38
-msgid "If enabled, the web push prompt will be displayed automatically after user click on the page."
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Trigger"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Date"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Actions"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Is equal to"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Is not equal to"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Contains"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Does not contain"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Starts with"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Ends with"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Is greater than"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Is less than"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enable conditional logic"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Conditions"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Merge Tag"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Operator"
-msgstr ""
-
-#: dist/index.js:38
-msgid "AND"
-msgstr ""
-
-#: dist/index.js:38
-msgid "New connection"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Connection name is required"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Integration is required"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Please fill in all required fields"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Cancel"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Next"
-msgstr ""
-
-#: dist/index.js:38
-msgid "All changes will be lost. Are you sure?"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Yes"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "No"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Back"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Save"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Add connection"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Select integration"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Select the integration you'd like to use to send your notifications."
-msgstr ""
-
-#: dist/index.js:38
-msgid "Each integration has its own settings and requirements."
-msgstr ""
-
-#: dist/index.js:38
-msgid "This integration is not configured yet, please configure it first."
-msgstr ""
-
-#: dist/index.js:38
-msgid "Go to settings"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Connection name"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enable connection"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Invalid settings"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Close"
-msgstr ""
-
-#: dist/index.js:38
-msgid "No connections yet."
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Are you sure?"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Name:"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Integration:"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Failed to load merge tags"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Search merge tags"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Plugin Dependency Required"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Copy"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Copied to clipboard"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Connections"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enabled"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Delete"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Update"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Saved"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Action"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "View"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Integration"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Total"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Statistics"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Overview"
-msgstr ""
-
-#: dist/index.js:38
-msgid "View all logs to see more details"
-msgstr ""
-
-#: dist/index.js:38
-msgid "View all"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Success"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Failed"
-msgstr ""
-
-#: dist/index.js:38
-msgid "All"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Active"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Inactive"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Sort by"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Order"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Descending"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Ascending"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Search"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Bulk Actions"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Deactive"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Activate"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Notifications deleted successfully"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Notifications inactivated successfully"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Notifications activated successfully"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Could not apply bulk action"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Please select at least one notification"
-msgstr ""
-
-#: dist/index.js:38
-#: dist/index.js:42
-msgid "Apply"
-msgstr ""
-
-#: dist/index.js:38
-msgid "None"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Notification status changed successfully"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Could not change notification status"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Trigger disabled from settings"
-msgstr ""
-
-#. translators: %s: date
-#: dist/index.js:40
-msgid "Published on %s"
-msgstr ""
-
-#: dist/index.js:40
-msgid "Edit"
-msgstr ""
-
-#: dist/index.js:40
-msgid "Duplicate"
-msgstr ""
-
-#. translators: %s: post title
-#: dist/index.js:42
-msgid "(Copy) %s"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Notification duplicated successfully"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Could not duplicate notification"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Notification deleted successfully"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Could not delete notification"
-msgstr ""
-
-#: dist/index.js:42
-msgid "No notifications found"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Are you sure you want to leave this page?"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Notification saved successfully"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Failed to save notification"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Failed to delete notification"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Back to Notifications"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Manage Web Push Subscriptions"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Total Subscriptions"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Transform Your Notifications Like Never Before 🚀"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Upgrade to Notification Master Pro and experience next-level notifications! Unlock exclusive features, seamless integrations, and powerful capabilities designed to keep you ahead. Take the leap today and redefine your communication strategy 🔥."
-msgstr ""
-
-#: dist/index.js:42
-msgid "General"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Triggers"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Web Push"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Settings saved successfully"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Failed to save settings"
-msgstr ""
-
-#: dist/index.js:42
-msgid "No logs found."
-msgstr ""
-
-#: dist/index.js:42
-msgid "Please select a log."
-msgstr ""
-
-#: dist/index.js:42
-msgid "Delete All"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Log Details"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Details"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Email Content"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Export All"
-msgstr ""
-
-#: dist/index.js:42
-msgid "Help"
 msgstr ""

@@ -77,6 +77,7 @@ class Attachment extends Merge_Tags_Group {
 				'date' => array(
 					'name'        => __( 'Attachment Date', 'notification-master' ),
 					'description' => __( 'The date of the attachment.', 'notification-master' ),
+					'type'        => 'datetime',
 				),
 			)
 		);
@@ -124,6 +125,22 @@ class Attachment extends Merge_Tags_Group {
 			default:
 				return '';
 		}
+	}
+
+	/**
+	 * Resolve attachment date to a UNIX timestamp.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $key Tag key.
+	 * @return int|null
+	 */
+	public function get_value_timestamp( $key ) {
+		if ( 'date' === $key && $this->attachment ) {
+			$ts = get_post_timestamp( $this->attachment->ID, 'date' );
+			return false === $ts ? null : (int) $ts;
+		}
+		return parent::get_value_timestamp( $key );
 	}
 
 	/**

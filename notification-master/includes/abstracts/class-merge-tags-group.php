@@ -257,6 +257,77 @@ abstract class Merge_Tags_Group {
 	}
 
 	/**
+	 * Get the declared type of a merge tag. Defaults to `string` when no type
+	 * is set so callers can rely on a non-null value.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $key Tag key.
+	 * @return string
+	 */
+	public function get_tag_type( $key ) {
+		$tag = $this->get_merge_tag( $key );
+		if ( ! $tag || empty( $tag['type'] ) ) {
+			return 'string';
+		}
+		return (string) $tag['type'];
+	}
+
+	/**
+	 * Return all merge tags declared as a given type, keyed by tag key.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $type Type to filter by (e.g. 'datetime').
+	 * @return array<string, array> Filtered tag definitions.
+	 */
+	public function get_tags_of_type( $type ) {
+		$result = array();
+		foreach ( $this->merge_tags as $key => $tag ) {
+			$tag_type = isset( $tag['type'] ) ? $tag['type'] : 'string';
+			if ( $tag_type === $type ) {
+				$result[ $key ] = $tag;
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * Resolve a date-typed merge tag to a UNIX timestamp. Returns null when the
+	 * tag is not date-typed or the underlying value cannot be parsed.
+	 *
+	 * Subclasses with non-string underlying values (e.g. post timestamps) should
+	 * override this to avoid relying on strtotime against a locale-formatted
+	 * string.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $key Tag key.
+	 * @return int|null
+	 */
+	public function get_value_timestamp( $key ) {
+		if ( 'datetime' !== $this->get_tag_type( $key ) ) {
+			return null;
+		}
+
+		$this->refresh_data_before_processing();
+		$raw = $this->get_value( $key );
+
+		if ( is_numeric( $raw ) ) {
+			return (int) $raw;
+		}
+
+		if ( is_string( $raw ) && '' !== $raw ) {
+			$ts = strtotime( $raw );
+			if ( false !== $ts ) {
+				return $ts;
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Get value.
 	 *
 	 * @since 1.0.0

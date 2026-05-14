@@ -90,10 +90,12 @@ class General extends Merge_Tags_Group {
 				'current_time'    => array(
 					'label'       => __( 'Current Time', 'notification-master' ),
 					'description' => __( 'The current time.', 'notification-master' ),
+					'type'        => 'datetime',
 				),
 				'current_date'    => array(
 					'label'       => __( 'Current Date', 'notification-master' ),
 					'description' => __( 'The current date.', 'notification-master' ),
+					'type'        => 'datetime',
 				),
 			)
 		);
@@ -140,5 +142,20 @@ class General extends Merge_Tags_Group {
 			default:
 				return '';
 		}
+	}
+
+	/**
+	 * Resolve current_time / current_date to the live UNIX timestamp.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $key Tag key.
+	 * @return int|null
+	 */
+	public function get_value_timestamp( $key ) {
+		if ( 'current_time' === $key || 'current_date' === $key ) {
+			return time();
+		}
+		return parent::get_value_timestamp( $key );
 	}
 }

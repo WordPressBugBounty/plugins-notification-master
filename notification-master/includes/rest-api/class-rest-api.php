@@ -14,6 +14,7 @@ use Notification_Master\REST_API\Controllers\V1\Rest_Notification_Controller;
 use Notification_Master\REST_API\Controllers\V1\Rest_Logs_Controller;
 use Notification_Master\REST_API\Controllers\V1\Rest_Notification_Logs_Controller;
 use Notification_Master\REST_API\Controllers\V1\Rest_Subscriptions_Controller;
+use Notification_Master\REST_API\Controllers\V1\Rest_Scheduled_Controller;
 
 /**
  * REST_API class.
@@ -64,6 +65,7 @@ class REST_API {
 			Rest_Logs_Controller::class,
 			Rest_Notification_Logs_Controller::class,
 			Rest_Subscriptions_Controller::class,
+			Rest_Scheduled_Controller::class,
 		);
 
 		foreach ( $controllers as $controller ) {

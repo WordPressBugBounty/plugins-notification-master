@@ -2,7 +2,7 @@
 Contributors: notificationmaster
 Donate link: https://notification-master.com
 Tags: web push, email, notifications, sms, whatsapp
-Stable tag: 1.6.9
+Stable tag: 1.7.0
 Requires at least: 4.9
 Tested up to: 6.9
 Requires PHP: 7.1
@@ -181,6 +181,13 @@ Yes! We include privacy triggers for personal data export/erasure and respect us
 4. Notification Master - Merge Tags Selection
 
 == Changelog ==
+
+= 1.7.0 =
+* Added: Per-connection scheduling. Each connection can now be delayed by a fixed amount of time (minutes, hours, or days) or scheduled relative to a date from a merge tag (e.g. send 1 hour before {{post.published_date}} or 7 days after {{comment.datetime}}).
+* Added: Typed merge tags. Date-typed tags now expose a `type: datetime` flag so they can be selected as scheduling sources. Covers published/modified post dates, comment dates, attachment dates, and the current time/date general tags.
+* Added: Configurable fallback behavior when a referenced date is in the past or the merge tag value is empty (send immediately or skip).
+* Added: Pending notifications tab in the Notification Log page, showing scheduled notifications with options to send them immediately or cancel.
+* Added: New REST endpoints under `/ntfm/v1/scheduled` for listing, cancelling, and dispatching scheduled notifications.
 
 = 1.6.10 =
 * Added: WordPress 6.9 compatibility.

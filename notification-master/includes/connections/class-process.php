@@ -12,6 +12,7 @@ namespace Notification_Master\Connections;
 
 use Notification_Master\Integrations\Loader as Integrations_Loader;
 use Notification_Master\Abstracts\Trigger;
+use Notification_Master\Scheduling\Scheduler;
 use Notification_Master\Settings;
 use Notification_Master\Utils;
 
@@ -80,6 +81,48 @@ class Process {
 	 * @return void
 	 */
 	public function process_connections( $connections, $trigger, $notification_id ) {
+		// Peel off connections that have a future scheduled delay. Each becomes
+		// its own Action Scheduler entry; the remainder continues through the
+		// existing immediate/async dispatch path.
+		$scheduler = Scheduler::get_instance();
+
+		foreach ( $connections as $connection_id => $connection ) {
+			$enabled = isset( $connection['enabled'] ) ? $connection['enabled'] : true;
+			if ( ! $enabled ) {
+				continue;
+			}
+
+			$delay = $scheduler->resolve_delay( $connection, $trigger );
+
+			// `false` means the scheduler decided to drop this connection
+			// entirely (e.g. merge-tag target is in the past with on_past=skip).
+			if ( false === $delay ) {
+				unset( $connections[ $connection_id ] );
+				continue;
+			}
+
+			if ( $delay <= 0 ) {
+				continue;
+			}
+
+			// Conditions still need to gate scheduling: a notification whose
+			// live conditions fail should never be queued for later delivery.
+			if ( ! empty( $connection['enable_conditions'] ) ) {
+				$conditions = $connection['conditions'] ?? array();
+				if ( ! apply_filters( 'notification_master_can_send_notification', true, $conditions, $trigger ) ) {
+					unset( $connections[ $connection_id ] );
+					continue;
+				}
+			}
+
+			$scheduler->schedule( $connection, $trigger, $notification_id, $connection_id, $delay );
+			unset( $connections[ $connection_id ] );
+		}
+
+		if ( empty( $connections ) ) {
+			return;
+		}
+
 		$background_process = Settings::get_setting( 'enable_background_processing', false );
 
 		if ( $background_process ) {

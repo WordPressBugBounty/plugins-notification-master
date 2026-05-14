@@ -24,6 +24,7 @@ use Notification_Master\DB\Tables\Logs_Table;
 use Notification_Master\DB\Tables\Notification_Logs_Table;
 use Notification_Master\DB\Tables\Subscriptions_Table;
 use Notification_Master\Delayed_Notifications;
+use Notification_Master\Scheduling\Scheduler;
 
 /**
  * Activate, deactivate and load classes.
@@ -151,6 +152,8 @@ class Plugin {
 		Email_Background_Process::get_instance();
 		// Load delay class.
 		Delayed_Notifications::init();
+		// Load scheduler.
+		Scheduler::init();
 
 		// Load logger class.
 		$this->logger = Logger::get_instance();

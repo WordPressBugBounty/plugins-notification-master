@@ -73,6 +73,7 @@ class Comment extends Comment_Merge_Tags_Group {
 					'name'        => __( 'Date/Time', 'notification-master' ),
 					/* translators: %s: Comment type name */
 					'description' => sprintf( __( 'The date/time of the %s.', 'notification-master' ), $this->comment_type_name ),
+					'type'        => 'datetime',
 				),
 			)
 		);
@@ -117,5 +118,21 @@ class Comment extends Comment_Merge_Tags_Group {
 			default:
 				return '';
 		}
+	}
+
+	/**
+	 * Resolve comment datetime to a UNIX timestamp.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $key Tag key.
+	 * @return int|null
+	 */
+	public function get_value_timestamp( $key ) {
+		if ( 'datetime' === $key && $this->comment && ! empty( $this->comment->comment_date_gmt ) ) {
+			$ts = strtotime( $this->comment->comment_date_gmt . ' UTC' );
+			return false === $ts ? null : (int) $ts;
+		}
+		return parent::get_value_timestamp( $key );
 	}
 }

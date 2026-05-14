@@ -149,6 +149,72 @@ class Notifications {
 							'description'          => __( 'Connection settings.', 'notification-master' ),
 							'additionalProperties' => true,
 						),
+						'schedule'    => array(
+							'type'        => 'object',
+							'description' => __( 'Per-connection scheduling settings.', 'notification-master' ),
+							'properties'  => array(
+								'enabled'            => array(
+									'type'    => 'boolean',
+									'default' => false,
+								),
+								'mode'               => array(
+									'type'    => 'string',
+									'enum'    => array( 'delay', 'merge_tag_relative' ),
+									'default' => 'delay',
+								),
+								'delay'              => array(
+									'type'       => 'object',
+									'properties' => array(
+										'value' => array(
+											'type'    => 'integer',
+											'minimum' => 0,
+											'maximum' => 525600,
+											'default' => 0,
+										),
+										'unit'  => array(
+											'type'    => 'string',
+											'enum'    => array( 'minutes', 'hours', 'days' ),
+											'default' => 'minutes',
+										),
+									),
+								),
+								'merge_tag_relative' => array(
+									'type'       => 'object',
+									'properties' => array(
+										'tag'        => array(
+											'type'    => 'string',
+											'default' => '',
+										),
+										'offset'     => array(
+											'type'    => 'integer',
+											'minimum' => 0,
+											'maximum' => 525600,
+											'default' => 0,
+										),
+										'unit'       => array(
+											'type'    => 'string',
+											'enum'    => array( 'minutes', 'hours', 'days' ),
+											'default' => 'minutes',
+										),
+										'direction'  => array(
+											'type'    => 'string',
+											'enum'    => array( 'before', 'after' ),
+											'default' => 'after',
+										),
+										'on_past'    => array(
+											'type'    => 'string',
+											'enum'    => array( 'send_now', 'skip' ),
+											'default' => 'send_now',
+										),
+										'on_invalid' => array(
+											'type'    => 'string',
+											'enum'    => array( 'send_now', 'skip' ),
+											'default' => 'send_now',
+										),
+									),
+								),
+							),
+						),
 					),
 					'arg_options' => array(
 						'validate_callback' => array( $this, 'validate_connections' ),
