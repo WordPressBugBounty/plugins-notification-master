@@ -70,6 +70,20 @@ class Webhook_Integration extends Integration {
 		// This function is used to get the values of merge tags and sanitize them.
 		$this->process_attributes();
 		$url         = $this->attributes['url'];
+
+		// Bail safely if the URL resolved to empty (e.g. an empty merge tag).
+		if ( empty( $url ) ) {
+			Notification_Master()->notification_logger->error(
+				$this->slug,
+				$this->prepare_response(
+					array(
+						'message' => __( 'Webhook URL is empty.', 'notification-master' ),
+					)
+				)
+			);
+			return;
+		}
+
 		$method      = $this->attributes['method'];
 		$headers     = $this->attributes['headers'] ?? array();
 		$body_format = $this->attributes['body_format'];

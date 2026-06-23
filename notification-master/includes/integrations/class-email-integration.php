@@ -381,8 +381,10 @@ class Email_Integration extends Integration {
 				case 'user':
 					$user_id = $value['value'];
 					if ( ! empty( $user_id ) ) {
-						$user               = get_user_by( 'ID', $user_id );
-						$sanitized_emails[] = $user->user_email;
+						$user = get_user_by( 'ID', $user_id );
+						if ( $user ) {
+							$sanitized_emails[] = $user->user_email;
+						}
 					}
 					break;
 			}

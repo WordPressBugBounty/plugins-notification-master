@@ -2,9 +2,9 @@
 Contributors: notificationmaster
 Donate link: https://notification-master.com
 Tags: web push, email, notifications, sms, whatsapp
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 Requires at least: 4.9
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.1
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -181,6 +181,12 @@ Yes! We include privacy triggers for personal data export/erasure and respect us
 4. Notification Master - Merge Tags Selection
 
 == Changelog ==
+
+= 1.7.1 =
+* Added: One-click starter templates. Install a ready-made set of notifications for common events (post/page published & updated, user login/logout/registration/password change, new comments, taxonomy terms, media, plugins and more) with Email and Web Push pre-configured and Discord/Webhook/Instagram added as ready-to-fill connections.
+* Added: Import and Export. Back up, migrate, or share notifications as a JSON file from the Notifications screen. Imports are added as inactive drafts by default for safe review before activation.
+* Added: New REST endpoints under `/ntfm/v1/notifications` for `templates`, `import`, and `export`.
+* Added: WordPress 7.0 compatibility.
 
 = 1.7.0 =
 * Added: Per-connection scheduling. Each connection can now be delayed by a fixed amount of time (minutes, hours, or days) or scheduled relative to a date from a merge tag (e.g. send 1 hour before {{post.published_date}} or 7 days after {{comment.datetime}}).

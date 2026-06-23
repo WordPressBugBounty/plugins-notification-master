@@ -239,8 +239,10 @@ abstract class Integration {
 	 * @return array
 	 */
 	public function prepare_response( $response ) {
-		$response['trigger']           = $this->trigger->get_slug();
-		$response['trigger_name']      = $this->trigger->get_name();
+		if ( $this->trigger ) {
+			$response['trigger']      = $this->trigger->get_slug();
+			$response['trigger_name'] = $this->trigger->get_name();
+		}
 		$response['notification_name'] = $this->notification_name;
 
 		return $response;

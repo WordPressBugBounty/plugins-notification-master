@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Notification Master 1.7.0\n"
+"Project-Id-Version: Notification Master 1.7.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/notification-master\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-14T12:47:05+00:00\n"
+"POT-Creation-Date: 2026-06-23T17:04:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: notification-master\n"
@@ -65,31 +65,38 @@ msgstr ""
 
 #: includes/admin/class-admin.php:182
 #: includes/admin/class-admin.php:183
+#: dist/index.js:62
 msgid "Home"
 msgstr ""
 
 #: includes/admin/class-admin.php:191
 #: includes/admin/class-admin.php:192
+#: dist/index.js:62
+#: dist/index.js:66
 msgid "Notifications"
 msgstr ""
 
 #: includes/admin/class-admin.php:200
 #: includes/admin/class-admin.php:201
+#: dist/index.js:66
 msgid "Settings"
 msgstr ""
 
 #: includes/admin/class-admin.php:209
 #: includes/admin/class-admin.php:210
+#: dist/index.js:66
 msgid "Subscriptions"
 msgstr ""
 
 #: includes/admin/class-admin.php:218
 #: includes/admin/class-admin.php:219
+#: dist/index.js:66
 msgid "Notification Log"
 msgstr ""
 
 #: includes/admin/class-admin.php:227
 #: includes/admin/class-admin.php:228
+#: dist/index.js:66
 msgid "Debug Log"
 msgstr ""
 
@@ -139,14 +146,18 @@ msgid "Add New"
 msgstr ""
 
 #: includes/class-notifications.php:70
+#: dist/index.js:62
+#: dist/index.js:66
 msgid "Add New Notification"
 msgstr ""
 
 #: includes/class-notifications.php:71
+#: dist/index.js:66
 msgid "New Notification"
 msgstr ""
 
 #: includes/class-notifications.php:72
+#: dist/index.js:66
 msgid "Edit Notification"
 msgstr ""
 
@@ -224,9 +235,214 @@ msgstr ""
 msgid "No old failed subscriptions found to clean up."
 msgstr ""
 
+#. translators: %1$s: trigger name, %2$s: site name.
+#: includes/class-templates.php:170
+#: includes/class-templates.php:238
+#: includes/class-templates.php:281
+#, php-format
+msgid "%1$s on %2$s."
+msgstr ""
+
+#: includes/class-templates.php:174
+#: includes/class-templates.php:219
+#: includes/class-templates.php:264
+#: includes/merge-tags/plugin/class-plugin.php:68
+#: includes/merge-tags/theme/traits/class-theme.php:35
+#: dist/index.js:1
+msgid "Author"
+msgstr ""
+
+#: includes/class-templates.php:175
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Date"
+msgstr ""
+
+#: includes/class-templates.php:176
+#: includes/class-templates.php:221
+#: includes/merge-tags/comment-type/class-comment.php:63
+#: includes/merge-tags/comment-type/class-parent-comment.php:64
+#: includes/merge-tags/post-type/class-post.php:102
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Status"
+msgstr ""
+
+#: includes/class-templates.php:178
+#: includes/class-templates.php:245
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "View"
+msgstr ""
+
+#: includes/class-templates.php:183
+#: includes/class-templates.php:195
+#: includes/class-templates.php:305
+#: includes/class-utils.php:214
+#: includes/merge-tags/user/class-user.php:47
+#: dist/index.js:1
+msgid "User"
+msgstr ""
+
+#. translators: %s: site name.
+#: includes/class-templates.php:192
+#, php-format
+msgid "A user account event was recorded on %s."
+msgstr ""
+
+#: includes/class-templates.php:196
+#: includes/class-templates.php:220
+#: includes/class-templates.php:306
+#: includes/merge-tags/post-type/class-post-author.php:69
+#: includes/merge-tags/post-type/class-post-last-editor.php:69
+#: includes/merge-tags/post-type/traits/class-post-user.php:43
+#: includes/merge-tags/user/class-user.php:81
+msgid "Email"
+msgstr ""
+
+#: includes/class-templates.php:197
+#: includes/merge-tags/post-type/class-post-author.php:64
+#: includes/merge-tags/post-type/class-post-last-editor.php:64
+#: includes/merge-tags/post-type/traits/class-post-user.php:38
+#: includes/merge-tags/user/class-user.php:77
+msgid "Username"
+msgstr ""
+
+#: includes/class-templates.php:198
+#: includes/merge-tags/user/class-user.php:105
+#: dist/index.js:1
+msgid "Role"
+msgstr ""
+
+#: includes/class-templates.php:200
+msgid "Manage users"
+msgstr ""
+
+#: includes/class-templates.php:205
 #: includes/class-utils.php:98
 #: includes/class-utils.php:126
 msgid "Comment"
+msgstr ""
+
+#. translators: %s: post title merge tag.
+#: includes/class-templates.php:215
+#, php-format
+msgid "New comment on \"%s\":"
+msgstr ""
+
+#: includes/class-templates.php:223
+msgid "View comment"
+msgstr ""
+
+#: includes/class-templates.php:242
+msgid "Term"
+msgstr ""
+
+#: includes/class-templates.php:243
+#: includes/merge-tags/post-type/class-post.php:97
+#: includes/merge-tags/taxonomy-type/class-taxonomy.php:87
+msgid "Slug"
+msgstr ""
+
+#: includes/class-templates.php:250
+#: includes/class-templates.php:262
+#: includes/class-utils.php:228
+msgid "Plugin"
+msgstr ""
+
+#. translators: %s: site name.
+#: includes/class-templates.php:259
+#, php-format
+msgid "A plugin change was detected on %s."
+msgstr ""
+
+#: includes/class-templates.php:263
+#: includes/merge-tags/plugin/class-plugin.php:64
+#: includes/merge-tags/theme/traits/class-theme.php:31
+msgid "Version"
+msgstr ""
+
+#: includes/class-templates.php:266
+#: includes/class-templates.php:326
+msgid "Open dashboard"
+msgstr ""
+
+#: includes/class-templates.php:271
+#: includes/class-utils.php:207
+msgid "Media"
+msgstr ""
+
+#: includes/class-templates.php:284
+#: includes/merge-tags/plugin/class-plugin.php:92
+msgid "File"
+msgstr ""
+
+#: includes/class-templates.php:285
+#: includes/merge-tags/comment-type/class-comment.php:68
+#: includes/merge-tags/comment-type/class-parent-comment.php:69
+#: dist/index.js:1
+#: dist/index.js:62
+msgid "Type"
+msgstr ""
+
+#: includes/class-templates.php:286
+#: dist/index.js:38
+msgid "Size"
+msgstr ""
+
+#: includes/class-templates.php:288
+msgid "View file"
+msgstr ""
+
+#: includes/class-templates.php:293
+#: includes/class-utils.php:235
+#: dist/index.js:1
+msgid "Privacy"
+msgstr ""
+
+#. translators: %s: site name.
+#: includes/class-templates.php:302
+#, php-format
+msgid "A privacy/data request was recorded on %s."
+msgstr ""
+
+#: includes/class-templates.php:308
+msgid "Review requests"
+msgstr ""
+
+#: includes/class-templates.php:314
+#: includes/class-utils.php:221
+msgid "Theme"
+msgstr ""
+
+#. translators: %s: site name.
+#: includes/class-templates.php:323
+#, php-format
+msgid "A theme change was detected on %s."
+msgstr ""
+
+#: includes/class-templates.php:389
+msgid "Email to administrators"
+msgstr ""
+
+#: includes/class-templates.php:397
+msgid "Administrator"
+msgstr ""
+
+#: includes/class-templates.php:411
+msgid "Web push to all subscribers"
+msgstr ""
+
+#: includes/class-templates.php:429
+msgid "Discord (add your webhook URL)"
+msgstr ""
+
+#: includes/class-templates.php:452
+msgid "Webhook (add your endpoint URL)"
+msgstr ""
+
+#: includes/class-templates.php:481
+msgid "Instagram (add your credentials)"
 msgstr ""
 
 #: includes/class-utils.php:99
@@ -237,27 +453,6 @@ msgstr ""
 #: includes/class-utils.php:100
 #: includes/class-utils.php:128
 msgid "Trackback"
-msgstr ""
-
-#: includes/class-utils.php:207
-msgid "Media"
-msgstr ""
-
-#: includes/class-utils.php:214
-#: includes/merge-tags/user/class-user.php:47
-msgid "User"
-msgstr ""
-
-#: includes/class-utils.php:221
-msgid "Theme"
-msgstr ""
-
-#: includes/class-utils.php:228
-msgid "Plugin"
-msgstr ""
-
-#: includes/class-utils.php:235
-msgid "Privacy"
 msgstr ""
 
 #. translators: %1$s: endpoint, %2$d: failure count
@@ -275,11 +470,11 @@ msgstr ""
 
 #: includes/integrations/class-discord-integration.php:120
 #: includes/integrations/class-discord-integration.php:136
-#: includes/integrations/class-webhook-integration.php:128
+#: includes/integrations/class-webhook-integration.php:142
 msgid "Error sending request."
 msgstr ""
 
-#: includes/integrations/class-discord-integration.php:148
+#: includes/integrations/class-discord-integration.php:149
 msgid "Request sent successfully."
 msgstr ""
 
@@ -457,7 +652,11 @@ msgstr ""
 msgid "Send your notifications to WhatsApp."
 msgstr ""
 
-#: includes/integrations/class-webhook-integration.php:142
+#: includes/integrations/class-webhook-integration.php:80
+msgid "Webhook URL is empty."
+msgstr ""
+
+#: includes/integrations/class-webhook-integration.php:156
 #: includes/integrations/class-webpush-integration.php:314
 msgid "Notification sent successfully."
 msgstr ""
@@ -559,6 +758,9 @@ msgstr ""
 #: includes/merge-tags/post-type/class-post-last-editor.php:54
 #: includes/merge-tags/post-type/class-post.php:52
 #: includes/merge-tags/post-type/traits/class-post-user.php:28
+#: dist/index.js:20
+#: dist/index.js:38
+#: dist/index.js:62
 msgid "ID"
 msgstr ""
 
@@ -571,6 +773,7 @@ msgstr ""
 #: includes/merge-tags/comment-type/class-comment.php:58
 #: includes/merge-tags/comment-type/class-parent-comment.php:59
 #: includes/merge-tags/post-type/class-post.php:62
+#: dist/index.js:1
 msgid "Content"
 msgstr ""
 
@@ -580,21 +783,10 @@ msgstr ""
 msgid "The content of the %1s."
 msgstr ""
 
-#: includes/merge-tags/comment-type/class-comment.php:63
-#: includes/merge-tags/comment-type/class-parent-comment.php:64
-#: includes/merge-tags/post-type/class-post.php:102
-msgid "Status"
-msgstr ""
-
 #. translators: %s: Comment type name
 #: includes/merge-tags/comment-type/class-comment.php:65
 #, php-format
 msgid "The status of the %1s."
-msgstr ""
-
-#: includes/merge-tags/comment-type/class-comment.php:68
-#: includes/merge-tags/comment-type/class-parent-comment.php:69
-msgid "Type"
 msgstr ""
 
 #. translators: %s: Comment type name
@@ -620,6 +812,7 @@ msgstr ""
 
 #: includes/merge-tags/comment-type/class-comment.php:106
 #: includes/merge-tags/comment-type/class-parent-comment.php:106
+#: dist/index.js:66
 msgid "Pending"
 msgstr ""
 
@@ -924,6 +1117,9 @@ msgstr ""
 #: includes/merge-tags/plugin/class-plugin.php:60
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:83
 #: includes/merge-tags/theme/traits/class-theme.php:27
+#: dist/index.js:1
+#: dist/index.js:62
+#: dist/index.js:66
 msgid "Name"
 msgstr ""
 
@@ -931,18 +1127,8 @@ msgstr ""
 msgid "The name of the plugin."
 msgstr ""
 
-#: includes/merge-tags/plugin/class-plugin.php:64
-#: includes/merge-tags/theme/traits/class-theme.php:31
-msgid "Version"
-msgstr ""
-
 #: includes/merge-tags/plugin/class-plugin.php:65
 msgid "The version of the plugin."
-msgstr ""
-
-#: includes/merge-tags/plugin/class-plugin.php:68
-#: includes/merge-tags/theme/traits/class-theme.php:35
-msgid "Author"
 msgstr ""
 
 #: includes/merge-tags/plugin/class-plugin.php:69
@@ -961,6 +1147,7 @@ msgstr ""
 #: includes/merge-tags/plugin/class-plugin.php:76
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:68
 #: includes/merge-tags/theme/traits/class-theme.php:43
+#: dist/index.js:1
 msgid "Description"
 msgstr ""
 
@@ -992,10 +1179,6 @@ msgstr ""
 
 #: includes/merge-tags/plugin/class-plugin.php:89
 msgid "The domain path of the plugin."
-msgstr ""
-
-#: includes/merge-tags/plugin/class-plugin.php:92
-msgid "File"
 msgstr ""
 
 #: includes/merge-tags/plugin/class-plugin.php:93
@@ -1040,24 +1223,10 @@ msgstr ""
 msgid "The display name of the %s author."
 msgstr ""
 
-#: includes/merge-tags/post-type/class-post-author.php:64
-#: includes/merge-tags/post-type/class-post-last-editor.php:64
-#: includes/merge-tags/post-type/traits/class-post-user.php:38
-#: includes/merge-tags/user/class-user.php:77
-msgid "Username"
-msgstr ""
-
 #. translators: %s: Post type singular name
 #: includes/merge-tags/post-type/class-post-author.php:66
 #, php-format
 msgid "The username of the %s author."
-msgstr ""
-
-#: includes/merge-tags/post-type/class-post-author.php:69
-#: includes/merge-tags/post-type/class-post-last-editor.php:69
-#: includes/merge-tags/post-type/traits/class-post-user.php:43
-#: includes/merge-tags/user/class-user.php:81
-msgid "Email"
 msgstr ""
 
 #. translators: %s: Post type singular name
@@ -1196,6 +1365,9 @@ msgid "The ID of the %s."
 msgstr ""
 
 #: includes/merge-tags/post-type/class-post.php:57
+#: dist/index.js:1
+#: dist/index.js:11
+#: dist/index.js:62
 msgid "Title"
 msgstr ""
 
@@ -1252,6 +1424,7 @@ msgid "The thumbnail URL of the %s."
 msgstr ""
 
 #: includes/merge-tags/post-type/class-post.php:87
+#: dist/index.js:1
 msgid "Format"
 msgstr ""
 
@@ -1269,11 +1442,6 @@ msgstr ""
 #: includes/merge-tags/post-type/class-post.php:94
 #, php-format
 msgid "The permalink of the %s."
-msgstr ""
-
-#: includes/merge-tags/post-type/class-post.php:97
-#: includes/merge-tags/taxonomy-type/class-taxonomy.php:87
-msgid "Slug"
 msgstr ""
 
 #. translators: %s: Post type singular name
@@ -1445,6 +1613,7 @@ msgid "The description of the %s term."
 msgstr ""
 
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:73
+#: dist/index.js:1
 msgid "URL"
 msgstr ""
 
@@ -1584,10 +1753,6 @@ msgstr ""
 msgid "The avatar of the user."
 msgstr ""
 
-#: includes/merge-tags/user/class-user.php:105
-msgid "Role"
-msgstr ""
-
 #: includes/merge-tags/user/class-user.php:106
 msgid "The role of the user."
 msgstr ""
@@ -1613,8 +1778,24 @@ msgstr ""
 msgid "Log IDs."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:51
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:53
 msgid "Trigger."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:100
+msgid "Notifications to import."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:106
+msgid "Status applied to imported notifications that do not specify one."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:192
+msgid "No notifications were provided to import."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:209
+msgid "Imported notification"
 msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:61
@@ -1915,4 +2096,1660 @@ msgstr ""
 
 #: includes/webpush/class-loader.php:793
 msgid "You have denied the permission to send notifications. Please allow it to subscribe to push notifications."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select a user"
+msgstr ""
+
+#: dist/index.js:1
+msgid "No users found"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select Type"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Custom"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Email Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to set up email notifications."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Find out more"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Email Addresses"
+msgstr ""
+
+#: dist/index.js:1
+msgid "You can use merge tags. For example, you can use {{general.admin_email}} to send the email to the admin email address."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select Role"
+msgstr ""
+
+#: dist/index.js:1
+msgid "example@domain.com or {{general.admin_email}}"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add Email"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Exclude Email Addresses"
+msgstr ""
+
+#: dist/index.js:1
+msgid "You can use merge tags. For example, you can use {{general.admin_email}} to exclude the admin email address."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Subject"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:11
+msgid "Message"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:62
+msgid "Merge Tags"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Webhook Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to setup webhooks."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Method"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Headers"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Key"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:62
+msgid "Value"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add Header"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Body"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add Field"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select Format"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Show Empty Fields"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Discord Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to setup Discord Webhook."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Title Link"
+msgstr ""
+
+#: dist/index.js:1
+msgid "This will be the main content of the message."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Allows you to add dynamic content to the author."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Icon URL"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Fields"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Label"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Inline"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Notification Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to setup webpush notifications."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Send To"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select who to send the notification to"
+msgstr ""
+
+#: dist/index.js:1
+msgid "All Users"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Specific Users"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Note: User should have subscribed to web push notifications to receive the notification."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add New User"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Merge Tag / ID"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the ID of the user or a merge tag e.g. {{order.customer_id}}"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Please select a user or enter a merge tag."
+msgstr ""
+
+#: dist/index.js:1
+msgid "User is already added."
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:62
+msgid "Add"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Add User"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the title of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the message of the notification"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Icon"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the icon URL of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Image"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the image URL of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter the URL of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Urgency"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select the urgency of the notification"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Very Low"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Low"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Normal"
+msgstr ""
+
+#: dist/index.js:1
+msgid "High"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Access token generated successfully."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Please enter your App ID and App Secret"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Instagram Settings"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Please make sure your WordPress admin URL is SSL secured. Instagram requires SSL for the redirect URL."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Read the documentation to learn more about how to get the access token."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Redirect URL"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Click to copy"
+msgstr ""
+
+#: dist/index.js:1
+msgid "App ID"
+msgstr ""
+
+#: dist/index.js:1
+msgid "App Secret"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Loading..."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Regenerate Access Token"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Generate Access Token"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Caption"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter your post text"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Image URL"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Alt Text"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Enter your post alt text"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Documentation"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Supercharge Your Notifications Today 🚀"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Elevate your experience with Notification Master Pro! Unlock advanced features, seamless integrations, and take your notifications to the next level. Join the pro community now and transform how you communicate 🔥."
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:66
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:62
+msgid "Pro"
+msgstr ""
+
+#: dist/index.js:1
+msgid "WooCommerce"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the WooCommerce product, review, or order changes."
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:38
+msgid "Enable"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:11
+#: dist/index.js:38
+#: dist/index.js:62
+msgid "On"
+msgstr ""
+
+#: dist/index.js:1
+#: dist/index.js:11
+#: dist/index.js:38
+#: dist/index.js:62
+msgid "Off"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Post status change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the post status changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Post types"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select the post types for which you want to send notifications when the post status changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select post types"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Taxonomy term change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the taxonomy term changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Taxonomies"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select the taxonomies for which you want to send notifications when the taxonomy term changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select taxonomies"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Comment change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the comment status changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Comment types"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select the comment types for which you want to send notifications when the comment status changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Select comment types"
+msgstr ""
+
+#: dist/index.js:1
+msgid "Media change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the media changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "User change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the user changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Theme change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the theme changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Plugin change"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, will be able to add notifications when the plugin changes."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Process notifications in the background"
+msgstr ""
+
+#: dist/index.js:1
+msgid "If enabled, notifications will be processed in the background. This will improve the performance of your website."
+msgstr ""
+
+#: dist/index.js:1
+msgid "Delete Notification Logs Older Than: "
+msgstr ""
+
+#. translators: %s: Number of days
+#: dist/index.js:4
+#, js-format
+msgid "All notification logs older than {%s} days will be deleted."
+msgstr ""
+
+#: dist/index.js:4
+msgid "Delete Debug Logs Older Than: "
+msgstr ""
+
+#. translators: %s: Number of days
+#: dist/index.js:7
+#, js-format
+msgid "All debug logs older than {%s} days will be deleted."
+msgstr ""
+
+#: dist/index.js:7
+msgid "Important Setup Instructions:"
+msgstr ""
+
+#: dist/index.js:7
+msgid "Make sure you have allowed notifications in your browser and operating system settings."
+msgstr ""
+
+#: dist/index.js:7
+msgid "Check that you have enabled notifications for this site in your browser."
+msgstr ""
+
+#: dist/index.js:7
+msgid "If your device has \"Do Not Disturb\" mode enabled, please disable it to allow notifications."
+msgstr ""
+
+#: dist/index.js:7
+msgid "If you’re having trouble generating the keys, try temporarily disabling any caching plugins and try again."
+msgstr ""
+
+#. translators: %s is the contact form url
+#: dist/index.js:9
+#, js-format
+msgid "If you face any issues with key generation or receiving notifications, please contact us via our <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Contact Form</a>."
+msgstr ""
+
+#. translators: %s is the documentation url
+#: dist/index.js:11
+#, js-format
+msgid "For detailed instructions, please refer to the <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">documentation</a>."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Web Push Public Key"
+msgstr ""
+
+#: dist/index.js:11
+msgid "This key is used to identify your web push service. use your own key or generate a new one."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Web Push Private Key"
+msgstr ""
+
+#: dist/index.js:11
+msgid "This key is used to authenticate your web push service. use your own key or generate a new one."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Keys generated successfully"
+msgstr ""
+
+#: dist/index.js:11
+#: dist/index.js:66
+msgid "An error occurred"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Generate Keys"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Automatically save the keys after generating."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Welcome Notification"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Enable Welcome Notification"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Auto-Delete Failed Subscriptions"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Automatically remove subscriptions that fail repeatedly to keep your database clean and improve delivery performance."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Enable Auto-Delete"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Failure Threshold"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Number of consecutive failed notification attempts before automatically deleting the subscription. Recommended: 3-5 failures."
+msgstr ""
+
+#: dist/index.js:11
+msgid "Enter number of failures (1-50)"
+msgstr ""
+
+#: dist/index.js:11
+msgid "How it works:"
+msgstr ""
+
+#: dist/index.js:11
+msgid "• When a notification successfully reaches a subscriber, their failure count resets to 0"
+msgstr ""
+
+#: dist/index.js:11
+msgid "• When a notification fails (invalid endpoint, expired subscription, etc.), the failure count increases by 1"
+msgstr ""
+
+#: dist/index.js:11
+msgid "• When the failure count reaches your threshold, the subscription is automatically deleted"
+msgstr ""
+
+#: dist/index.js:11
+msgid "• This helps maintain a clean subscriber list and improves overall delivery rates"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Subscribe Buttons"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Normal Button"
+msgstr ""
+
+#: dist/index.js:11
+msgid "Use this shortcode to display the subscribe button:"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Text"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Unsubscribe Text"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Colors"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Color"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Background Color"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Hover"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Hover Color"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Hover Background Color"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Spacing"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Padding"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Top"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Right"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Bottom"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Left"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Margin"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Border"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Border Radius"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Advanced"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Extra Class"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Add extra class to the button for custom styling."
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:38
+msgid "Add ID to the button for custom styling."
+msgstr ""
+
+#: dist/index.js:20
+msgid "Floating Button"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Enable floating button to show a subscribe button on the all pages."
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:62
+msgid "OR"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Use this shortcode to display the floating button on a specific page:"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Custom Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Icon Type"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Default"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Custom SVG Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Upload a custom SVG icon for the floating button. The icon will support color customization."
+msgstr ""
+
+#: dist/index.js:38
+msgid "WordPress Media Library is not available"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Select SVG Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Use this icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Please select an SVG file."
+msgstr ""
+
+#: dist/index.js:38
+msgid "Change Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Select Icon"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Custom Icon Preview"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Remove"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Tooltip"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enable tooltip to show a message when user hover on the button. (Hover Effect will be shown in frontend)"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enable Tooltip"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Subscribe Text"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Animation"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Enable Animation"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Animation Color"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Position"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Top Left"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Top Right"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Bottom Left"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Bottom Right"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Top Offset"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Bottom Offset (PX)"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Left Offset (PX)"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Right Offset"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Z-Index"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Icon Color"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Hover Icon Color"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Width"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Height"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Responsive"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Hide on Desktop"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Hide on Tablet"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Hide on Mobile"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Auto Display Web Push Prompt"
+msgstr ""
+
+#: dist/index.js:38
+msgid "If enabled, the web push prompt will be displayed automatically after user click on the page."
+msgstr ""
+
+#: dist/index.js:38
+msgid "Could not load starter templates."
+msgstr ""
+
+#: dist/index.js:38
+msgid "Install a ready-made set of notifications for common events."
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:41
+msgid "Starter Templates"
+msgstr ""
+
+#: dist/index.js:38
+#: dist/index.js:59
+msgid "Import"
+msgstr ""
+
+#. translators: %d: number of notifications exported.
+#: dist/index.js:41
+#, js-format
+msgid "%d notification exported."
+msgid_plural "%d notifications exported."
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:41
+msgid "Export failed."
+msgstr ""
+
+#: dist/index.js:41
+msgid "Export"
+msgstr ""
+
+#: dist/index.js:41
+msgid "Select all shown"
+msgstr ""
+
+#. translators: %d: number selected.
+#: dist/index.js:44
+#, js-format
+msgid "%d selected"
+msgstr ""
+
+#: dist/index.js:44
+#: dist/index.js:53
+#: dist/index.js:62
+msgid "Cancel"
+msgstr ""
+
+#. translators: %d: number of notifications installed.
+#: dist/index.js:47
+#, js-format
+msgid "%d starter notification installed as a draft. Review and activate it from the list."
+msgid_plural "%d starter notifications installed as drafts. Review and activate them from the list."
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:47
+#: dist/index.js:56
+msgid "Import failed."
+msgstr ""
+
+#: dist/index.js:47
+msgid "Please select at least one template."
+msgstr ""
+
+#. translators: %d: number selected.
+#: dist/index.js:50
+#, js-format
+msgid "Install %d"
+msgstr ""
+
+#: dist/index.js:50
+msgid "Installed as inactive drafts with Email and Web Push pre-configured. Discord, Webhook and Instagram are added as ready-to-fill connections. Review each one, then switch it on."
+msgstr ""
+
+#. translators: %d: total templates.
+#: dist/index.js:53
+#, js-format
+msgid "All %d"
+msgstr ""
+
+#: dist/index.js:53
+#: dist/index.js:62
+msgid "Search"
+msgstr ""
+
+#: dist/index.js:53
+msgid "Email — ready to send"
+msgstr ""
+
+#: dist/index.js:53
+msgid "Web Push — ready to send"
+msgstr ""
+
+#: dist/index.js:53
+msgid "+ Discord · Webhook · Instagram"
+msgstr ""
+
+#: dist/index.js:53
+msgid "No templates match your filter."
+msgstr ""
+
+#: dist/index.js:53
+msgid "Import Notifications"
+msgstr ""
+
+#. translators: 1: imported count, 2: skipped count.
+#: dist/index.js:56
+#, js-format
+msgid "%1$d notifications imported, %2$d skipped."
+msgstr ""
+
+#. translators: %d: number of notifications.
+#: dist/index.js:59
+#, js-format
+msgid "Import %d"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Upload a JSON file previously exported from Notification Master."
+msgstr ""
+
+#: dist/index.js:59
+msgid "No notifications found in this file."
+msgstr ""
+
+#: dist/index.js:59
+msgid "This file does not contain valid notifications."
+msgstr ""
+
+#: dist/index.js:59
+msgid "Could not read this file."
+msgstr ""
+
+#. translators: %d: number of notifications found.
+#: dist/index.js:62
+#, js-format
+msgid "%d notification found."
+msgid_plural "%d notifications found."
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:62
+msgid "No valid notifications."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Import as inactive (draft) — recommended"
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Trigger"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Actions"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Is equal to"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Is not equal to"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Contains"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Does not contain"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Starts with"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Ends with"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Is greater than"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Is less than"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Enable conditional logic"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Conditions"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Merge Tag"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Operator"
+msgstr ""
+
+#: dist/index.js:62
+msgid "AND"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Minutes"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Hours"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Days"
+msgstr ""
+
+#: dist/index.js:62
+msgid "After"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Before"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Send immediately"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Skip notification"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Schedule"
+msgstr ""
+
+#: dist/index.js:62
+msgid "When enabled, this connection will be queued and dispatched later instead of firing immediately."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Delay after the trigger fires"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Relative to a date from a merge tag"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Send after"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Send"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Select a date merge tag…"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Loading…"
+msgstr ""
+
+#: dist/index.js:62
+msgid "No date merge tags available for this trigger."
+msgstr ""
+
+#: dist/index.js:62
+msgid "If the date is in the past"
+msgstr ""
+
+#: dist/index.js:62
+msgid "If the merge tag is empty or invalid"
+msgstr ""
+
+#: dist/index.js:62
+msgid "New connection"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Connection name is required"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Integration is required"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Please fill in all required fields"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Next"
+msgstr ""
+
+#: dist/index.js:62
+msgid "All changes will be lost. Are you sure?"
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Yes"
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "No"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Back"
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Save"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Add connection"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Select integration"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Select the integration you'd like to use to send your notifications."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Each integration has its own settings and requirements."
+msgstr ""
+
+#: dist/index.js:62
+msgid "This integration is not configured yet, please configure it first."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Go to settings"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Connection name"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Enable connection"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Fill in the required settings above before enabling this connection."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Complete the required settings above to enable this connection."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Invalid settings"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Close"
+msgstr ""
+
+#: dist/index.js:62
+msgid "No connections yet."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Add this connection’s required settings before enabling it."
+msgstr ""
+
+#: dist/index.js:62
+msgid "This integration isn’t set up yet. Configure it in Settings before enabling this connection."
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Are you sure?"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Name:"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Integration:"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Failed to load merge tags"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Search merge tags"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Plugin Dependency Required"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Copy"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Copied to clipboard"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Connections"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Enabled"
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Delete"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Update"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Saved"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Action"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Could not load scheduled notifications."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Notification"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Connection"
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Integration"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Scheduled for"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Send now"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Notification dispatched."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Could not dispatch the notification."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Cancel this scheduled notification?"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Scheduled notification cancelled."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Could not cancel the scheduled notification."
+msgstr ""
+
+#: dist/index.js:62
+msgid "No scheduled notifications."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Connections with a schedule configured will appear here while they wait to fire."
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Total"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Statistics"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Overview"
+msgstr ""
+
+#: dist/index.js:62
+msgid "View all logs to see more details"
+msgstr ""
+
+#: dist/index.js:62
+msgid "View all"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Success"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Failed"
+msgstr ""
+
+#: dist/index.js:62
+msgid "All"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Active"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Inactive"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Sort by"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Order"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Descending"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Ascending"
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Bulk Actions"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Deactive"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Activate"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Notifications deleted successfully"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Notifications inactivated successfully"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Notifications activated successfully"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Could not apply bulk action"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Please select at least one notification"
+msgstr ""
+
+#: dist/index.js:62
+#: dist/index.js:66
+msgid "Apply"
+msgstr ""
+
+#: dist/index.js:62
+msgid "None"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Notification status changed successfully"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Could not change notification status"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Trigger disabled from settings"
+msgstr ""
+
+#. translators: %s: date
+#: dist/index.js:64
+#, js-format
+msgid "Published on %s"
+msgstr ""
+
+#: dist/index.js:64
+msgid "Edit"
+msgstr ""
+
+#: dist/index.js:64
+msgid "Duplicate"
+msgstr ""
+
+#. translators: %s: post title
+#: dist/index.js:66
+#, js-format
+msgid "(Copy) %s"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Notification duplicated successfully"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Could not duplicate notification"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Notification deleted successfully"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Could not delete notification"
+msgstr ""
+
+#: dist/index.js:66
+msgid "No notifications found"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Create your first notification"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Start from a ready-made template for common events like post published, new user, or new comment — or build one from scratch."
+msgstr ""
+
+#: dist/index.js:66
+msgid "Browse Starter Templates"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Are you sure you want to leave this page?"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Notification saved successfully"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Failed to save notification"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Failed to delete notification"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Back to Notifications"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Manage Web Push Subscriptions"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Total Subscriptions"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Transform Your Notifications Like Never Before 🚀"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Upgrade to Notification Master Pro and experience next-level notifications! Unlock exclusive features, seamless integrations, and powerful capabilities designed to keep you ahead. Take the leap today and redefine your communication strategy 🔥."
+msgstr ""
+
+#: dist/index.js:66
+msgid "General"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Triggers"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Web Push"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Settings saved successfully"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Failed to save settings"
+msgstr ""
+
+#: dist/index.js:66
+msgid "History"
+msgstr ""
+
+#: dist/index.js:66
+msgid "No logs found."
+msgstr ""
+
+#: dist/index.js:66
+msgid "Please select a log."
+msgstr ""
+
+#: dist/index.js:66
+msgid "Delete All"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Log Details"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Details"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Email Content"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Export All"
+msgstr ""
+
+#: dist/index.js:66
+msgid "Help"
 msgstr ""

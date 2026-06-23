@@ -138,6 +138,7 @@ class Discord_Integration extends Integration {
 					)
 				)
 			);
+			return;
 		}
 
 		Notification_Master()->notification_logger->success(
