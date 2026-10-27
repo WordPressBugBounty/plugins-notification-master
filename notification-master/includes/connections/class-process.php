@@ -81,6 +81,10 @@ class Process {
 	 * @return void
 	 */
 	public function process_connections( $connections, $trigger, $notification_id ) {
+		if ( ! is_array( $connections ) ) {
+			return;
+		}
+
 		// Peel off connections that have a future scheduled delay. Each becomes
 		// its own Action Scheduler entry; the remainder continues through the
 		// existing immediate/async dispatch path.
@@ -151,6 +155,10 @@ class Process {
 	 * @return void
 	 */
 	public function process( $connections, $trigger, $notification_id ) {
+		if ( ! is_array( $connections ) ) {
+			return;
+		}
+
 		foreach ( $connections as $connection_id => $connection ) {
 			$enabled     = isset( $connection['enabled'] ) ? $connection['enabled'] : true;
 			$integration = Integrations_Loader::get_instance()->get_integration( $connection['integration'] );

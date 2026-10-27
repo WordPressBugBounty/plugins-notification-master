@@ -81,14 +81,13 @@ class WebPush_Integration extends Integration {
 	 */
 	public function process() {
 		if ( ! WebPush_Loader::get_instance()->is_configured() ) {
-			Notification_Master()->logger->error(
-				'webpush_integration_not_configured',
-				$this->prepare_response(
-					array(
-						'message' => __( 'WebPush is not configured.', 'notification-master' ),
-					)
+			$not_configured = $this->prepare_response(
+				array(
+					'message' => __( 'WebPush is not configured.', 'notification-master' ),
 				)
 			);
+			Notification_Master()->logger->error( 'webpush_integration_not_configured', $not_configured );
+			Notification_Master()->notification_logger->error( $this->slug, $not_configured );
 			return;
 		}
 
@@ -256,75 +255,97 @@ class WebPush_Integration extends Integration {
 			),
 		);
 
-		$webPush = new WebPush( $auth );
+		$payload = wp_json_encode(
+			array(
+				'title'   => $title,
+				'message' => $message,
+				'icon'    => $icon,
+				'image'   => $image,
+				'url'     => $url,
+			)
+		);
+		$queued  = 0;
+		$webPush = null;
 
 		foreach ( $subscriptions as $subscription ) {
-			$endpoint         = $subscription->endpoint;
-			$user_auth        = $subscription->auth;
-			$p256dh           = $subscription->p256dh;
-			$expiration_time  = $subscription->expiration_time;
-			$content_encoding = $subscription->content_encoding;
+			$endpoint = $subscription->endpoint;
 
-			$subscription = Subscription::create(
-				array(
-					'endpoint'        => $endpoint,
-					'keys'            => array(
-						'auth'   => $user_auth,
-						'p256dh' => $p256dh,
-					),
-					'expirationTime'  => $expiration_time,
-					'contentEncoding' => $content_encoding,
-				)
-			);
+			// A row with unusable keys must not take the whole batch down.
+			if ( ! Subscription_Model::has_valid_keys( $subscription->p256dh, $subscription->auth ) ) {
+				$this->log_skipped( $endpoint, __( 'Skipped: the stored subscription keys are not valid.', 'notification-master' ) );
+				continue;
+			}
 
-			$webPush->queueNotification(
-				$subscription,
-				wp_json_encode(
-					array(
-						'title'   => $title,
-						'message' => $message,
-						'icon'    => $icon,
-						'image'   => $image,
-						'url'     => $url,
-					)
-				),
-				array(
-					'urgency' => $urgency,
-				)
-			);
-		}
+			try {
+				if ( null === $webPush ) {
+					$webPush = new WebPush( $auth );
+				}
 
-		/**
-		 * Check sent results
-		 *
-		 * @var MessageSentReport $report
-		 */
-		foreach ( $webPush->flush() as $report ) {
-			$endpoint = $report->getRequest()->getUri()->__toString();
-
-			if ( $report->isSuccess() ) {
-				// Record success and reset failure count.
-				Subscription_Model::record_success( $endpoint );
-
-				Notification_Master()->notification_logger->success(
-					$this->slug,
-					$this->prepare_response(
+				$webPush->queueNotification(
+					Subscription::create(
 						array(
-							'subscription' => $endpoint,
-							'message'      => __( 'Notification sent successfully.', 'notification-master' ),
+							'endpoint'        => $endpoint,
+							'keys'            => array(
+								'auth'   => $subscription->auth,
+								'p256dh' => $subscription->p256dh,
+							),
+							'expirationTime'  => $subscription->expiration_time,
+							'contentEncoding' => $subscription->content_encoding,
 						)
+					),
+					$payload,
+					array(
+						'urgency' => $urgency,
 					)
 				);
-			} else {
-				// Record failure and potentially auto-delete subscription.
-				Subscription_Model::record_failure( $endpoint );
+				++$queued;
+			} catch ( \Throwable $e ) {
+				$this->log_skipped( $endpoint, $e->getMessage() );
+			}
+		}
 
+		if ( $queued > 0 ) {
+			try {
+				foreach ( $webPush->flush() as $report ) {
+					$endpoint = $report->getRequest()->getUri()->__toString();
+
+					if ( $report->isSuccess() ) {
+						// Record success and reset failure count.
+						Subscription_Model::record_success( $endpoint );
+						Notification_Master()->notification_logger->success(
+							$this->slug,
+							$this->prepare_response(
+								array(
+									'subscription' => $endpoint,
+									'message'      => __( 'Notification sent successfully.', 'notification-master' ),
+								)
+							)
+						);
+					} else {
+						// Record failure and potentially auto-delete subscription.
+						Subscription_Model::record_failure( $endpoint );
+						Notification_Master()->notification_logger->error(
+							$this->slug,
+							$this->prepare_response(
+								array(
+									'subscription' => $endpoint,
+									'message'      => $report->getReason(),
+								)
+							)
+						);
+					}
+				}
+			} catch ( \Throwable $e ) {
+				// Encryption runs inside flush(); one bad row must not fail the scheduled action.
 				Notification_Master()->notification_logger->error(
 					$this->slug,
 					$this->prepare_response(
 						array(
-							'subscription' => $endpoint,
-							'message'      => $report->getReason(),
+							'message' => sprintf(
+								/* translators: %s: error message from the push library */
+								__( 'Push batch stopped early: %s', 'notification-master' ),
+								$e->getMessage()
+							),
 						)
 					)
 				);
@@ -337,6 +358,27 @@ class WebPush_Integration extends Integration {
 			$data['page'] = $page + 1;
 			Utils::enqueue_async_action( $this->slug, $data );
 		}
+	}
+
+	/**
+	 * Record a subscription that was skipped, and count it as a failure.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param string $endpoint Push endpoint.
+	 * @param string $reason   Why it was skipped.
+	 */
+	private function log_skipped( $endpoint, $reason ) {
+		Subscription_Model::record_failure( $endpoint );
+		Notification_Master()->notification_logger->error(
+			$this->slug,
+			$this->prepare_response(
+				array(
+					'subscription' => $endpoint,
+					'message'      => $reason,
+				)
+			)
+		);
 	}
 
 	/**

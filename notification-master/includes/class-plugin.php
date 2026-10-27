@@ -25,6 +25,7 @@ use Notification_Master\DB\Tables\Notification_Logs_Table;
 use Notification_Master\DB\Tables\Subscriptions_Table;
 use Notification_Master\Delayed_Notifications;
 use Notification_Master\Scheduling\Scheduler;
+use Notification_Master\Abilities\Abilities_Module;
 
 /**
  * Activate, deactivate and load classes.
@@ -91,6 +92,7 @@ class Plugin {
 		add_action( 'init', array( $this, 'load_classes' ) );
 		// Register tables.
 		add_action( 'admin_init', array( $this, 'register_tables' ) );
+		add_action( 'init', array( $this, 'maybe_register_tables' ), 5 );
 
 		// Schedule cleanup of failed subscriptions.
 		add_action( 'ntfm_cleanup_failed_subscriptions', array( $this, 'cleanup_failed_subscriptions' ) );
@@ -154,6 +156,8 @@ class Plugin {
 		Delayed_Notifications::init();
 		// Load scheduler.
 		Scheduler::init();
+		// Load abilities (WordPress 6.9+ Abilities API, inert below).
+		new Abilities_Module();
 
 		// Load logger class.
 		$this->logger = Logger::get_instance();
@@ -180,6 +184,23 @@ class Plugin {
 		Merge_Tags_Loader::get_instance();
 		// Load integrations class.
 		Integrations_Loader::get_instance();
+	}
+
+	/**
+	 * Create the tables once per plugin version on any request type.
+	 *
+	 * admin_init alone leaves a fresh install that is used through REST,
+	 * WP-CLI or MCP without tables until someone opens wp-admin.
+	 *
+	 * @since 1.8.0
+	 */
+	public function maybe_register_tables() {
+		if ( NOTIFICATION_MASTER_VERSION === get_option( 'notification_master_tables_version' ) ) {
+			return;
+		}
+
+		$this->register_tables();
+		update_option( 'notification_master_tables_version', NOTIFICATION_MASTER_VERSION, false );
 	}
 
 	/**

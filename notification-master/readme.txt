@@ -2,10 +2,10 @@
 Contributors: notificationmaster
 Donate link: https://notification-master.com
 Tags: web push, email, notifications, sms, whatsapp
-Stable tag: 1.7.1
+Stable tag: 1.8.0
 Requires at least: 4.9
-Tested up to: 7.0
-Requires PHP: 7.1
+Tested up to: 7.1
+Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -127,6 +127,37 @@ Access our complete knowledge base for detailed setup guides:
 * **[WooCommerce Notifications](https://notification-master.com/docs/woocommerce-triggers/)** - eCommerce-specific triggers
 * **[API & Webhooks](https://notification-master.com/docs/webhook/)** - Advanced integrations
 
+## 🤖 Works with AI Assistants (Claude and Cursor via MCP)
+
+Notification Master registers its notification, trigger, channel, schedule and log operations with the WordPress Abilities API, which is part of WordPress core since 6.9. Install the free MCP Adapter plugin from the WordPress project and MCP clients that sign in with a WordPress Application Password (Claude Desktop, Claude Code, Cursor) can manage your notifications in plain English. Verified with Claude Code.
+
+**What an AI assistant can do:**
+
+* List notifications with their trigger, channels and on/off state
+* Read one notification with its schedule, with webhook URLs, API secrets and recipient lists masked
+* List triggers, merge tags, channels and starter templates
+* Read settings without the push keys
+* List scheduled sends and cancel one
+* Read the send log, send statistics and the debug log
+* Count push subscribers
+* Create a notification from a starter template as a draft
+* Enable or disable a notification
+* Rename a notification or edit a connection's text fields
+
+*"Which notifications fire when a post is published, and which ones are turned off?"*
+*"Create a draft from the new comment template and leave it disabled."*
+*"Show me the failed sends from the last 7 days."*
+
+**What an AI assistant cannot do:**
+
+* Send a queued notification now over MCP. That stays off by default, and even over REST it needs an explicit confirmation.
+* Send test emails or broadcast push notifications.
+* Delete notifications, logs or subscribers, import or export raw data, or change settings and integration credentials. None of these are exposed to agents.
+* Use Pro channels, WooCommerce triggers or conditions on the free plan. The server refuses them.
+* Act as anyone but an administrator. Every operation checks the administrator capability, and a filter can require more than that, never less.
+
+**What you need:** WordPress 6.9 or newer, the free [MCP Adapter](https://github.com/WordPress/mcp-adapter) plugin (not bundled with Notification Master and not required), and a WordPress Application Password for a dedicated admin user (Users > Profile > Application Passwords). On the command line, `wp notification-master abilities` lists what registered. Nothing changes for sites that skip this: on older WordPress, or without the adapter, Notification Master runs exactly as before, and nothing leaves your server.
+
 == Installation ==
 
 ### **Automatic Installation (Recommended)**
@@ -174,6 +205,10 @@ Absolutely! We provide test functionality for all notification types, so you can
 
 Yes! We include privacy triggers for personal data export/erasure and respect user subscription preferences and unsubscribe options.
 
+= Does Notification Master work with Claude, Cursor or other AI assistants (MCP)? =
+
+Yes, on WordPress 6.9 or newer with the free MCP Adapter plugin from the WordPress project. An assistant can list your notifications, triggers, channels and logs, create draft notifications from the starter templates, enable or disable a notification and cancel a scheduled send. Sending a queued notification right away is off MCP, and every call needs an administrator Application Password. Without the adapter nothing changes.
+
 == Screenshots ==
 1. Notification Master - Notifications Dashboard
 2. Notification Master - Notification Configuration
@@ -181,6 +216,12 @@ Yes! We include privacy triggers for personal data export/erasure and respect us
 4. Notification Master - Merge Tags Selection
 
 == Changelog ==
+
+= 1.8.0 =
+* Added: Support for AI assistants through the WordPress Abilities API and MCP. Assistants such as Claude or ChatGPT can list your notifications, triggers, channels, templates, scheduled sends and logs, create draft notifications from templates, turn notifications on or off and cancel scheduled sends. Your credentials and recipient lists are never shown to them.
+* Added: WordPress 7.1 compatibility.
+* Updated: Notification Master now requires PHP 7.4 or newer. Sites on older PHP keep running 1.7.1.
+* Updated: The bundled Action Scheduler and Mobile Detect libraries, for full PHP 8.4 compatibility.
 
 = 1.7.1 =
 * Added: One-click starter templates. Install a ready-made set of notifications for common events (post/page published & updated, user login/logout/registration/password change, new comments, taxonomy terms, media, plugins and more) with Email and Web Push pre-configured and Discord/Webhook/Instagram added as ready-to-fill connections.
@@ -340,4 +381,9 @@ Yes! We include privacy triggers for personal data export/erasure and respect us
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.8.0 =
+Requires PHP 7.4 or newer. Adds support for AI assistants (WordPress Abilities API and MCP) and WordPress 7.1 compatibility.
+
+= 1.6.5 =
 Notification Master 1.6.5 introduces an intelligent auto-delete system for failed web push subscriptions. This major enhancement automatically maintains clean subscriber lists by removing inactive subscriptions after configurable failure thresholds, significantly improving notification delivery rates and database performance. The system intelligently resets failure counts when notifications succeed, ensuring only truly inactive subscriptions are removed.

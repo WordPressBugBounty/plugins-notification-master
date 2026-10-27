@@ -14,6 +14,7 @@ use Notification_Master\Merge_Tags\Loader as Merge_Tags_Loader;
 use Notification_Master\Triggers\Loader as Triggers_Loader;
 use Notification_Master\Templates;
 use Notification_Master\Notifications;
+use Notification_Master\Tier;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -203,19 +204,43 @@ class Rest_Notification_Controller extends Rest_Controller {
 				continue;
 			}
 
-			$trigger = isset( $item['trigger'] ) ? sanitize_text_field( $item['trigger'] ) : '';
-			$title   = isset( $item['title'] ) && '' !== trim( (string) $item['title'] )
-				? sanitize_text_field( $item['title'] )
-				: __( 'Imported notification', 'notification-master' );
+			$trigger = isset( $item['trigger'] ) && is_scalar( $item['trigger'] ) ? sanitize_text_field( (string) $item['trigger'] ) : '';
+			$title   = isset( $item['title'] ) && is_scalar( $item['title'] ) ? sanitize_text_field( (string) $item['title'] ) : '';
+			if ( '' === $title ) {
+				$title = __( 'Imported notification', 'notification-master' );
+			}
+
+			// Same gates as the editor: unknown and Pro-only triggers are skipped, never stored.
+			$gate          = Notifications::get_instance();
+			$trigger_check = $gate->validate_trigger( $trigger, new WP_REST_Request(), 'trigger' );
+			if ( is_wp_error( $trigger_check ) ) {
+				$skipped[] = array(
+					'title'   => $title,
+					'trigger' => $trigger,
+					'reason'  => 'ntfm_pro_required' === $trigger_check->get_error_code() ? 'pro_required' : 'invalid_trigger',
+					'message' => $trigger_check->get_error_message(),
+				);
+				continue;
+			}
 
 			$status = isset( $item['status'] ) ? $item['status'] : $default_status;
 			if ( ! in_array( $status, array( 'publish', 'draft' ), true ) ) {
 				$status = 'draft';
 			}
 
-			$connections = isset( $item['connections'] ) && is_array( $item['connections'] )
-				? Notifications::get_instance()->sanitize_connections( $item['connections'] )
-				: array();
+			// Connections go through the editor's validator too: Pro channels and conditions stay out on Free.
+			$connections       = isset( $item['connections'] ) && is_array( $item['connections'] ) ? $item['connections'] : array();
+			$connections_check = $gate->validate_connections( $connections );
+			if ( is_wp_error( $connections_check ) ) {
+				$skipped[] = array(
+					'title'   => $title,
+					'trigger' => $trigger,
+					'reason'  => 'ntfm_pro_required' === $connections_check->get_error_code() ? 'pro_required' : 'invalid_connections',
+					'message' => $connections_check->get_error_message(),
+				);
+				continue;
+			}
+			$connections = $gate->sanitize_connections( $connections );
 
 			$post_id = wp_insert_post(
 				array(

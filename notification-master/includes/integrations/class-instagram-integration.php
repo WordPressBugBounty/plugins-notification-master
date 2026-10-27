@@ -458,7 +458,7 @@ class Instagram_Integration extends Integration {
 					)
 				),
 				'timeout' => 60,
-			),
+			)
 		);
 
 		if ( is_wp_error( $create_response ) ) {

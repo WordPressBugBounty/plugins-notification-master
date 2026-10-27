@@ -261,20 +261,35 @@ class Email_Integration extends Integration {
 	public function process_batch( $data ) {
 		$emails        = $data['emails'] ?? array();
 		$current_index = $data['current_index'] ?? 0;
-		$subject       = $data['subject'];
-		$message       = $data['message'];
+		$subject       = $data['subject'] ?? '';
+		$message       = $data['message'] ?? '';
 		$args          = $data['args'] ?? array();
 
-		if ( empty( $emails ) || empty( $subject ) || empty( $message ) || empty( $args ) ) {
+		if ( empty( $emails ) || empty( $args ) ) {
 			return;
 		}
 
 		if ( ! $this->notification_name ) {
-			$this->notification_name = $args['notification_name'];
+			$this->notification_name = $args['notification_name'] ?? '';
 		}
 
-		if ( ! $this->trigger ) {
+		if ( ! $this->trigger && ! empty( $args['trigger'] ) ) {
 			$this->trigger = Triggers_Loader::get_instance()->get_trigger( $args['trigger'] );
+		}
+
+		// An empty body or subject is a failed send, not a silent skip: the log must say why no mail went out.
+		if ( empty( $subject ) || empty( $message ) ) {
+			Notification_Master()->notification_logger->error(
+				$this->slug,
+				$this->prepare_response(
+					array(
+						'message' => empty( $message ) ? __( 'Email skipped: empty message.', 'notification-master' ) : __( 'Email skipped: empty subject.', 'notification-master' ),
+						'emails'  => $emails,
+						'subject' => $subject,
+					)
+				)
+			);
+			return;
 		}
 
 		$headers = array(

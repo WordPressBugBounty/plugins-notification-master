@@ -192,7 +192,7 @@ abstract class Trigger {
 			array(
 				'post_type'   => 'ntfm_notification',
 				'post_status' => 'publish',
-				'per_page'    => -1,
+				'numberposts' => -1,
 				'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Reason: Need to get all posts with this trigger meta.
 					array(
 						'key'   => 'trigger',

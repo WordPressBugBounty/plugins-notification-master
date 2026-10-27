@@ -12,6 +12,9 @@
 namespace Notification_Master;
 
 use Notification_Master\Integrations\Loader;
+use Notification_Master\Triggers\Loader as Triggers_Loader;
+use Notification_Master\Tier;
+use WP_Error;
 
 /**
  * Notifications class.
@@ -53,6 +56,12 @@ class Notifications {
 
 		// Register rest fields for notification post type.
 		add_action( 'rest_api_init', array( $this, 'register_rest_fields' ) );
+
+		// The CPT stores connection credentials and recipients: only administrators may touch it over REST.
+		add_filter( 'rest_request_before_callbacks', array( $this, 'require_admin_for_notifications' ), 9, 3 );
+
+		// Core wraps field validation errors as 400; unwrap our Pro refusal so clients see 403 ntfm_pro_required.
+		add_filter( 'rest_request_before_callbacks', array( $this, 'surface_pro_refusal' ), 10, 3 );
 	}
 
 	/**
@@ -116,6 +125,7 @@ class Notifications {
 					'type'        => 'string',
 					'arg_options' => array(
 						'sanitize_callback' => 'sanitize_text_field',
+						'validate_callback' => array( $this, 'validate_trigger' ),
 					),
 				),
 			)
@@ -233,30 +243,207 @@ class Notifications {
 	 *
 	 * @param array $value Value.
 	 *
-	 * @return bool
+	 * @return bool|WP_Error
 	 */
 	public function validate_connections( $value ) {
-		$connections = $value;
-
-		if ( empty( $connections ) ) {
+		// Core's type check is bypassed by the arg_options callbacks, so refuse non-objects here.
+		if ( null === $value || array() === $value ) {
 			return true;
 		}
 
+		if ( ! is_array( $value ) ) {
+			return new WP_Error(
+				'rest_invalid_param',
+				__( 'connections must be an object keyed by connection id.', 'notification-master' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		$connections = $value;
+
+		// One source of truth for what Free may not store (Pro channel, conditions).
+		$pro_key = Tier::pro_only_connection_key( $connections );
+		if ( null !== $pro_key ) {
+			$pro_slug = isset( $connections[ $pro_key ]['integration'] ) ? (string) $connections[ $pro_key ]['integration'] : '';
+			$what     = Tier::is_pro_integration( $pro_slug )
+				/* translators: %s: integration slug */
+				? sprintf( __( 'The "%s" channel', 'notification-master' ), $pro_slug )
+				: __( 'Connection conditions', 'notification-master' );
+
+			return Tier::pro_required_error( $what, array( 'connection_id' => $pro_key ) );
+		}
+
+		// Never get_integration(): it logs an invalid_integration row for unknown slugs.
+		$integrations = Loader::get_instance()->get_integrations();
+
 		foreach ( $connections as $connection_id => $connection ) {
-			$integration = Loader::get_instance()->get_integration( $connection['integration'] );
+			$slug = isset( $connection['integration'] ) ? (string) $connection['integration'] : '';
 
-			if ( $integration ) {
-				$attributes = $integration->get_attributes_schema();
-				/* translators: %s: integration name */
-				$settings = rest_validate_object_value_from_schema( $connection['settings'], $attributes, sprintf( '(%s) integration', $integration->name ) );
+			if ( ! isset( $integrations[ $slug ] ) ) {
+				return new WP_Error(
+					'rest_invalid_param',
+					sprintf(
+						/* translators: 1: integration slug, 2: registered slugs */
+						__( 'Unknown integration "%1$s". Registered integrations: %2$s.', 'notification-master' ),
+						$slug,
+						implode( ', ', array_keys( $integrations ) )
+					),
+					array( 'status' => 400 )
+				);
+			}
 
-				if ( is_wp_error( $settings ) ) {
-					return false;
-				}
+			$integration = $integrations[ $slug ];
+			$attributes  = $integration->get_attributes_schema();
+			$settings    = isset( $connection['settings'] ) ? $connection['settings'] : null;
+			/* translators: %s: integration name */
+			$settings = rest_validate_object_value_from_schema( $settings, $attributes, sprintf( '(%s) integration', $integration->name ) );
+
+			if ( is_wp_error( $settings ) ) {
+				return $settings;
 			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * Validate the trigger slug of a notification.
+	 *
+	 * Accepts '', the value already stored on the post (so a notification whose
+	 * trigger family was disabled still saves) and any registered slug. Refuses
+	 * Pro triggers on Free with ntfm_pro_required and unknown slugs with
+	 * rest_invalid_param.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param mixed           $value   Value.
+	 * @param WP_REST_Request $request Request.
+	 * @param string          $param   Parameter name.
+	 *
+	 * @return bool|WP_Error
+	 */
+	public function validate_trigger( $value, $request, $param ) {
+		if ( ! is_scalar( $value ) && null !== $value ) {
+			return new WP_Error(
+				'rest_invalid_param',
+				__( 'trigger must be a string.', 'notification-master' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		$value  = null === $value ? '' : (string) $value;
+		$stored = isset( $request['id'] ) ? (string) get_post_meta( (int) $request['id'], 'trigger', true ) : '';
+
+		if ( '' === $value ) {
+			// A draft may still have no trigger; a saved trigger is never blanked by an empty or null value.
+			if ( '' !== $stored ) {
+				return new WP_Error(
+					'rest_invalid_param',
+					__( 'trigger cannot be removed from a saved notification. Pick another trigger instead.', 'notification-master' ),
+					array( 'status' => 400 )
+				);
+			}
+
+			return true;
+		}
+
+		if ( '' !== $stored && $stored === $value ) {
+			return true;
+		}
+
+		$triggers = Triggers_Loader::get_instance()->get_triggers();
+		if ( isset( $triggers[ $value ] ) ) {
+			return true;
+		}
+
+		if ( Tier::is_pro_trigger( $value ) && ! Tier::is_pro() ) {
+			/* translators: %s: trigger slug */
+			return Tier::pro_required_error( sprintf( __( 'The "%s" trigger', 'notification-master' ), $value ) );
+		}
+
+		return new WP_Error(
+			'rest_invalid_param',
+			/* translators: %s: trigger slug */
+			sprintf( __( 'Unknown trigger "%s".', 'notification-master' ), $value ),
+			array(
+				'status'  => 400,
+				'allowed' => array_keys( $triggers ),
+			)
+		);
+	}
+
+	/**
+	 * Refuse every /wp/v2/ntfm_notification* request from a user without manage_options.
+	 *
+	 * Runs before the route's own permission callback, so a published
+	 * notification is never readable anonymously.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param mixed           $response Result to send, or a WP_Error.
+	 * @param array           $handler  Route handler.
+	 * @param WP_REST_Request $request  Request.
+	 *
+	 * @return mixed
+	 */
+	public function require_admin_for_notifications( $response, $handler, $request ) {
+		if ( ! ( $request instanceof \WP_REST_Request ) ) {
+			return $response;
+		}
+
+		$route = (string) $request->get_route();
+		if ( 0 !== strpos( $route, '/wp/v2/ntfm_notification' ) || current_user_can( 'manage_options' ) ) {
+			return $response;
+		}
+
+		return new WP_Error(
+			'rest_forbidden',
+			__( 'Sorry, you are not allowed to do that.', 'notification-master' ),
+			array( 'status' => is_user_logged_in() ? 403 : 401 )
+		);
+	}
+
+	/**
+	 * Unwrap a Pro refusal that core folded into rest_invalid_param, on this plugin's routes only.
+	 *
+	 * On WordPress below 5.7 the nested details are absent and the response is returned unchanged.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param mixed           $response Result to send, or a WP_Error.
+	 * @param array           $handler  Route handler.
+	 * @param WP_REST_Request $request  Request.
+	 *
+	 * @return mixed
+	 */
+	public function surface_pro_refusal( $response, $handler, $request ) {
+		if ( ! is_wp_error( $response ) || 'rest_invalid_param' !== $response->get_error_code() || ! ( $request instanceof \WP_REST_Request ) ) {
+			return $response;
+		}
+
+		$route = (string) $request->get_route();
+		if ( 0 !== strpos( $route, '/wp/v2/ntfm_notification' ) && 0 !== strpos( $route, '/ntfm/v1/' ) ) {
+			return $response;
+		}
+
+		$data = $response->get_error_data();
+		if ( ! isset( $data['details'] ) || ! is_array( $data['details'] ) ) {
+			return $response;
+		}
+
+		foreach ( $data['details'] as $param => $detail ) {
+			if ( ! isset( $detail['code'] ) || 'ntfm_pro_required' !== $detail['code'] ) {
+				continue;
+			}
+
+			$inner           = isset( $detail['data'] ) && is_array( $detail['data'] ) ? $detail['data'] : array();
+			$inner['status'] = 403;
+			$inner['param']  = (string) $param;
+
+			return new WP_Error( 'ntfm_pro_required', isset( $detail['message'] ) ? (string) $detail['message'] : '', $inner );
+		}
+
+		return $response;
 	}
 
 	/**
@@ -269,6 +456,11 @@ class Notifications {
 	 * @return array
 	 */
 	public function sanitize_connections( $value ) {
+		// null means "not sent" and must stay null so the stored meta is left alone.
+		if ( ! is_array( $value ) ) {
+			return null === $value ? null : array();
+		}
+
 		$connections = $value;
 
 		foreach ( $connections as $connection_id => $connection ) {
@@ -298,9 +490,13 @@ class Notifications {
 	 * @return array
 	 */
 	public function get_trigger( $object ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return '';
+		}
+
 		$trigger = get_post_meta( $object['id'], 'trigger', true );
 
-		return $trigger ?? '';
+		return $trigger ? (string) $trigger : '';
 	}
 
 	/**
@@ -314,6 +510,13 @@ class Notifications {
 	 * @return bool
 	 */
 	public function update_trigger( $value, $object ) {
+		$value = is_scalar( $value ) ? (string) $value : '';
+
+		// Defence in depth behind the validator: a saved trigger is never blanked.
+		if ( '' === $value && '' !== (string) get_post_meta( $object->ID, 'trigger', true ) ) {
+			return true;
+		}
+
 		return update_post_meta( $object->ID, 'trigger', $value );
 	}
 
@@ -327,9 +530,14 @@ class Notifications {
 	 * @return array
 	 */
 	public function get_connections( $object ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return array();
+		}
+
 		$connections = get_post_meta( $object['id'], 'connections', true );
 
-		return ! empty( $connections ) ? $connections : array();
+		// A non-array left behind by an older build reads as an empty list, so the next save normalises it.
+		return is_array( $connections ) ? $connections : array();
 	}
 
 	/**
@@ -343,6 +551,10 @@ class Notifications {
 	 * @return bool
 	 */
 	public function update_connections( $value, $object ) {
+		if ( ! is_array( $value ) ) {
+			return false;
+		}
+
 		return update_post_meta( $object->ID, 'connections', $value );
 	}
 }

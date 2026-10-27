@@ -88,7 +88,8 @@ class Subscription_Model {
 	public static function get( $id ) {
 		global $wpdb;
 
-		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}ntfm_subscriptions WHERE %s = %d", self::$primary_key, $id ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No caching needed.
+		$key    = self::$primary_key;
+		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}ntfm_subscriptions WHERE {$key} = %d", $id ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Static column name; no caching needed.
 
 		return $result;
 	}
@@ -420,7 +421,50 @@ class Subscription_Model {
 	 * @return string
 	 */
 	public static function get_user_agent() {
-		return $_SERVER['HTTP_USER_AGENT'];
+		return isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
+	}
+
+	/**
+	 * Whether a subscription's client keys can be used for encryption.
+	 *
+	 * The push library throws on anything else, so this check runs before a
+	 * row is stored and before it is queued for a send.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param string $p256dh Client public key, base64url.
+	 * @param string $auth   Client auth secret, base64url.
+	 *
+	 * @return bool
+	 */
+	public static function has_valid_keys( $p256dh, $auth ) {
+		$public = self::decode_base64url( $p256dh );
+		$secret = self::decode_base64url( $auth );
+
+		if ( false === $public || false === $secret ) {
+			return false;
+		}
+
+		return 65 === strlen( $public ) && "\x04" === $public[0] && 16 === strlen( $secret );
+	}
+
+	/**
+	 * Strict base64url decode; false on anything that is not base64url.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param mixed $value Encoded value.
+	 *
+	 * @return string|false
+	 */
+	private static function decode_base64url( $value ) {
+		if ( ! is_string( $value ) || '' === $value || ! preg_match( '/^[A-Za-z0-9_-]+=*$/', $value ) ) {
+			return false;
+		}
+
+		$padded = str_pad( strtr( $value, '-_', '+/' ), (int) ceil( strlen( $value ) / 4 ) * 4, '=' );
+
+		return base64_decode( $padded, true );
 	}
 
 	/**
@@ -572,5 +616,36 @@ class Subscription_Model {
 		); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No caching needed.
 
 		return $deleted;
+	}
+
+	/**
+	 * Count rows grouped by one whitelisted column.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param string $column One of status, device, browser.
+	 *
+	 * @return array Value => count; NULL/empty values are summed under 'unknown'. Empty for a rejected column.
+	 */
+	public static function get_counts_grouped( $column ) {
+		global $wpdb;
+
+		// Never interpolate an unvalidated column name.
+		if ( ! in_array( $column, array( 'status', 'device', 'browser' ), true ) ) {
+			return array();
+		}
+
+		$rows = $wpdb->get_results( "SELECT `{$column}` AS k, COUNT(*) AS total FROM {$wpdb->prefix}ntfm_subscriptions GROUP BY `{$column}`" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Column is whitelisted above and no caching needed.
+
+		$counts = array();
+		foreach ( (array) $rows as $row ) {
+			$key = isset( $row->k ) ? trim( (string) $row->k ) : '';
+			if ( '' === $key ) {
+				$key = 'unknown';
+			}
+			$counts[ $key ] = ( isset( $counts[ $key ] ) ? $counts[ $key ] : 0 ) + (int) $row->total;
+		}
+
+		return $counts;
 	}
 }

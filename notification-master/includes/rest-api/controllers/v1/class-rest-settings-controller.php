@@ -11,6 +11,7 @@ namespace Notification_Master\REST_API\Controllers\V1;
 
 use Notification_Master\REST_API\Controllers\V1\Rest_Controller;
 use Notification_Master\Settings;
+use Notification_Master\Tier;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -60,6 +61,41 @@ class Rest_Settings_Controller extends Rest_Controller {
 				),
 			)
 		);
+	}
+
+	/**
+	 * Coerce a posted setting to the type of its schema property or, failing that, of its default.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param string $key    Setting key.
+	 * @param mixed  $value  Value as posted.
+	 * @param array  $schema Settings schema (properties + default).
+	 * @return mixed|WP_Error Typed value, or WP_Error when the value cannot be that type.
+	 */
+	private function type_setting( $key, $value, $schema ) {
+		if ( isset( $schema['properties'][ $key ] ) ) {
+			$valid = rest_validate_value_from_schema( $value, $schema['properties'][ $key ], $key );
+
+			return is_wp_error( $valid ) ? $valid : rest_sanitize_value_from_schema( $value, $schema['properties'][ $key ], $key );
+		}
+
+		$default = isset( $schema['default'][ $key ] ) ? $schema['default'][ $key ] : null;
+		$refused = new WP_Error( 'rest_invalid_type', $key );
+
+		switch ( gettype( $default ) ) {
+			case 'boolean':
+				return rest_is_boolean( $value ) ? rest_sanitize_boolean( $value ) : $refused;
+			case 'integer':
+				return is_numeric( $value ) ? (int) $value : $refused;
+			case 'double':
+				return is_numeric( $value ) ? (float) $value : $refused;
+			case 'array':
+				return is_array( $value ) ? $value : $refused;
+			default:
+				// Strings: the UI may post a number for a width or a radius.
+				return is_scalar( $value ) || null === $value ? (string) $value : $refused;
+		}
 	}
 
 	/**
@@ -292,7 +328,7 @@ class Rest_Settings_Controller extends Rest_Controller {
 	 *
 	 * @param WP_REST_Request $request
 	 *
-	 * @return WP_REST_Response
+	 * @return WP_REST_Response|WP_Error
 	 */
 	public function update_items( $request ) {
 		$schema   = $this->get_schema();
@@ -300,10 +336,26 @@ class Rest_Settings_Controller extends Rest_Controller {
 		$settings = Settings::get_settings( $default );
 		$settings = wp_parse_args( $settings, $default );
 		$params   = $request->get_param( 'settings' );
+		$params   = is_array( $params ) ? $params : array();
+		$pro_key  = Tier::pro_only_setting_key( $params, $settings );
+		if ( $pro_key ) {
+			/* translators: %s: setting key */
+			return Tier::pro_required_error( sprintf( __( 'The "%s" setting', 'notification-master' ), $pro_key ) );
+		}
+		// An unchanged Pro key is neither refused nor stored.
+		$params = Tier::strip_pro_settings( $params );
 		foreach ( $params as $key => $value ) {
-			if ( isset( $settings[ $key ] ) ) {
-				$settings[ $key ] = $value;
+			if ( ! isset( $settings[ $key ] ) ) {
+				continue;
 			}
+
+			// Store every key with its type whatever the client sent; the UI posts numbers as strings.
+			$typed = $this->type_setting( $key, $value, $schema );
+			if ( is_wp_error( $typed ) ) {
+				continue;
+			}
+
+			$settings[ $key ] = $typed;
 		}
 
 		$updated  = Settings::update_settings( $settings );
@@ -332,17 +384,33 @@ class Rest_Settings_Controller extends Rest_Controller {
 	 *
 	 * @param WP_REST_Request $request
 	 *
-	 * @return WP_REST_Response
+	 * @return WP_REST_Response|WP_Error
 	 */
 	public function delete_items( $request ) {
 		$schema   = $this->get_schema();
 		$default  = $schema['default'];
 		$settings = Settings::get_settings( $default );
 		$params   = $request->get_param( 'settings' );
+		$params   = is_array( $params ) ? $params : array();
+		$pro_key  = Tier::pro_only_setting_key( $params, wp_parse_args( $settings, $default ) );
+		if ( $pro_key ) {
+			/* translators: %s: setting key */
+			return Tier::pro_required_error( sprintf( __( 'The "%s" setting', 'notification-master' ), $pro_key ) );
+		}
+		// An unchanged Pro key is neither refused nor stored.
+		$params = Tier::strip_pro_settings( $params );
 		foreach ( $params as $key => $value ) {
-			if ( isset( $settings[ $key ] ) ) {
-				$settings[ $key ] = $value;
+			if ( ! isset( $settings[ $key ] ) ) {
+				continue;
 			}
+
+			// Store every key with its type whatever the client sent; the UI posts numbers as strings.
+			$typed = $this->type_setting( $key, $value, $schema );
+			if ( is_wp_error( $typed ) ) {
+				continue;
+			}
+
+			$settings[ $key ] = $typed;
 		}
 		$updated  = Settings::update_settings( $settings );
 		$response = rest_ensure_response( $updated );

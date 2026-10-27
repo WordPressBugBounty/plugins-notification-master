@@ -263,8 +263,8 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 		$action           = sanitize_text_field( $request->get_param( 'action' ) );
 		$action           = $action ? $action : 'automatic';
 
-		if ( empty( $endpoint ) || empty( $auth ) || empty( $p256dh ) ) {
-			return new WP_Error( 'invalid_data', __( 'Invalid data.', 'notification-master' ), array( 'status' => 400 ) );
+		if ( ! $this->is_valid_subscription( $endpoint, $auth, $p256dh ) ) {
+			return new WP_Error( 'ntfm_invalid_subscription', __( 'The push subscription is incomplete or malformed.', 'notification-master' ), array( 'status' => 400 ) );
 		}
 
 		$subscription_data = array(
@@ -311,6 +311,30 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 			),
 			200
 		);
+	}
+
+	/**
+	 * A browser PushSubscription has an http(s) endpoint URL and two non-empty key strings.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param string $endpoint Push service endpoint.
+	 * @param string $auth     Auth secret.
+	 * @param string $p256dh   Client public key.
+	 *
+	 * @return bool
+	 */
+	private function is_valid_subscription( $endpoint, $auth, $p256dh ) {
+		if ( '' === $endpoint || false === filter_var( $endpoint, FILTER_VALIDATE_URL ) ) {
+			return false;
+		}
+
+		$scheme = strtolower( (string) wp_parse_url( $endpoint, PHP_URL_SCHEME ) );
+		if ( 'http' !== $scheme && 'https' !== $scheme ) {
+			return false;
+		}
+
+		return Subscription_Model::has_valid_keys( $p256dh, $auth );
 	}
 
 	/**

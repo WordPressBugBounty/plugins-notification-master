@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Notification Master 1.7.1\n"
+"Project-Id-Version: Notification Master 1.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/notification-master\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-23T17:04:30+00:00\n"
+"POT-Creation-Date: 2026-10-22T12:06:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: notification-master\n"
@@ -31,6 +31,577 @@ msgstr ""
 #. Author URI of the plugin
 #: notifications-master.php
 msgid "https://notification-master.com"
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:88
+msgid "Notification Master (Read)"
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:89
+msgid "Read-only inspection of notifications, triggers, channels, scheduled sends, logs and subscriber counts. Nothing in this category changes or sends anything."
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:96
+msgid "Notification Master (Actions)"
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:97
+msgid "Operations that enable, edit, create or cancel notifications and scheduled sends. Everything here writes."
+msgstr ""
+
+#. translators: 1: read category slug, 2: actions category slug
+#: includes/abilities/class-abilities-module.php:117
+#, php-format
+msgid "Notification Master abilities were not registered because the \"%1$s\" or \"%2$s\" category is missing."
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:374
+msgid "was not registered."
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:395
+msgid "is annotated both destructive and idempotent."
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:399
+msgid "is annotated both readonly and destructive."
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:405
+msgid "is destructive but is not opted out of MCP."
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:409
+msgid "is destructive but requires no confirmation field."
+msgstr ""
+
+#: includes/abilities/class-abilities-module.php:414
+msgid "is not in a Notification Master category."
+msgstr ""
+
+#. translators: 1: ability name, 2: description of the problem
+#: includes/abilities/class-abilities-module.php:484
+#, php-format
+msgid "Ability \"%1$s\" %2$s"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:76
+msgid "List triggers"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:77
+msgid "Lists every trigger (site event) Notification Master can react to, grouped the way the admin screen groups them: one group per enabled post type, taxonomy and comment type, plus media, user, theme, plugin and privacy, and the WooCommerce order, product and review groups only when Notification Master Pro is licensed and WooCommerce is active. Each trigger carries its slug (the exact value a notification stores), the merge-tag groups its content may use, how many notifications currently use it (notifications_active = published and firing, notifications_draft = disabled) and whether it is a Pro trigger. A trigger family switched off in the settings is absent here even if notifications still reference it; list-notifications reports that as trigger_active false. Pass group to narrow the list to one group slug; an unknown group returns an empty triggers list while the groups map always names every valid slug. Changes nothing. Read-only, so the run endpoint is a GET with bracket-encoded input: ?input[group]=post."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:84
+msgid "Return only the triggers in this group slug, e.g. \"post\", \"page\", \"comment\", \"user\". Omit for every group."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:96
+msgid "Every trigger group on this site, keyed by group slug."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:195
+msgid "List merge tags"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:196
+msgid "Lists the merge tags a notification on the given trigger may use in its subject, message, URL or body, written as {{group.key}}, for example {{post.title}} or {{general.blogname}}. Groups come back keyed by group slug with the shared \"general\" group first. Each group has a label, is_advanced, available (advanced groups such as ACF fields need Notification Master Pro, so available is false for them on the free plan), the plugin the group depends on (null when none) and whether that plugin is active, and its tags keyed by tag key with label, description and type (null when untyped; \"datetime\" tags can drive a connection schedule). The trigger slug is checked here: an unknown slug answers 400 ntfm_invalid_trigger with the allowed slugs, and a Pro WooCommerce trigger on the free plan answers 403 ntfm_pro_required. Changes nothing. Read-only, so the run endpoint is a GET with bracket-encoded input: ?input[trigger]=post-published."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:203
+msgid "Trigger slug exactly as list-triggers reports it, e.g. \"post-published\"."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:215
+msgid "Merge-tag groups keyed by slug, \"general\" first. Each is {label, is_advanced, available, depends_on_plugin, plugin_dependency_active, merge_tags: {key: {label, description, type}}}."
+msgstr ""
+
+#. translators: %s: trigger slug
+#: includes/abilities/class-catalog-abilities.php:232
+#: includes/class-notifications.php:361
+#, php-format
+msgid "The \"%s\" trigger"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:233
+msgid "WooCommerce triggers are part of Notification Master Pro. On this install only the free triggers are available; call notification-master/list-triggers for the list."
+msgstr ""
+
+#. translators: %s: trigger slug
+#: includes/abilities/class-catalog-abilities.php:240
+#: includes/abilities/class-notification-abilities.php:164
+#: includes/class-notifications.php:367
+#, php-format
+msgid "Unknown trigger \"%s\"."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:244
+msgid "Pass a slug from the allowed list. A trigger whose family is switched off in the settings, or a Pro trigger when WooCommerce is inactive, is not registered and so not listed."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:305
+msgid "List channels"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:306
+msgid "Lists the delivery channels (integrations) a notification connection can use. The free plugin ships webpush, email, webhook, discord and instagram; facebook, twitterx, twilio, slack, zapier, make and whatsapp need Notification Master Pro and on the free plan are listed with available false and requires \"Notification Master Pro\", so an agent can tell a locked channel from an unknown one. Each channel reports its connection settings keys, which of those hold credentials or recipient lists (secret_keys: always redacted elsewhere and never writable through update-notification), whether it is configured where that is knowable (webpush: both VAPID keys set; instagram: an account connected; null for channels configured per connection) and how many connections across the first 100 notifications use it and how many of those are enabled. Never returns a credential. Takes no input. Read-only, so the run endpoint is a GET; with no input the bracket-encoded query string (?input[...]) stays empty."
+msgstr ""
+
+#. translators: %s: channel name
+#: includes/abilities/class-catalog-abilities.php:393
+#, php-format
+msgid "Send notifications to %s. Available in Notification Master Pro."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:427
+msgid "List starter templates"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:428
+msgid "Lists the ready-made starter notifications that notification-master/create-notification-from-template can import: one per registered trigger, each pre-wired with an email and a web push connection (enabled) plus discord, webhook and instagram shells (disabled). Returns each template id (pass it as template_id), title, trigger slug, group label, whether that trigger is registered right now, and one {id, integration, enabled} summary per connection. HTML bodies and connection settings are left out on purpose; import a template and read it with get-notification to see them. Pass group to narrow the list to one trigger group slug such as \"post\" or \"user\". Changes nothing. Read-only, so the run endpoint is a GET with bracket-encoded input: ?input[group]=post."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:435
+msgid "Return only templates whose trigger belongs to this group slug. Omit for every group."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:549
+msgid "Get settings"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:550
+msgid "Reads the Notification Master settings merged over their defaults: which trigger families are on (post_status_change_trigger, taxonomy_term_change_trigger, comment_change_trigger, user_change_trigger, theme_change_trigger, plugin_change_trigger, media_change_trigger, privacy_trigger and, only when Pro is licensed, woocommerce_change_trigger), which post types, taxonomies and comment types fire triggers, log retention in days (delete_logs_every for the debug log, notifications_delete_logs_every for the send log), whether background processing is on, and the web push subscribe-button appearance options. The VAPID key pair is never returned; webpush_configured says whether both keys are set. is_pro says whether Notification Master Pro is licensed. There is deliberately no write counterpart: changing these re-registers triggers and can silently stop live notifications, so it stays a human decision in wp-admin. Takes no input. Read-only, so the run endpoint is a GET; with no input the bracket-encoded query string (?input[...]) stays empty."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:573
+msgid "Present only when Notification Master Pro is licensed."
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:773
+#: includes/integrations/class-loader.php:162
+msgid "Facebook"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:774
+#: includes/integrations/class-loader.php:167
+msgid "X"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:775
+#: includes/integrations/class-loader.php:172
+msgid "Twilio"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:776
+#: includes/integrations/class-loader.php:177
+msgid "Slack"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:777
+#: includes/integrations/class-loader.php:182
+msgid "Zapier"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:778
+#: includes/integrations/class-loader.php:187
+msgid "Make"
+msgstr ""
+
+#: includes/abilities/class-catalog-abilities.php:779
+#: includes/integrations/class-loader.php:192
+msgid "WhatsApp"
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:92
+msgid "List scheduled sends"
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:93
+msgid "Lists the per-connection sends Notification Master has queued in Action Scheduler, one row per pending (or, with status, completed or failed) action: the notification and connection it belongs to, the channel, the trigger that queued it, and the fire time both as a UNIX timestamp (scheduled_for, 0 when unknown) and as a GMT datetime (scheduled_for_gmt). This is the same list the REST route GET /ntfm/v1/scheduled serves. Pass notification_id to see only one notification's sends; the filter runs in the database, so paging is exact. It reads only and never changes a schedule; use notification-master/cancel-scheduled-send to remove one. Cancelled actions are removed by Action Scheduler's cleaner on a later queue run, so they drop out of this list; the send log (notification-master/list-send-log) is the durable record of what was delivered. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[status]=pending&input[per_page]=50."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:101
+msgid "Action status to list. Defaults to pending, the sends that have not fired yet."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:106
+msgid "Return only sends belonging to this notification."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:111
+#: includes/abilities/class-delivery-abilities.php:217
+#: includes/abilities/class-delivery-abilities.php:475
+#: includes/abilities/class-notification-abilities.php:111
+msgid "Page of results to return. Defaults to 1."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:117
+msgid "Rows per page, 1 to 100. Defaults to 20."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:195
+msgid "List send log"
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:196
+msgid "Lists Notification Master's send log, newest first: one row per delivery attempt with the channel (integration), whether it succeeded (\"success\") or failed (\"error\"), the notification and trigger it came from, the integration's own result message and, for HTTP channels, the response code or error text in detail. Filter by status, integration slug or a substring of the notification name; total counts every row matching the filters so a caller can page. This is the right place to answer \"did it go out\" and \"why did it fail\". It never returns the raw log content: recipient email addresses, webhook URLs, headers and credentials are stripped, and any email address left inside a message is masked as [email]. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[status]=error&input[per_page]=50."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:204
+msgid "Return only successful or only failed sends. Omit for both."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:208
+msgid "Channel slug such as email, webpush, webhook, discord or instagram. See notification-master/list-channels."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:212
+msgid "Exact match on the notification name recorded with the send."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:223
+#: includes/abilities/class-delivery-abilities.php:481
+#: includes/abilities/class-notification-abilities.php:117
+msgid "Rows per page, 1 to 100. Defaults to 25."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:242
+msgid "\"success\" or \"error\"."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:249
+msgid "The integration's result message, with email addresses masked."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:253
+msgid "HTTP response code and message, or the error text, when the integration recorded one."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:316
+msgid "Get send stats"
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:317
+msgid "Counts Notification Master's sends over the last N days (1 to 30, default 7) without returning a single log row: overall total, success and failed counts, a daily series with exactly one entry per requested day (days with no sends are present with zeros), and the same split per channel in by_integration. Use it to spot a channel that started failing or a day with no deliveries. Dates use the site timezone because the log rows were written with current_time(); the from/to values show the exact window counted. Runs two grouped queries regardless of log size. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[days]=14."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:326
+msgid "How many days back to count, today included. Defaults to 7."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:457
+msgid "List debug log"
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:458
+msgid "Lists Notification Master's internal debug log, newest first. Unlike the send log, these rows are written by the plugin itself: a scheduled send that was dropped (action \"scheduling\", with the reason, e.g. notification_missing or connection_disabled, surfaced as summary), an unknown integration slug (\"invalid_integration\"), and other errors, info and debug notes. Filter by type (error, info, debug) or by the exact action string. content is the recorded context with credentials, endpoints, IP addresses and user agents replaced by [redacted] and email addresses masked; date may be null on old rows. It changes nothing. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[type]=error&input[per_page]=50."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:466
+msgid "Return only rows of this level. Omit for all."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:470
+msgid "Exact action string, e.g. scheduling or invalid_integration."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:499
+msgid "error, info or debug."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:504
+msgid "The drop reason for scheduling rows, otherwise the action."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:568
+msgid "Get subscriber stats"
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:569
+msgid "Counts the site's web push subscribers: total, subscribed and unsubscribed, a split by device (desktop, mobile, tablet, unknown), a split by browser (chrome, firefox, safari, opera, other) and how many subscribed in the last 7 days, plus push_configured, which is false until VAPID keys are saved in Notification Master settings. It returns counts only: no subscription rows, endpoints, keys, IP addresses or user agents ever leave this ability, and there is no ability to list, delete or unsubscribe subscribers. Takes no input. Read-only, so the run endpoint is a GET."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:649
+msgid "Cancel scheduled send"
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:650
+msgid "Cancels one pending scheduled send so it never fires. Takes the action_id from notification-master/list-scheduled-sends and removes that Action Scheduler action; the notification itself, its connections and its schedule settings are untouched, so the next real trigger event schedules a fresh send as usual. Only a pending Notification Master send can be cancelled: an action_id that is missing, already complete, failed, cancelled, or that belongs to another plugin answers 404 ntfm_scheduled_send_not_found. Nothing is sent and no log row is written. The cancelled row keeps status canceled only until Action Scheduler's cleaner removes it on a later queue run, so do not rely on list-scheduled-sends as an audit trail; the send log is the durable record. The response repeats what was cancelled, including was_scheduled_for, so the caller can confirm it hit the intended send."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:658
+#: includes/abilities/class-delivery-abilities.php:730
+msgid "Action Scheduler action ID of the pending send, from notification-master/list-scheduled-sends."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:670
+msgid "Always true: the send is no longer queued."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:677
+msgid "UNIX timestamp the send would have fired at, 0 when unknown."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:721
+msgid "Send scheduled now"
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:722
+msgid "Delivers one pending scheduled send immediately instead of at its scheduled time. THIS SENDS FOR REAL: depending on the connection it emails the configured recipients, pushes to subscribers, posts to Discord or a webhook, or publishes to Instagram, exactly as the scheduled run would have. It is synchronous and blocks on the outbound HTTP call (Instagram can take up to 60 seconds), and the Action Scheduler row is cancelled before dispatch and marked complete afterwards with the log line \"Sent immediately via send-now\", so a timed-out request may still have delivered and list-scheduled-sends with status complete then shows it. Requires confirm set to true and confirm_action_id equal to action_id; a mismatch answers 400 ntfm_confirm_mismatch before anything is looked up. An action_id that is not a pending Notification Master send answers 404 ntfm_scheduled_send_not_found. The delivery result is written to the send log, not returned here: read notification-master/list-send-log afterwards. This ability is not available over MCP (meta.mcp.public is false); it runs only through the REST /run endpoint or PHP."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:735
+msgid "Must be true. Confirms a human accepted that this delivers to real recipients now."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:740
+msgid "Must repeat action_id exactly. Guards against sending the wrong queued action."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:752
+msgid "Always true: the send was handed to the integration."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:772
+msgid "confirm must be true and confirm_action_id must equal action_id. Nothing was sent."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:775
+msgid "confirm_action_id must repeat action_id exactly; this delivers to real recipients."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:885
+#: includes/scheduling/class-scheduler.php:446
+#: includes/scheduling/class-scheduler.php:460
+msgid "No pending scheduled send with that action_id."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:888
+msgid "It may have already run or been cancelled."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:908
+#: includes/scheduling/class-scheduler.php:467
+msgid "The queue is delivering this scheduled send right now. Nothing was sent twice."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:911
+msgid "The queue runner delivers it once. Check notification-master/list-send-log in a moment."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:941
+msgid "UNIX timestamp of the fire time, 0 when unknown."
+msgstr ""
+
+#: includes/abilities/class-delivery-abilities.php:945
+msgid "Fire time as a GMT datetime, null when scheduled_for is 0."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:93
+msgid "List notifications"
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:94
+msgid "Lists notifications one page at a time, newest first, each with its status, trigger and the connections (channels) it sends through. It never returns connection settings: no recipients, no webhook URLs, no credentials and no message bodies. Use notification-master/get-notification for one notification's redacted settings. \"enabled\" is true when the status is publish, which means the notification fires on its trigger and sends to real recipients. \"trigger_active\" is false when the stored trigger is not registered on this site (its family is disabled in settings or it needs Notification Master Pro), and such a notification never fires. \"total\" counts every notification matching the status and trigger filters, not only this page. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[status]=publish&input[page]=2&input[per_page]=50."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:102
+msgid "publish returns enabled notifications, draft returns disabled ones, any returns both. Defaults to any."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:106
+msgid "Return only notifications on this trigger slug, e.g. post-published. Slugs come from notification-master/list-triggers."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:133
+msgid "Notifications matching the filters across all pages."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:168
+msgid "Pass a slug from the allowed list, or omit trigger to list every notification."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:236
+msgid "Merge tag group slugs the trigger offers, \"general\" first. Empty when the trigger is not registered. Read the tags themselves with notification-master/list-merge-tags."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:240
+msgid "Delayed sends queued for this notification and not yet delivered (pending Action Scheduler rows, counted in one query)."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:246
+msgid "Get notification"
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:247
+msgid "Returns one notification: the same row notification-master/list-notifications shows, plus each connection's settings and schedule, the merge tag groups its trigger offers and how many delayed sends are still queued for it. Settings are redacted before they leave the site: recipient lists, webhook URLs, headers and API credentials come back as \"[redacted]\" or \"[redacted: N items]\" so the agent can tell an empty list from a filled one without reading it. Text settings such as subject, title and message stay readable, so this is where to look before notification-master/update-notification. \"schedule\" carries the stored delay or merge-tag-relative config together with a one-line \"summary\"; summary is null when the connection sends immediately. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[id]=12."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:255
+#: includes/abilities/class-notification-abilities.php:316
+#: includes/abilities/class-notification-abilities.php:434
+msgid "Notification id from notification-master/list-notifications."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:307
+msgid "Set notification status"
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:308
+msgid "Enables a notification by setting it to publish, or disables it by setting it to draft. Enabling makes it fire on the next real event and send to real recipients; disabling also drops already-queued delayed sends at fire time. Nothing is sent by this call itself. Idempotent: asking for the status it already has returns changed false and writes nothing. \"pending_scheduled_sends\" reports how many delayed sends are queued for it so a human can judge what disabling will drop, or what enabling will let through."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:321
+msgid "publish enables the notification, draft disables it."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:342
+msgid "False when the notification already had the requested status."
+msgstr ""
+
+#. translators: 1: editable settings keys per channel, 2: channel slugs the free plugin ships
+#: includes/abilities/class-notification-abilities.php:422
+#, php-format
+msgid "Renames a notification and/or edits its existing connections: toggle a connection on or off, rename it, or change its text settings. Only content keys are editable and the allowed keys per channel are %1$s. Recipients, URLs, headers, credentials and the Pro-only condition keys are refused with ntfm_invalid_setting; change those in wp-admin. Discord's message is an object (title, description, content, author, fields) and webhook's body is a list of {key, value} pairs; each replaces the stored value whole. Supplied settings are merged over the stored ones and the result is validated against the channel's own schema before anything is written, so a refusal means nothing changed. Connection ids come from notification-master/get-notification; an unknown id is refused with ntfm_connection_not_found and the valid ids. New connections cannot be added here. Connections on Pro-only channels (slack, twilio, whatsapp, zapier, make, facebook, twitterx) are refused with ntfm_pro_required on the free plan; with Notification Master Pro active their listed content keys are editable like any other. The channels this plugin ships are %2$s. Writing does not send anything, but an enabled notification uses the new text on its next real event."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:425
+msgid "Update notification"
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:440
+msgid "New notification name."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:444
+msgid "Patches keyed by connection id. Each may set enabled, name and/or settings."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:450
+msgid "Whether this connection sends when the notification fires."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:454
+msgid "New connection name."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:458
+msgid "Text settings to merge over the stored ones. Only the channel's content keys are accepted."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:481
+msgid "Dotted paths whose stored value actually changed, e.g. name or connections.email_default.settings.subject. Empty when every supplied value already matched."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:523
+msgid "Neither a name nor a connection change was supplied."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:541
+msgid "The notification name cannot be empty."
+msgstr ""
+
+#. translators: %s: connection id
+#: includes/abilities/class-notification-abilities.php:568
+#, php-format
+msgid "This notification has no connection \"%s\"."
+msgstr ""
+
+#. translators: %s: integration slug
+#: includes/abilities/class-notification-abilities.php:598
+#, php-format
+msgid "The connection's channel \"%s\" is not registered on this site."
+msgstr ""
+
+#. translators: 1: settings key, 2: integration slug, 3: allowed keys
+#: includes/abilities/class-notification-abilities.php:619
+#, php-format
+msgid "The setting \"%1$s\" cannot be edited on a %2$s connection. Editable keys: %3$s."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:755
+msgid "Create notification from template"
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:756
+msgid "Creates a new notification from one of the starter templates and always saves it as a draft, so nothing fires until a human (or notification-master/set-notification-status with status publish) enables it. Template ids come from notification-master/list-starter-templates and look like tpl_post-published. Each template ships five connections: email to administrators and web push to every subscriber (both enabled), plus disabled Discord, webhook and Instagram shells whose URLs and credentials still have to be filled in wp-admin. Templates exist only for triggers registered on this site; there are no WooCommerce templates in either tier, so an unknown id answers 400 ntfm_invalid_template with the allowed ids. The reply lists the new id and the next action that would enable it. Nothing is sent by this call."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:763
+msgid "Template id from notification-master/list-starter-templates, e.g. tpl_post-published."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:769
+msgid "Name for the new notification. Defaults to the template title."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:787
+msgid "Whether the template's trigger is registered on this site right now."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:804
+msgid "The follow-up call that would enable the new draft."
+msgstr ""
+
+#. translators: %s: template id
+#: includes/abilities/class-notification-abilities.php:843
+#, php-format
+msgid "No starter template has the id \"%s\"."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:911
+msgid "The notification could not be created from the template."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:988
+msgid "True when status is publish."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:992
+msgid "Trigger slug stored on the notification; may be empty on an unfinished notification."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:996
+msgid "Human name of the trigger, null when it is not registered on this site."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:1000
+msgid "Whether the trigger is registered right now. A notification on an inactive trigger never fires."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:1008
+msgid "Last modified time, GMT, as Y-m-d H:i:s."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:1032
+msgid "Channel slug, e.g. email or webpush."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:1036
+msgid "Human name of the channel, null when no active plugin provides it."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:1040
+msgid "Whether the channel is registered on this site. A connection on an unavailable channel is skipped at send time."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:1049
+msgid "delay or merge_tag_relative; null when the connection sends immediately."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:1053
+msgid "One line such as \"delay 2 hours\" or \"merge_tag_relative post.published_date +10 minutes\"; null when the connection sends immediately."
+msgstr ""
+
+#: includes/abilities/class-notification-abilities.php:1069
+msgid "Connection settings with recipients, URLs, headers and credentials replaced by \"[redacted]\" or \"[redacted: N items]\"."
+msgstr ""
+
+#. translators: %d: notification id
+#: includes/abilities/class-notification-abilities.php:1098
+#, php-format
+msgid "No notification exists with id %d."
 msgstr ""
 
 #. translators: %s: Media name
@@ -120,118 +691,150 @@ msgstr ""
 msgid "I already did this"
 msgstr ""
 
-#: includes/class-notifications.php:65
+#: includes/class-notifications.php:74
 msgctxt "post type general name"
 msgid "Notifications"
 msgstr ""
 
-#: includes/class-notifications.php:66
+#: includes/class-notifications.php:75
 msgctxt "post type singular name"
 msgid "Notification"
 msgstr ""
 
-#: includes/class-notifications.php:67
+#: includes/class-notifications.php:76
 msgctxt "admin menu"
 msgid "Notifications"
 msgstr ""
 
-#: includes/class-notifications.php:68
+#: includes/class-notifications.php:77
 msgctxt "add new on admin bar"
 msgid "Notification"
 msgstr ""
 
-#: includes/class-notifications.php:69
+#: includes/class-notifications.php:78
 msgctxt "notification"
 msgid "Add New"
 msgstr ""
 
-#: includes/class-notifications.php:70
+#: includes/class-notifications.php:79
 #: dist/index.js:62
 #: dist/index.js:66
 msgid "Add New Notification"
 msgstr ""
 
-#: includes/class-notifications.php:71
+#: includes/class-notifications.php:80
 #: dist/index.js:66
 msgid "New Notification"
 msgstr ""
 
-#: includes/class-notifications.php:72
+#: includes/class-notifications.php:81
 #: dist/index.js:66
 msgid "Edit Notification"
 msgstr ""
 
-#: includes/class-notifications.php:73
+#: includes/class-notifications.php:82
 msgid "View Notification"
 msgstr ""
 
-#: includes/class-notifications.php:74
+#: includes/class-notifications.php:83
 msgid "All Notifications"
 msgstr ""
 
-#: includes/class-notifications.php:75
+#: includes/class-notifications.php:84
 msgid "Search Notifications"
 msgstr ""
 
-#: includes/class-notifications.php:76
+#: includes/class-notifications.php:85
 msgid "Parent Notifications:"
 msgstr ""
 
-#: includes/class-notifications.php:77
+#: includes/class-notifications.php:86
 msgid "No notifications found."
 msgstr ""
 
-#: includes/class-notifications.php:78
+#: includes/class-notifications.php:87
 msgid "No notifications found in Trash."
 msgstr ""
 
-#: includes/class-notifications.php:83
+#: includes/class-notifications.php:92
 msgid "Description."
 msgstr ""
 
-#: includes/class-notifications.php:115
+#: includes/class-notifications.php:124
 msgid "Notification trigger."
 msgstr ""
 
-#: includes/class-notifications.php:132
+#: includes/class-notifications.php:142
 msgid "Notification connection."
 msgstr ""
 
-#: includes/class-notifications.php:137
+#: includes/class-notifications.php:147
 msgid "Connection enabled."
 msgstr ""
 
-#: includes/class-notifications.php:141
+#: includes/class-notifications.php:151
 msgid "Connection name."
 msgstr ""
 
-#: includes/class-notifications.php:145
+#: includes/class-notifications.php:155
 msgid "Connection integration."
 msgstr ""
 
-#: includes/class-notifications.php:149
+#: includes/class-notifications.php:159
 msgid "Connection settings."
 msgstr ""
 
-#: includes/class-notifications.php:154
+#: includes/class-notifications.php:164
 msgid "Per-connection scheduling settings."
 msgstr ""
 
-#: includes/class-plugin.php:231
+#: includes/class-notifications.php:257
+msgid "connections must be an object keyed by connection id."
+msgstr ""
+
+#. translators: %s: integration slug
+#: includes/class-notifications.php:270
+#, php-format
+msgid "The \"%s\" channel"
+msgstr ""
+
+#: includes/class-notifications.php:271
+msgid "Connection conditions"
+msgstr ""
+
+#. translators: 1: integration slug, 2: registered slugs
+#: includes/class-notifications.php:287
+#, php-format
+msgid "Unknown integration \"%1$s\". Registered integrations: %2$s."
+msgstr ""
+
+#: includes/class-notifications.php:329
+msgid "trigger must be a string."
+msgstr ""
+
+#: includes/class-notifications.php:342
+msgid "trigger cannot be removed from a saved notification. Pick another trigger instead."
+msgstr ""
+
+#: includes/class-notifications.php:401
+msgid "Sorry, you are not allowed to do that."
+msgstr ""
+
+#: includes/class-plugin.php:252
 msgid "Running cleanup task for failed subscriptions..."
 msgstr ""
 
-#: includes/class-plugin.php:239
+#: includes/class-plugin.php:260
 msgid "Auto-delete is disabled. Skipping cleanup."
 msgstr ""
 
 #. translators: %d: number of deleted subscriptions
-#: includes/class-plugin.php:252
+#: includes/class-plugin.php:273
 #, php-format
 msgid "Cleaned up %d old failed subscriptions."
 msgstr ""
 
-#: includes/class-plugin.php:259
+#: includes/class-plugin.php:280
 msgid "No old failed subscriptions found to clean up."
 msgstr ""
 
@@ -445,6 +1048,12 @@ msgstr ""
 msgid "Instagram (add your credentials)"
 msgstr ""
 
+#. translators: %s: feature name
+#: includes/class-tier.php:239
+#, php-format
+msgid "%s needs Notification Master Pro."
+msgstr ""
+
 #: includes/class-utils.php:99
 #: includes/class-utils.php:127
 msgid "Pingback"
@@ -456,7 +1065,7 @@ msgid "Trackback"
 msgstr ""
 
 #. translators: %1$s: endpoint, %2$d: failure count
-#: includes/db/models/class-subscription-model.php:470
+#: includes/db/models/class-subscription-model.php:514
 #, php-format
 msgid "Auto-deleted subscription %1$s after %2$d failed attempts."
 msgstr ""
@@ -502,6 +1111,14 @@ msgstr ""
 #: includes/integrations/class-email-integration.php:131
 #: includes/integrations/class-email-integration.php:225
 msgid "Failed to send email."
+msgstr ""
+
+#: includes/integrations/class-email-integration.php:286
+msgid "Email skipped: empty message."
+msgstr ""
+
+#: includes/integrations/class-email-integration.php:286
+msgid "Email skipped: empty subject."
 msgstr ""
 
 #: includes/integrations/class-instagram-integration.php:89
@@ -596,56 +1213,28 @@ msgstr ""
 msgid "URL of the image to post"
 msgstr ""
 
-#: includes/integrations/class-loader.php:162
-msgid "Facebook"
-msgstr ""
-
 #: includes/integrations/class-loader.php:163
 msgid "Send notifications to Facebook."
-msgstr ""
-
-#: includes/integrations/class-loader.php:167
-msgid "X"
 msgstr ""
 
 #: includes/integrations/class-loader.php:168
 msgid "Send notifications to TwitterX."
 msgstr ""
 
-#: includes/integrations/class-loader.php:172
-msgid "Twilio"
-msgstr ""
-
 #: includes/integrations/class-loader.php:173
 msgid "Send notifications to twilio."
-msgstr ""
-
-#: includes/integrations/class-loader.php:177
-msgid "Slack"
 msgstr ""
 
 #: includes/integrations/class-loader.php:178
 msgid "Send notifications to Slack."
 msgstr ""
 
-#: includes/integrations/class-loader.php:182
-msgid "Zapier"
-msgstr ""
-
 #: includes/integrations/class-loader.php:183
 msgid "Send notifications to Zapier."
 msgstr ""
 
-#: includes/integrations/class-loader.php:187
-msgid "Make"
-msgstr ""
-
 #: includes/integrations/class-loader.php:188
 msgid "Send notifications to Make."
-msgstr ""
-
-#: includes/integrations/class-loader.php:192
-msgid "WhatsApp"
 msgstr ""
 
 #: includes/integrations/class-loader.php:193
@@ -657,16 +1246,26 @@ msgid "Webhook URL is empty."
 msgstr ""
 
 #: includes/integrations/class-webhook-integration.php:156
-#: includes/integrations/class-webpush-integration.php:314
+#: includes/integrations/class-webpush-integration.php:320
 msgid "Notification sent successfully."
 msgstr ""
 
-#: includes/integrations/class-webpush-integration.php:88
+#: includes/integrations/class-webpush-integration.php:86
 msgid "WebPush is not configured."
 msgstr ""
 
-#: includes/integrations/class-webpush-integration.php:101
+#: includes/integrations/class-webpush-integration.php:100
 msgid "Invalid attributes"
+msgstr ""
+
+#: includes/integrations/class-webpush-integration.php:275
+msgid "Skipped: the stored subscription keys are not valid."
+msgstr ""
+
+#. translators: %s: error message from the push library
+#: includes/integrations/class-webpush-integration.php:346
+#, php-format
+msgid "Push batch stopped early: %s"
 msgstr ""
 
 #. translators: %s: Comment type name
@@ -1778,23 +2377,23 @@ msgstr ""
 msgid "Log IDs."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:53
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:54
 msgid "Trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:100
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:101
 msgid "Notifications to import."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:106
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:107
 msgid "Status applied to imported notifications that do not specify one."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:192
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:193
 msgid "No notifications were provided to import."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:209
+#: includes/rest-api/controllers/v1/class-rest-notification-controller.php:210
 msgid "Imported notification"
 msgstr ""
 
@@ -1806,120 +2405,127 @@ msgstr ""
 msgid "Could not cancel the scheduled action."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-scheduled-controller.php:158
+#: includes/rest-api/controllers/v1/class-rest-scheduled-controller.php:163
 msgid "Could not dispatch the scheduled action."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:79
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:115
 msgid "Enable background processing."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:84
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:120
 msgid "Post status change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:88
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:124
 msgid "Post types."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:95
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:131
 msgid "Taxonomy term change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:99
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:135
 msgid "Taxonomies."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:106
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:142
 msgid "Comment change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:110
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:146
 msgid "Comment types."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:117
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:153
 msgid "User change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:121
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:157
 msgid "Theme change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:125
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:161
 msgid "Plugin change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:129
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:165
 msgid "Media change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:133
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:169
 msgid "Privacy trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:137
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:173
 msgid "WooCommerce change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:141
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:177
 msgid "Delete logs every."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:145
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:181
 msgid "Notifications delete logs every."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:149
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:185
 msgid "Web Push Public Key."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:153
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:189
 msgid "Web Push Private Key."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:157
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:193
 msgid "Web Push Action Type."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:161
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:197
 msgid "Enable automatic deletion of failed subscriptions."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:165
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:201
 msgid "Number of consecutive failures before auto-deleting subscription."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:171
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:207
 msgid "Auto delete subscription after failed attempts."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:195
-#: includes/webpush/class-loader.php:347
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:231
+#: includes/webpush/class-loader.php:368
 msgid "Subscribe to Notifications!"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:203
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:210
-#: includes/webpush/class-loader.php:355
-#: includes/webpush/class-loader.php:392
-#: includes/webpush/class-loader.php:791
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:239
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:246
+#: includes/webpush/class-loader.php:376
+#: includes/webpush/class-loader.php:413
+#: includes/webpush/class-loader.php:812
 msgid "Unsubscribe!"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:209
-#: includes/webpush/class-loader.php:391
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:245
+#: includes/webpush/class-loader.php:412
 msgid "Subscribe!"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:244
-#: includes/webpush/class-loader.php:100
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:280
+#: includes/webpush/class-loader.php:110
 msgid "Welcome!"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:245
-#: includes/webpush/class-loader.php:101
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:281
+#: includes/webpush/class-loader.php:111
 msgid "Thanks for subscribing to our notifications!"
+msgstr ""
+
+#. translators: %s: setting key
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:343
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:398
+#, php-format
+msgid "The \"%s\" setting"
 msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:60
@@ -1951,12 +2557,15 @@ msgid "Subscription ID."
 msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:267
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:364
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:400
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:433
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:467
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:501
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:538
+msgid "The push subscription is incomplete or malformed."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:388
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:424
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:457
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:491
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:525
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:562
 msgid "Invalid data."
 msgstr ""
 
@@ -2082,19 +2691,23 @@ msgstr ""
 msgid "All users with the role %1$s. (%2$d)"
 msgstr ""
 
-#: includes/webpush/class-loader.php:160
+#: includes/webpush/class-loader.php:100
+msgid "Welcome notification skipped: VAPID keys are not configured."
+msgstr ""
+
+#: includes/webpush/class-loader.php:171
 msgid "Welcome notification sent successfully."
 msgstr ""
 
-#: includes/webpush/class-loader.php:744
+#: includes/webpush/class-loader.php:765
 msgid "Invalid response."
 msgstr ""
 
-#: includes/webpush/class-loader.php:792
+#: includes/webpush/class-loader.php:813
 msgid "Your browser does not support push notifications, if you are using iPhone/iPad, please add this website to your home screen to receive notifications."
 msgstr ""
 
-#: includes/webpush/class-loader.php:793
+#: includes/webpush/class-loader.php:814
 msgid "You have denied the permission to send notifications. Please allow it to subscribe to push notifications."
 msgstr ""
 

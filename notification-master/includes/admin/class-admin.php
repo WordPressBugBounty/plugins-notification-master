@@ -108,7 +108,7 @@ class Admin {
 
 		wp_register_script(
 			'notification-master-admin',
-			NOTIFICATION_MASTER_URL . '/dist/index.js',
+			NOTIFICATION_MASTER_URL . 'dist/index.js',
 			$dependencies,
 			$version,
 			true
@@ -116,7 +116,7 @@ class Admin {
 
 		wp_register_style(
 			'notification-master-admin',
-			NOTIFICATION_MASTER_URL . '/dist/style.css',
+			NOTIFICATION_MASTER_URL . 'dist/style.css',
 			array(
 				'wp-components',
 				'wp-editor',

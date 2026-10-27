@@ -93,6 +93,16 @@ class Loader {
 			return;
 		}
 
+		if ( ! $this->is_configured() ) {
+			Notification_Master()->logger->info(
+				'welcome_webpush_skipped',
+				array(
+					'message' => __( 'Welcome notification skipped: VAPID keys are not configured.', 'notification-master' ),
+				)
+			);
+			return;
+		}
+
 		if ( is_array( $subscription ) ) {
 			$subscription = (object) $subscription;
 		}
@@ -114,61 +124,72 @@ class Loader {
 			),
 		);
 
-		$webPush = new WebPush( $auth );
+		try {
+			$webPush = new WebPush( $auth );
 
-		$endpoint         = $subscription->endpoint;
-		$user_auth        = $subscription->auth;
-		$p256dh           = $subscription->p256dh;
-		$expiration_time  = $subscription->expiration_time;
-		$content_encoding = $subscription->content_encoding;
+			$endpoint         = $subscription->endpoint;
+			$user_auth        = $subscription->auth;
+			$p256dh           = $subscription->p256dh;
+			$expiration_time  = $subscription->expiration_time;
+			$content_encoding = $subscription->content_encoding;
 
-		$subscription = Subscription::create(
-			array(
-				'endpoint'        => $endpoint,
-				'keys'            => array(
-					'auth'   => $user_auth,
-					'p256dh' => $p256dh,
+			$subscription = Subscription::create(
+				array(
+					'endpoint'        => $endpoint,
+					'keys'            => array(
+						'auth'   => $user_auth,
+						'p256dh' => $p256dh,
+					),
+					'expirationTime'  => $expiration_time,
+					'contentEncoding' => $content_encoding,
+				)
+			);
+
+			$webPush->queueNotification(
+				$subscription,
+				wp_json_encode(
+					$notification
 				),
-				'expirationTime'  => $expiration_time,
-				'contentEncoding' => $content_encoding,
-			)
-		);
+				array(
+					'urgency' => 'normal',
+				)
+			);
 
-		$webPush->queueNotification(
-			$subscription,
-			wp_json_encode(
-				$notification
-			),
-			array(
-				'urgency' => 'normal',
-			)
-		);
+			/**
+			 * Check sent results
+			 *
+			 * @var MessageSentReport $report
+			 */
+			foreach ( $webPush->flush() as $report ) {
+				$endpoint = $report->getRequest()->getUri()->__toString();
 
-		/**
-		 * Check sent results
-		 *
-		 * @var MessageSentReport $report
-		 */
-		foreach ( $webPush->flush() as $report ) {
-			$endpoint = $report->getRequest()->getUri()->__toString();
-
-			if ( $report->isSuccess() ) {
-				Notification_Master()->logger->info(
-					'welcome_webpush_notification',
-					array(
-						'subscription' => $endpoint,
-						'message'      => __( 'Welcome notification sent successfully.', 'notification-master' ),
-					)
-				);
-			} else {
-				Notification_Master()->logger->error(
-					'welcome_webpush_notification',
-					array(
-						'subscription' => $endpoint,
-						'message'      => $report->getReason(),
-					)
-				);
+				if ( $report->isSuccess() ) {
+					Notification_Master()->logger->info(
+						'welcome_webpush_notification',
+						array(
+							'subscription' => $endpoint,
+							'message'      => __( 'Welcome notification sent successfully.', 'notification-master' ),
+						)
+					);
+				} else {
+					Notification_Master()->logger->error(
+						'welcome_webpush_notification',
+						array(
+							'subscription' => $endpoint,
+							'message'      => $report->getReason(),
+						)
+					);
+				}
 			}
+		} catch ( \Throwable $e ) {
+			Notification_Master()->logger->error(
+				'welcome_webpush_notification',
+				array(
+					'subscription' => isset( $endpoint ) ? (string) $endpoint : '',
+					'message'      => $e->getMessage(),
+				)
+			);
+			return;
 		}
 	}
 

@@ -153,8 +153,13 @@ class Rest_Scheduled_Controller extends Rest_Controller {
 	public function send_now( $request ) {
 		$action_id = (int) $request->get_param( 'action_id' );
 
-		$ok = Scheduler::get_instance()->send_now( $action_id );
-		if ( ! $ok ) {
+		$sent = Scheduler::get_instance()->send_now( $action_id );
+
+		if ( is_wp_error( $sent ) ) {
+			return $sent;
+		}
+
+		if ( true !== $sent ) {
 			return new WP_Error( 'ntfm_send_now_failed', __( 'Could not dispatch the scheduled action.', 'notification-master' ), array( 'status' => 404 ) );
 		}
 

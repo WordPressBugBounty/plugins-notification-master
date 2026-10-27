@@ -17,6 +17,7 @@ namespace Notification_Master\Scheduling;
 use Notification_Master\Abstracts\Trigger;
 use Notification_Master\Connections\Process as Connections_Process;
 use Notification_Master\Merge_Tags\Loader as Merge_Tags_Loader;
+use WP_Error;
 
 use function Notification_Master\Notification_Master;
 
@@ -419,7 +420,7 @@ class Scheduler {
 	 * @return bool
 	 */
 	public function cancel( $action_id ) {
-		if ( ! function_exists( 'as_unschedule_action' ) || ! function_exists( 'as_get_scheduled_actions' ) ) {
+		if ( ! class_exists( '\ActionScheduler' ) ) {
 			return false;
 		}
 
@@ -428,33 +429,139 @@ class Scheduler {
 			return false;
 		}
 
-		$args = $action->get_args();
-		as_unschedule_action( self::HOOK, $args, self::GROUP );
-
-		return true;
+		return $this->cancel_by_id( $action_id );
 	}
 
 	/**
 	 * Force-dispatch a pending scheduled connection immediately.
 	 *
 	 * @param int $action_id Action Scheduler action ID.
-	 * @return bool
+	 * @return true|WP_Error True when dispatched; 404 for an unknown or finished id, 409 while the queue holds it.
 	 */
 	public function send_now( $action_id ) {
 		$action = $this->get_action( $action_id );
 		if ( ! $action ) {
-			return false;
+			return new WP_Error(
+				'ntfm_scheduled_send_not_found',
+				__( 'No pending scheduled send with that action_id.', 'notification-master' ),
+				array( 'status' => 404 )
+			);
 		}
 
 		$args = $action->get_args();
 
-		// Cancel the pending action first so it doesn't fire again.
-		as_unschedule_action( self::HOOK, $args, self::GROUP );
+		// Take the row before dispatching, the way the runner does (in progress + attempt stamp):
+		// a queue runner picking it up at the same moment loses (or we do), never both.
+		if ( ! $this->take_pending( $action_id, \ActionScheduler_Store::STATUS_RUNNING, true ) ) {
+			// Still pending or in progress means the queue holds it right now; anything else already ran or was cancelled.
+			if ( ! in_array( $this->status_of( $action_id ), array( \ActionScheduler_Store::STATUS_PENDING, \ActionScheduler_Store::STATUS_RUNNING ), true ) ) {
+				return new WP_Error(
+					'ntfm_scheduled_send_not_found',
+					__( 'No pending scheduled send with that action_id.', 'notification-master' ),
+					array( 'status' => 404 )
+				);
+			}
+
+			return new WP_Error(
+				'ntfm_scheduled_send_not_pending',
+				__( 'The queue is delivering this scheduled send right now. Nothing was sent twice.', 'notification-master' ),
+				array( 'status' => 409 )
+			);
+		}
 
 		// Dispatch synchronously using the snapshot we just removed.
 		$this->handle_scheduled( $args[0] ?? 0, $args[1] ?? '', $args[2] ?? array() );
 
+		// The row is in progress like a runner-owned action; record the completion.
+		try {
+			\ActionScheduler::store()->mark_complete( (int) $action_id );
+			\ActionScheduler_Logger::instance()->log( (int) $action_id, 'Sent immediately via send-now' );
+		} catch ( \Exception $e ) {
+			Notification_Master()->logger->error(
+				'send_now_mark_complete',
+				array(
+					'action_id' => (int) $action_id,
+					'message'   => $e->getMessage(),
+				)
+			);
+		}
+
 		return true;
+	}
+
+	/**
+	 * Cancel exactly this pending action id.
+	 *
+	 * Unlike as_unschedule_action(), which removes the oldest action with the
+	 * same args, this addresses the store by id. False when the id is not pending.
+	 *
+	 * @param int $action_id Action Scheduler action ID.
+	 * @return bool
+	 */
+	protected function cancel_by_id( $action_id ) {
+		if ( ! $this->take_pending( $action_id, \ActionScheduler_Store::STATUS_CANCELED, false ) ) {
+			return false;
+		}
+
+		// Same hook the store fires, so the Action Scheduler log keeps its "action canceled" row.
+		do_action( 'action_scheduler_canceled_action', (int) $action_id );
+
+		return true;
+	}
+
+	/**
+	 * Move a pending, unclaimed action to a new status in one statement.
+	 *
+	 * The queue runner claims rows with the same compare-and-set
+	 * (claim_id = 0 AND status = pending), so exactly one side wins. With
+	 * $stamp the attempt is recorded like the runner does, which keeps the
+	 * cleaner from treating the row as never attempted.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param int    $action_id Action Scheduler action ID.
+	 * @param string $status    Status to set.
+	 * @param bool   $stamp     Whether to count an attempt and stamp its time.
+	 * @return bool True when this call took the row.
+	 */
+	protected function take_pending( $action_id, $status, $stamp ) {
+		global $wpdb;
+
+		$table = ! empty( $wpdb->actionscheduler_actions ) ? $wpdb->actionscheduler_actions : $wpdb->prefix . 'actionscheduler_actions';
+
+		if ( $stamp ) {
+			$sql = $wpdb->prepare(
+				"UPDATE {$table} SET status = %s, attempts = attempts + 1, last_attempt_gmt = %s, last_attempt_local = %s WHERE action_id = %d AND status = %s AND claim_id = 0", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name from $wpdb.
+				$status,
+				current_time( 'mysql', true ),
+				current_time( 'mysql' ),
+				(int) $action_id,
+				\ActionScheduler_Store::STATUS_PENDING
+			);
+		} else {
+			$sql = $wpdb->prepare(
+				"UPDATE {$table} SET status = %s WHERE action_id = %d AND status = %s AND claim_id = 0", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name from $wpdb.
+				$status,
+				(int) $action_id,
+				\ActionScheduler_Store::STATUS_PENDING
+			);
+		}
+
+		return 1 === $wpdb->query( $sql ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- prepared above; a compare-and-set has no store API.
+	}
+
+	/**
+	 * Current Action Scheduler status of an action, 'unknown' when it cannot be read.
+	 *
+	 * @param int $action_id Action ID.
+	 * @return string
+	 */
+	protected function status_of( $action_id ) {
+		try {
+			return (string) \ActionScheduler::store()->get_status( (int) $action_id );
+		} catch ( \Exception $e ) {
+			return 'unknown';
+		}
 	}
 
 	/**
@@ -482,10 +589,11 @@ class Scheduler {
 	}
 
 	/**
-	 * Get pending scheduled actions.
+	 * Get scheduled actions as summaries.
 	 *
-	 * @param array $args Query args (per_page, page, status, notification_id).
-	 * @return array List of pending action descriptors.
+	 * @param array $args Query args: per_page, page, status (pending|complete|failed),
+	 *                    notification_id (only that notification's actions; 0 = all).
+	 * @return array List of action descriptors.
 	 */
 	public function get_pending( $args = array() ) {
 		if ( ! function_exists( 'as_get_scheduled_actions' ) ) {
@@ -500,60 +608,161 @@ class Scheduler {
 
 		$args = wp_parse_args( $args, $defaults );
 
-		$status_map = array(
-			'pending'  => \ActionScheduler_Store::STATUS_PENDING,
-			'complete' => \ActionScheduler_Store::STATUS_COMPLETE,
-			'failed'   => \ActionScheduler_Store::STATUS_FAILED,
-		);
+		$notification_id = isset( $args['notification_id'] ) ? (int) $args['notification_id'] : 0;
+		$status          = $this->map_status( $args['status'] );
 
 		$query = array(
 			'hook'     => self::HOOK,
 			'group'    => self::GROUP,
-			'status'   => $status_map[ $args['status'] ] ?? \ActionScheduler_Store::STATUS_PENDING,
+			'status'   => $status,
 			'per_page' => max( 1, min( 100, (int) $args['per_page'] ) ),
 			'offset'   => max( 0, ( (int) $args['page'] - 1 ) * (int) $args['per_page'] ),
 			'orderby'  => 'date',
 			'order'    => 'ASC',
 		);
 
-		// Default return-format gives us ActionScheduler_Action objects keyed
-		// by ID. We deliberately avoid 'ARRAY_A' because that returns raw DB
-		// rows where `args` is still a JSON string, not an unpacked array.
-		$actions = as_get_scheduled_actions( $query );
+		// Objects keyed by id; one fetch per id is Action Scheduler's own cost.
+		if ( $notification_id > 0 ) {
+			$actions = $this->fetch_notification_actions( $notification_id, $status, $query['per_page'], $query['offset'] );
+		} else {
+			$actions = as_get_scheduled_actions( $query );
+		}
 
 		if ( empty( $actions ) ) {
 			return array();
 		}
 
+		// Prime the notification posts once so each title is a cache hit.
+		$post_ids = array();
+		foreach ( $actions as $action ) {
+			if ( $action instanceof \ActionScheduler_Action ) {
+				$action_args = $action->get_args();
+				if ( isset( $action_args[0] ) && (int) $action_args[0] > 0 ) {
+					$post_ids[] = (int) $action_args[0];
+				}
+			}
+		}
+		if ( ! empty( $post_ids ) ) {
+			_prime_post_caches( array_values( array_unique( $post_ids ) ), false, false );
+		}
+
 		$results = array();
 		foreach ( $actions as $action_id => $action ) {
-			$results[] = $this->format_action_summary( $action_id, $action );
+			$results[] = $this->format_action_summary( $action_id, $action, $status );
 		}
 
 		return $results;
 	}
 
 	/**
+	 * Count a notification's queued sends with one query.
+	 *
+	 * @param int    $notification_id Notification post id.
+	 * @param string $status          pending|complete|failed.
+	 * @return int
+	 */
+	public function count_pending( $notification_id, $status = 'pending' ) {
+		global $wpdb;
+
+		$where = $this->notification_where_sql( (int) $notification_id, $this->map_status( $status ) );
+		if ( '' === $where ) {
+			return 0;
+		}
+
+		return (int) $wpdb->get_var( 'SELECT COUNT(*) ' . $where ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- $where is prepared; counts must be live.
+	}
+
+	/**
+	 * Prepared FROM/WHERE fragment selecting one notification's actions, or '' when the AS tables are unknown.
+	 *
+	 * @param int    $notification_id Notification post id.
+	 * @param string $status          Action Scheduler status.
+	 * @return string
+	 */
+	protected function notification_where_sql( $notification_id, $status ) {
+		global $wpdb;
+
+		if ( $notification_id <= 0 || empty( $wpdb->actionscheduler_actions ) || empty( $wpdb->actionscheduler_groups ) ) {
+			return '';
+		}
+
+		// Args are stored as a JSON list; long args live in extended_args with an md5 in args.
+		$like = '[' . $notification_id . ',%';
+
+		return $wpdb->prepare(
+			"FROM {$wpdb->actionscheduler_actions} a INNER JOIN {$wpdb->actionscheduler_groups} g ON g.group_id = a.group_id WHERE a.hook = %s AND g.slug = %s AND a.status = %s AND ( ( a.extended_args IS NULL AND a.args LIKE %s ) OR a.extended_args LIKE %s )",
+			self::HOOK,
+			self::GROUP,
+			$status,
+			$like,
+			$like
+		);
+	}
+
+	/**
+	 * Map the public status word to the Action Scheduler constant.
+	 *
+	 * @param string $status pending|complete|failed.
+	 * @return string
+	 */
+	protected function map_status( $status ) {
+		$map = array(
+			'pending'  => \ActionScheduler_Store::STATUS_PENDING,
+			'complete' => \ActionScheduler_Store::STATUS_COMPLETE,
+			'failed'   => \ActionScheduler_Store::STATUS_FAILED,
+		);
+
+		return is_string( $status ) && isset( $map[ $status ] ) ? $map[ $status ] : \ActionScheduler_Store::STATUS_PENDING;
+	}
+
+	/**
+	 * One notification's actions for a page, hydrated one by one (the only API the store offers).
+	 *
+	 * @param int    $notification_id Notification post id.
+	 * @param string $status          Action Scheduler status.
+	 * @param int    $per_page        Page size.
+	 * @param int    $offset          Row offset.
+	 * @return array<int, \ActionScheduler_Action>
+	 */
+	protected function fetch_notification_actions( $notification_id, $status, $per_page, $offset ) {
+		global $wpdb;
+
+		$where = $this->notification_where_sql( (int) $notification_id, $status );
+		if ( '' === $where || ! class_exists( '\ActionScheduler' ) ) {
+			return array();
+		}
+
+		// $where is already prepared; the two ints are cast, so no second prepare().
+		$sql = 'SELECT a.action_id ' . $where . sprintf( ' ORDER BY a.scheduled_date_gmt ASC, a.action_id ASC LIMIT %d OFFSET %d', (int) $per_page, (int) $offset );
+		$ids = $wpdb->get_col( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- the queue must be live.
+
+		$actions = array();
+		foreach ( $ids as $id ) {
+			$action = $this->get_action( (int) $id );
+			if ( $action ) {
+				$actions[ (int) $id ] = $action;
+			}
+		}
+
+		return $actions;
+	}
+
+	/**
 	 * Format an action row into a UI-friendly summary.
 	 *
-	 * @param int                                              $action_id Action ID.
-	 * @param array|\ActionScheduler_Action|\ActionScheduler_Action $action    Action.
+	 * @param int                           $action_id    Action ID.
+	 * @param array|\ActionScheduler_Action $action       Action.
+	 * @param string                        $known_status Status the query already filtered on; '' looks it up.
 	 * @return array
 	 */
-	protected function format_action_summary( $action_id, $action ) {
-		// as_get_scheduled_actions in ARRAY_A mode returns ActionScheduler_Action objects keyed by ID.
+	protected function format_action_summary( $action_id, $action, $known_status = '' ) {
 		if ( $action instanceof \ActionScheduler_Action ) {
 			$args     = $action->get_args();
 			$schedule = $action->get_schedule();
 			$next_ts  = $schedule && method_exists( $schedule, 'get_date' ) && $schedule->get_date()
 				? $schedule->get_date()->getTimestamp()
 				: 0;
-			$status   = '';
-			try {
-				$status = \ActionScheduler::store()->get_status( $action_id );
-			} catch ( \Exception $e ) {
-				$status = 'unknown';
-			}
+			$status   = '' !== $known_status ? $known_status : $this->status_of( $action_id );
 		} else {
 			$args    = $action['args'] ?? array();
 			$next_ts = isset( $action['scheduled_date_gmt'] ) ? strtotime( $action['scheduled_date_gmt'] ) : 0;
