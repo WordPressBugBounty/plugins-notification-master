@@ -164,8 +164,8 @@ class Loader {
 				'icon'        => NOTIFICATION_MASTER_URL . 'assets/integrations/facebook.svg',
 			),
 			'twitterx' => array(
-				'name'        => __( 'X', 'notification-master' ),
-				'description' => __( 'Send notifications to TwitterX.', 'notification-master' ),
+				'name'        => __( 'X (Twitter)', 'notification-master' ),
+				'description' => __( 'Send notifications to X (Twitter).', 'notification-master' ),
 				'icon'        => NOTIFICATION_MASTER_URL . 'assets/integrations/twitterx.svg',
 			),
 			'twilio'   => array(

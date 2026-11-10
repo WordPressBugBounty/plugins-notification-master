@@ -63,8 +63,8 @@ class Post_Added extends Post_Trigger {
 	 * @return string
 	 */
 	public function get_description() {
-		/* translators: %s: Trigger name */
-		return sprintf( 'This trigger fires when a %s is inserted into the database.', $this->post_type );
+		/* translators: %s: content type label, e.g. post, page, category, comment. */
+		return sprintf( __( 'This trigger fires when any %s is created.', 'notification-master' ), $this->label_in_sentence( $this->post_type_object->labels->singular_name ) );
 	}
 
 	/**

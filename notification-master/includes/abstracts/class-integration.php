@@ -72,6 +72,24 @@ abstract class Integration {
 	public $notification_name;
 
 	/**
+	 * Notification ID.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var int
+	 */
+	public $notification_id = 0;
+
+	/**
+	 * Connection ID (key in the notification's connections).
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var string
+	 */
+	public $connection_id = '';
+
+	/**
 	 * Trigger.
 	 *
 	 * @since 1.0.0
@@ -87,7 +105,7 @@ abstract class Integration {
 	 */
 	public function __construct() {
 		$this->merge_tags_loader = Merge_Tags_Loader::get_instance();
-		add_action( 'notification_master_before_process_connection', array( $this, 'set_args' ), 10, 3 );
+		add_action( 'notification_master_before_process_connection', array( $this, 'set_args' ), 10, 4 );
 		add_action( 'notification_master_after_process_connection', array( $this, 'clear_args' ) );
 		add_filter( 'notification_master_integrations', array( $this, 'register' ) );
 	}
@@ -100,13 +118,16 @@ abstract class Integration {
 	 * @param array  $connection_settings Connection settings.
 	 * @param string $trigger Trigger.
 	 * @param int    $notification_id Notification ID.
+	 * @param string $connection_id   Connection ID (since 2.0.0).
 	 *
 	 * @return void
 	 */
-	public function set_args( $connection_settings, $trigger, $notification_id ) {
+	public function set_args( $connection_settings, $trigger, $notification_id, $connection_id = '' ) {
 		$this->attributes        = $connection_settings;
 		$this->trigger           = $trigger;
 		$this->notification_name = get_the_title( $notification_id );
+		$this->notification_id   = absint( $notification_id );
+		$this->connection_id     = is_scalar( $connection_id ) ? (string) $connection_id : '';
 	}
 
 	/**
@@ -120,6 +141,8 @@ abstract class Integration {
 		$this->attributes        = array();
 		$this->trigger           = '';
 		$this->notification_name = null;
+		$this->notification_id   = 0;
+		$this->connection_id     = '';
 	}
 
 	/**
@@ -244,7 +267,39 @@ abstract class Integration {
 			$response['trigger_name'] = $this->trigger->get_name();
 		}
 		$response['notification_name'] = $this->notification_name;
+		if ( $this->notification_id ) {
+			$response['notification_id'] = (int) $this->notification_id;
+		}
+		if ( '' !== (string) $this->connection_id ) {
+			$response['connection_id'] = (string) $this->connection_id;
+		}
 
 		return $response;
+	}
+
+	/**
+	 * Whether this integration can be sent as a test.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return true|\WP_Error True, or an error that says why not.
+	 */
+	public function can_test() {
+		return true;
+	}
+
+	/**
+	 * Adjust connection settings before a test send (e.g. the recipient).
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array   $settings  Connection settings as posted.
+	 * @param string  $recipient Optional override recipient.
+	 * @param Trigger $trigger   Trigger with sample data.
+	 *
+	 * @return array|\WP_Error Settings to send with, or an error.
+	 */
+	public function prepare_test_attributes( $settings, $recipient, $trigger ) {
+		return $settings;
 	}
 }

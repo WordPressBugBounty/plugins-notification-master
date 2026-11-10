@@ -314,7 +314,7 @@ class Delivery_Abilities {
 	private static function get_send_stats( $module, array $meta ) {
 		return array(
 			'label'               => __( 'Get send stats', 'notification-master' ),
-			'description'         => __( 'Counts Notification Master\'s sends over the last N days (1 to 30, default 7) without returning a single log row: overall total, success and failed counts, a daily series with exactly one entry per requested day (days with no sends are present with zeros), and the same split per channel in by_integration. Use it to spot a channel that started failing or a day with no deliveries. Dates use the site timezone because the log rows were written with current_time(); the from/to values show the exact window counted. Runs two grouped queries regardless of log size. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[days]=14.', 'notification-master' ),
+			'description'         => __( 'Counts Notification Master\'s sends over the last N days (1 to 30, default 7) without returning a single log row: overall total, success and failed counts, a daily series with exactly one entry per requested day (days with no sends are present with zeros), and the same split per channel in by_integration. Use it to spot a channel that started failing or a day with no deliveries. Dates use the site timezone because the log rows were written with current_time(); the from/to values show the exact window counted. Test sends (made with Send a test in the editor) are not counted, matching the admin Overview. Runs two grouped queries regardless of log size. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[days]=14.', 'notification-master' ),
 			'category'            => Abilities_Module::CATEGORY_READ,
 			'input_schema'        => array(
 				'type'                 => 'object',
@@ -394,7 +394,7 @@ class Delivery_Abilities {
 					);
 				}
 
-				foreach ( Notification_Logs_Model::get_daily_counts( $from, $to ) as $row ) {
+				foreach ( Notification_Logs_Model::get_daily_counts( $from, $to, true ) as $row ) {
 					$day = isset( $row->day ) ? (string) $row->day : '';
 					if ( ! isset( $daily[ $day ] ) ) {
 						continue;
@@ -403,7 +403,7 @@ class Delivery_Abilities {
 				}
 
 				$by_integration = array();
-				foreach ( Notification_Logs_Model::get_counts_by_integration( $from, $to ) as $row ) {
+				foreach ( Notification_Logs_Model::get_counts_by_integration( $from, $to, true ) as $row ) {
 					$slug = isset( $row->integration ) ? (string) $row->integration : '';
 					if ( ! isset( $by_integration[ $slug ] ) ) {
 						$by_integration[ $slug ] = array(

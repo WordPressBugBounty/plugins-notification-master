@@ -33,6 +33,15 @@ class Notification_Logs_Model {
 	public static $primary_key = 'id';
 
 	/**
+	 * Serialized marker of a "Send a test" row (content key test => true).
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var string
+	 */
+	const TEST_MARKER = 's:4:"test";b:1;';
+
+	/**
 	 * Prepare data.
 	 *
 	 * @since 1.0.0
@@ -242,6 +251,11 @@ class Notification_Logs_Model {
 			'status'            => '',
 			'integration'       => '',
 			'notification_name' => '',
+			'notification_id'   => 0,
+			'search'            => '',
+			'from'              => '',
+			'to'                => '',
+			'exclude_tests'     => false,
 			'per_page'          => 25,
 			'page'              => 1,
 		);
@@ -252,7 +266,7 @@ class Notification_Logs_Model {
 	 *
 	 * @since 1.8.0
 	 *
-	 * @param array $args Parsed args: status, integration, notification_name.
+	 * @param array $args Parsed args: status, integration, notification_name, notification_id, search, from, to.
 	 *
 	 * @return array SQL fragment (empty or leading with ' WHERE ') and its prepare() params.
 	 */
@@ -279,6 +293,39 @@ class Notification_Logs_Model {
 		if ( '' !== $name ) {
 			$where[]  = 'content LIKE %s';
 			$params[] = '%' . $wpdb->esc_like( sprintf( 's:17:"notification_name";s:%d:"%s";', strlen( $name ), $name ) ) . '%';
+		}
+
+		// Stored as an int since 2.0, so match the exact serialized entry.
+		$notification_id = isset( $args['notification_id'] ) ? absint( $args['notification_id'] ) : 0;
+		if ( $notification_id > 0 ) {
+			$where[]  = 'content LIKE %s';
+			$params[] = '%' . $wpdb->esc_like( sprintf( 's:15:"notification_id";i:%d;', $notification_id ) ) . '%';
+		}
+
+		// Substring match on the serialized content and the integration slug.
+		$search = isset( $args['search'] ) ? trim( (string) $args['search'] ) : '';
+		if ( '' !== $search ) {
+			$like     = '%' . $wpdb->esc_like( $search ) . '%';
+			$where[]  = '(content LIKE %s OR integration LIKE %s)';
+			$params[] = $like;
+			$params[] = $like;
+		}
+
+		$from = isset( $args['from'] ) ? (string) $args['from'] : '';
+		if ( '' !== $from ) {
+			$where[]  = 'created_at >= %s';
+			$params[] = $from;
+		}
+
+		$to = isset( $args['to'] ) ? (string) $args['to'] : '';
+		if ( '' !== $to ) {
+			$where[]  = 'created_at <= %s';
+			$params[] = $to;
+		}
+
+		if ( ! empty( $args['exclude_tests'] ) ) {
+			$where[]  = 'content NOT LIKE %s';
+			$params[] = '%' . $wpdb->esc_like( self::TEST_MARKER ) . '%';
 		}
 
 		$sql = empty( $where ) ? '' : ' WHERE ' . implode( ' AND ', $where );
@@ -341,19 +388,63 @@ class Notification_Logs_Model {
 	}
 
 	/**
+	 * Count rows per status with the same filters as query(), ignoring the status filter.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $args Args: integration, notification_name, notification_id, search, from, to.
+	 *
+	 * @return array { all, success, error } as ints.
+	 */
+	public static function count_by_status( $args = array() ) {
+		global $wpdb;
+
+		$args           = wp_parse_args( is_array( $args ) ? $args : array(), self::query_defaults() );
+		$args['status'] = '';
+
+		list( $where, $params ) = self::build_where( $args );
+
+		$sql = "SELECT status, COUNT(*) AS total FROM {$wpdb->prefix}ntfm_notification_logs{$where} GROUP BY status";
+
+		if ( empty( $params ) ) {
+			$rows = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Static query and no caching needed.
+		} else {
+			$rows = $wpdb->get_results( $wpdb->prepare( $sql, $params ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Prepared in the line above and no caching needed.
+		}
+
+		$counts = array(
+			'all'     => 0,
+			'success' => 0,
+			'error'   => 0,
+		);
+
+		foreach ( (array) $rows as $row ) {
+			$total          = (int) $row->total;
+			$counts['all'] += $total;
+			if ( isset( $counts[ $row->status ] ) && 'all' !== $row->status ) {
+				$counts[ $row->status ] += $total;
+			}
+		}
+
+		return $counts;
+	}
+
+	/**
 	 * Get per-day, per-status totals in a date range.
 	 *
 	 * @since 1.8.0
 	 *
-	 * @param string $from_date From date (MySQL datetime).
-	 * @param string $to_date   To date (MySQL datetime).
+	 * @param string $from_date     From date (MySQL datetime).
+	 * @param string $to_date       To date (MySQL datetime).
+	 * @param bool   $exclude_tests Leave out "Send a test" rows (since 2.0.0).
 	 *
 	 * @return array Row objects {day, status, total}.
 	 */
-	public static function get_daily_counts( $from_date, $to_date ) {
+	public static function get_daily_counts( $from_date, $to_date, $exclude_tests = false ) {
 		global $wpdb;
 
-		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT DATE(created_at) AS `day`, status, COUNT(*) AS total FROM {$wpdb->prefix}ntfm_notification_logs WHERE created_at BETWEEN %s AND %s GROUP BY DATE(created_at), status ORDER BY `day` ASC", $from_date, $to_date ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No caching needed.
+		$marker = $exclude_tests ? '%' . $wpdb->esc_like( self::TEST_MARKER ) . '%' : '';
+		$rows   = $wpdb->get_results( $wpdb->prepare( "SELECT DATE(created_at) AS `day`, status, COUNT(*) AS total FROM {$wpdb->prefix}ntfm_notification_logs WHERE created_at BETWEEN %s AND %s AND ( %s = '' OR content NOT LIKE %s ) GROUP BY DATE(created_at), status ORDER BY `day` ASC", $from_date, $to_date, $marker, $marker ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No caching needed.
 
 		return is_array( $rows ) ? $rows : array();
 	}
@@ -363,15 +454,17 @@ class Notification_Logs_Model {
 	 *
 	 * @since 1.8.0
 	 *
-	 * @param string $from_date From date (MySQL datetime).
-	 * @param string $to_date   To date (MySQL datetime).
+	 * @param string $from_date     From date (MySQL datetime).
+	 * @param string $to_date       To date (MySQL datetime).
+	 * @param bool   $exclude_tests Leave out "Send a test" rows (since 2.0.0).
 	 *
 	 * @return array Row objects {integration, status, total}.
 	 */
-	public static function get_counts_by_integration( $from_date, $to_date ) {
+	public static function get_counts_by_integration( $from_date, $to_date, $exclude_tests = false ) {
 		global $wpdb;
 
-		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT integration, status, COUNT(*) AS total FROM {$wpdb->prefix}ntfm_notification_logs WHERE created_at BETWEEN %s AND %s GROUP BY integration, status ORDER BY integration ASC, status ASC", $from_date, $to_date ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No caching needed.
+		$marker = $exclude_tests ? '%' . $wpdb->esc_like( self::TEST_MARKER ) . '%' : '';
+		$rows   = $wpdb->get_results( $wpdb->prepare( "SELECT integration, status, COUNT(*) AS total FROM {$wpdb->prefix}ntfm_notification_logs WHERE created_at BETWEEN %s AND %s AND ( %s = '' OR content NOT LIKE %s ) GROUP BY integration, status ORDER BY integration ASC, status ASC", $from_date, $to_date, $marker, $marker ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No caching needed.
 
 		return is_array( $rows ) ? $rows : array();
 	}

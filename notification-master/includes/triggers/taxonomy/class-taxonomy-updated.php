@@ -63,8 +63,8 @@ class Taxonomy_Updated extends Taxonomy_Trigger {
 	 * @return string
 	 */
 	public function get_description() {
-		/* translators: %s: Taxonomy singular name */
-		return sprintf( __( 'When a %s is updated.', 'notification-master' ), $this->taxonomy_object->labels->singular_name );
+		/* translators: %s: content type label, e.g. post, page, category, comment. */
+		return sprintf( __( 'This trigger fires when any %s is updated.', 'notification-master' ), $this->label_in_sentence( $this->taxonomy_object->labels->singular_name ) );
 	}
 
 	/**

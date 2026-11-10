@@ -63,8 +63,8 @@ class Post_Updated extends Post_Trigger {
 	 * @return string
 	 */
 	public function get_description() {
-		/* translators: %s: Trigger name */
-		return sprintf( 'When a %s is updated.', $this->get_name() );
+		/* translators: %s: content type label, e.g. post, page, category, comment. */
+		return sprintf( __( 'This trigger fires when any %s is updated.', 'notification-master' ), $this->label_in_sentence( $this->post_type_object->labels->singular_name ) );
 	}
 
 	/**

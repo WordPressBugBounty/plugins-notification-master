@@ -12,9 +12,9 @@
     display: none;
 }
 
+/* Subscribed-state opacity comes from the settings (inline styles). */
 .ntfm-subscribe-btn.subscribed{
     filter: drop-shadow(0 2px 4px rgb(34 36 38 / .35));
-    opacity: .5;
 }
 
 .ntfm-subscribe-floating-btn{
@@ -33,12 +33,6 @@
 
 .ntfm-subscribe-floating-btn.subscribed {
     filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));
-    opacity: 0.5;
-}
-
-.ntfm-subscribe-floating-btn.subscribed {
-    filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));
-    opacity: 0.5;
 }
 
 .ntfm-subscribe-floating-btn svg {

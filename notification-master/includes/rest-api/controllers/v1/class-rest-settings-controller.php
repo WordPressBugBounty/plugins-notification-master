@@ -12,6 +12,7 @@ namespace Notification_Master\REST_API\Controllers\V1;
 use Notification_Master\REST_API\Controllers\V1\Rest_Controller;
 use Notification_Master\Settings;
 use Notification_Master\Tier;
+use Notification_Master\WebPush\Loader as WebPush_Loader;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -96,6 +97,86 @@ class Rest_Settings_Controller extends Rest_Controller {
 				// Strings: the UI may post a number for a width or a radius.
 				return is_scalar( $value ) || null === $value ? (string) $value : $refused;
 		}
+	}
+
+	/**
+	 * Type and clean posted values over a settings array, exactly as a save does (unknown keys and bad types are skipped).
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $settings Current settings merged with defaults.
+	 * @param array $params   Posted key => value pairs.
+	 * @param array $schema   Settings schema (properties + default).
+	 * @return array Settings with the patch applied.
+	 */
+	public function apply_patch( $settings, $params, $schema ) {
+		foreach ( $params as $key => $value ) {
+			if ( ! isset( $settings[ $key ] ) ) {
+				continue;
+			}
+
+			// Store every key with its type whatever the client sent; the UI posts numbers as strings.
+			$typed = $this->type_setting( $key, $value, $schema );
+			if ( is_wp_error( $typed ) ) {
+				continue;
+			}
+
+			$settings[ $key ] = $this->clean_setting( $key, $typed );
+		}
+
+		return $settings;
+	}
+
+	/**
+	 * Clamp the Web Push button size/opacity settings to valid values.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $key   Setting key.
+	 * @param mixed  $value Typed value.
+	 * @return mixed
+	 */
+	private function clean_setting( $key, $value ) {
+		if ( 'normal_button_font_size' === $key ) {
+			return WebPush_Loader::sanitize_font_size( $value );
+		}
+
+		if ( in_array( $key, array( 'normal_button_subscribed_opacity', 'floating_button_subscribed_opacity' ), true ) ) {
+			return WebPush_Loader::sanitize_opacity( $value );
+		}
+
+		if ( 'floating_button_position' === $key ) {
+			return self::sanitize_position( $value );
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Keep one corner string, or a full { desktop, tablet, mobile } map of allowed corners.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param mixed $value Posted position.
+	 * @return string|array
+	 */
+	public static function sanitize_position( $value ) {
+		$corners = array( 'top-left', 'top-right', 'bottom-left', 'bottom-right' );
+		$clean   = function ( $corner ) use ( $corners ) {
+			return is_string( $corner ) && in_array( $corner, $corners, true ) ? $corner : 'bottom-right';
+		};
+
+		if ( ! is_array( $value ) ) {
+			return $clean( $value );
+		}
+
+		// The loader reads all three devices, so fill any that are missing.
+		$result = array();
+		foreach ( array( 'desktop', 'tablet', 'mobile' ) as $device ) {
+			$result[ $device ] = $clean( isset( $value[ $device ] ) ? $value[ $device ] : null );
+		}
+
+		return $result;
 	}
 
 	/**
@@ -206,6 +287,22 @@ class Rest_Settings_Controller extends Rest_Controller {
 					'type'        => 'integer',
 					'description' => __( 'Auto delete subscription after failed attempts.', 'notification-master' ),
 				),
+				'normal_button_font_size'               => array(
+					'type'        => array( 'string', 'number' ),
+					'description' => __( 'Subscribe button font size in px; empty uses the theme size.', 'notification-master' ),
+				),
+				'normal_button_subscribed_opacity'      => array(
+					'type'        => array( 'string', 'number' ),
+					'description' => __( 'Subscribe button opacity when subscribed (0 to 1).', 'notification-master' ),
+				),
+				'floating_button_position'              => array(
+					'type'        => array( 'string', 'object' ),
+					'description' => __( 'Floating button corner, one for all devices or one per device.', 'notification-master' ),
+				),
+				'floating_button_subscribed_opacity'    => array(
+					'type'        => array( 'string', 'number' ),
+					'description' => __( 'Floating button opacity when subscribed (0 to 1).', 'notification-master' ),
+				),
 			),
 			'default'    => array(
 				'enable_background_processing'             => false,
@@ -239,6 +336,9 @@ class Rest_Settings_Controller extends Rest_Controller {
 				'normal_button_unsubscribe_text'           => __( 'Unsubscribe!', 'notification-master' ),
 				'normal_button_extra_class'                => '',
 				'normal_button_id'                         => '',
+				'normal_button_font_size'                  => '',
+				'normal_button_subscribed_opacity'         => 0.5,
+				'floating_button_subscribed_opacity'       => 0.5,
 				'enable_floating_button'                   => true,
 				'enable_floating_button_animation'         => true,
 				'enable_floating_button_tooltip'           => true,
@@ -344,19 +444,7 @@ class Rest_Settings_Controller extends Rest_Controller {
 		}
 		// An unchanged Pro key is neither refused nor stored.
 		$params = Tier::strip_pro_settings( $params );
-		foreach ( $params as $key => $value ) {
-			if ( ! isset( $settings[ $key ] ) ) {
-				continue;
-			}
-
-			// Store every key with its type whatever the client sent; the UI posts numbers as strings.
-			$typed = $this->type_setting( $key, $value, $schema );
-			if ( is_wp_error( $typed ) ) {
-				continue;
-			}
-
-			$settings[ $key ] = $typed;
-		}
+		$settings = $this->apply_patch( $settings, $params, $schema );
 
 		$updated  = Settings::update_settings( $settings );
 		$response = rest_ensure_response( $updated );
@@ -399,19 +487,7 @@ class Rest_Settings_Controller extends Rest_Controller {
 		}
 		// An unchanged Pro key is neither refused nor stored.
 		$params = Tier::strip_pro_settings( $params );
-		foreach ( $params as $key => $value ) {
-			if ( ! isset( $settings[ $key ] ) ) {
-				continue;
-			}
-
-			// Store every key with its type whatever the client sent; the UI posts numbers as strings.
-			$typed = $this->type_setting( $key, $value, $schema );
-			if ( is_wp_error( $typed ) ) {
-				continue;
-			}
-
-			$settings[ $key ] = $typed;
-		}
+		$settings = $this->apply_patch( $settings, $params, $schema );
 		$updated  = Settings::update_settings( $settings );
 		$response = rest_ensure_response( $updated );
 

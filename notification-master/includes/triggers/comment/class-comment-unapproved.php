@@ -56,8 +56,8 @@ class Comment_Unapproved extends Comment_Trigger {
 	 * @return string
 	 */
 	public function get_description() {
-		/* translators: %s Comment type name */
-		return sprintf( 'When a %s is unapproved.', $this->get_name() );
+		/* translators: %s: content type label, e.g. post, page, category, comment. */
+		return sprintf( __( 'This trigger fires when any %s is unapproved.', 'notification-master' ), $this->label_in_sentence( $this->comment_type_name ) );
 	}
 
 	/**

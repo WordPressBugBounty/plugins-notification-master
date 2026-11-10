@@ -89,12 +89,12 @@ class Webhook_Integration extends Integration {
 		$body_format = $this->attributes['body_format'];
 		$body        = $this->attributes['body'] ?? array();
 
-		// Show empty fields.
+		// Stored meaning since 1.0 (despite the "Show Empty Fields" label): true = leave out fields whose value is empty.
 		if ( $this->attributes['show_empty_fields'] ?? false ) {
 			$body = array_filter(
 				$body,
 				function ( $value ) {
-					return ! empty( $value );
+					return '' !== trim( (string) $value );
 				}
 			);
 		}
@@ -134,12 +134,18 @@ class Webhook_Integration extends Integration {
 			)
 		);
 
-		if ( is_wp_error( $response ) ) {
+		$code = is_wp_error( $response ) ? 0 : (int) wp_remote_retrieve_response_code( $response );
+
+		// A reply outside 2xx (e.g. 404, 500) is a failed send, not a success.
+		if ( is_wp_error( $response ) || $code < 200 || $code > 299 ) {
 			Notification_Master()->notification_logger->error(
 				$this->slug,
 				$this->prepare_response(
 					array(
-						'message'  => __( 'Error sending request.', 'notification-master' ),
+						'message'  => $code
+							/* translators: %d: HTTP status code */
+							? sprintf( __( 'The server answered with HTTP %d.', 'notification-master' ), $code )
+							: __( 'Error sending request.', 'notification-master' ),
 						'url'      => $url,
 						'method'   => $method,
 						'headers'  => $headers,

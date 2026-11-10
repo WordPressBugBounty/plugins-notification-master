@@ -10,6 +10,7 @@
 namespace Notification_Master\WebPush;
 
 use Notification_Master\Settings;
+use Notification_Master\Svg_Sanitizer;
 use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
 use function Notification_Master\Notification_Master;
@@ -31,6 +32,15 @@ class Loader {
 	 * @var Loader
 	 */
 	private static $instance;
+
+	/**
+	 * Floating button copies printed in this request (for unique SVG ids).
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var int
+	 */
+	private static $icon_instances = 0;
 
 	/**
 	 * Get instance of this class.
@@ -241,17 +251,18 @@ class Loader {
 
 		// Get icon markup based on icon type.
 		$icon_markup = $this->get_floating_button_icon_markup( $settings );
+		$instance    = ++self::$icon_instances;
 
 		ob_start();
 		?>
 		<button class="ntfm-subscribe-floating-btn notification-master-subscribe<?php echo esc_attr( $settings['extra_class'] ); ?>" <?php echo ! empty( $settings['id'] ) ? 'id="' . esc_attr( $settings['id'] ) . '"' : ''; ?> aria-label="<?php echo esc_attr( $settings['text_subscribe'] ); ?>">
-		<?php echo $icon_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo self::unique_svg_ids( $icon_markup, 'ntfm-' . $instance . '-a' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php if ( $settings['tooltip'] ) : ?>
 			<span class="ntfm-subscribe-floating-btn-tooltip"><?php echo esc_html( $settings['text_subscribe'] ); ?></span>
 		<?php endif; ?>
 		</button>
-		<button class="ntfm-subscribe-floating-btn subscribed notification-master-unsubscribe<?php echo esc_attr( $settings['extra_class'] ); ?>" <?php echo ! empty( $settings['id'] ) ? 'id="' . esc_attr( $settings['id'] ) . '"' : ''; ?> aria-label="<?php echo esc_attr( $settings['text_unsubscribe'] ); ?>">
-		<?php echo $icon_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<button class="ntfm-subscribe-floating-btn subscribed notification-master-unsubscribe<?php echo esc_attr( $settings['extra_class'] ); ?>" <?php echo ! empty( $settings['id'] ) ? 'id="' . esc_attr( $settings['id'] . '-subscribed' ) . '"' : ''; ?> aria-label="<?php echo esc_attr( $settings['text_unsubscribe'] ); ?>">
+		<?php echo self::unique_svg_ids( $icon_markup, 'ntfm-' . $instance . '-b' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		<?php if ( $settings['tooltip'] ) : ?>
 			<span class="ntfm-subscribe-floating-btn-tooltip"><?php echo esc_html( $settings['text_unsubscribe'] ); ?></span>
 		<?php endif; ?>
@@ -283,13 +294,37 @@ class Loader {
 		}
 
 		// Default icon fallback.
-		return '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 312.061 373.784">
-			<g id="Group_698" data-name="Group 698" transform="translate(0.528)">
-			<path id="Subtraction_6" data-name="Subtraction 6" d="M295.268,267.945H15.737c-8.218,0-13.042-6.144-14.819-11.895-2.115-6.864-.854-16.106,6.732-21.28l22.87-15.594C47,207.945,57.235,187.4,57.235,165.57V96.741c0-25.84,8.858-50.134,24.939-68.406S119.635,0,142.376,0h26.254c22.743,0,44.12,10.062,60.2,28.334S253.763,70.9,253.763,96.741V165.57c0,21.834,10.238,42.375,26.713,53.608l22.881,15.594c7.586,5.173,8.844,14.415,6.73,21.28C308.311,261.8,303.488,267.945,295.268,267.945ZM97.286,184.863c1.7,7.8,3.927,12.72,7.025,15.494,7.7,6.89,19.276,6.89,42.337,6.89h17.709c23.063,0,34.636,0,42.337-6.89,3.1-2.776,5.33-7.7,7.027-15.494Zm-6.77-63.1v.009c-.408,3.09.117,7.968.909,15.352l1.495,13.9q.389,3.622.748,7.124l.02.206c.525,5.055,1.021,9.83,1.6,14.3H215.721c.588-4.6,1.1-9.476,1.63-14.644q.358-3.431.735-6.987l1.492-13.88.018-.17c.787-7.314,1.308-12.146.893-15.21l.144.007a12.219,12.219,0,1,0-9.243-4.237c-2.667,1.645-6.11,5.079-11.324,10.278-4.04,4.024-6.056,6.032-8.306,6.348a6.819,6.819,0,0,1-3.664-.508c-2.083-.924-3.465-3.407-6.216-8.353L167.31,99.178l-.063-.114c-1.578-2.828-3.068-5.5-4.353-7.558a16.281,16.281,0,1,0-14.783,0c-1.29,2.066-2.778,4.734-4.353,7.558l-.063.114L129.124,125.3c-2.75,4.947-4.132,7.43-6.216,8.353a6.819,6.819,0,0,1-3.664.508c-2.241-.315-4.254-2.32-8.272-6.315-5.244-5.229-8.691-8.666-11.358-10.311a12.206,12.206,0,1,0-9.241,4.237l.133-.007Z" transform="translate(0 68.281)" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
-			<circle id="Ellipse_2" data-name="Ellipse 2" cx="23.353" cy="23.353" r="23.353" transform="translate(132.149 0)"/>
-			<circle id="Ellipse_3" data-name="Ellipse 3" cx="37.557" cy="37.557" r="37.557" transform="translate(117.944 298.67)"/>
+		return '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 312.061 373.784" aria-hidden="true" focusable="false">
+			<g transform="translate(0.528)">
+			<path d="M295.268,267.945H15.737c-8.218,0-13.042-6.144-14.819-11.895-2.115-6.864-.854-16.106,6.732-21.28l22.87-15.594C47,207.945,57.235,187.4,57.235,165.57V96.741c0-25.84,8.858-50.134,24.939-68.406S119.635,0,142.376,0h26.254c22.743,0,44.12,10.062,60.2,28.334S253.763,70.9,253.763,96.741V165.57c0,21.834,10.238,42.375,26.713,53.608l22.881,15.594c7.586,5.173,8.844,14.415,6.73,21.28C308.311,261.8,303.488,267.945,295.268,267.945ZM97.286,184.863c1.7,7.8,3.927,12.72,7.025,15.494,7.7,6.89,19.276,6.89,42.337,6.89h17.709c23.063,0,34.636,0,42.337-6.89,3.1-2.776,5.33-7.7,7.027-15.494Zm-6.77-63.1v.009c-.408,3.09.117,7.968.909,15.352l1.495,13.9q.389,3.622.748,7.124l.02.206c.525,5.055,1.021,9.83,1.6,14.3H215.721c.588-4.6,1.1-9.476,1.63-14.644q.358-3.431.735-6.987l1.492-13.88.018-.17c.787-7.314,1.308-12.146.893-15.21l.144.007a12.219,12.219,0,1,0-9.243-4.237c-2.667,1.645-6.11,5.079-11.324,10.278-4.04,4.024-6.056,6.032-8.306,6.348a6.819,6.819,0,0,1-3.664-.508c-2.083-.924-3.465-3.407-6.216-8.353L167.31,99.178l-.063-.114c-1.578-2.828-3.068-5.5-4.353-7.558a16.281,16.281,0,1,0-14.783,0c-1.29,2.066-2.778,4.734-4.353,7.558l-.063.114L129.124,125.3c-2.75,4.947-4.132,7.43-6.216,8.353a6.819,6.819,0,0,1-3.664.508c-2.241-.315-4.254-2.32-8.272-6.315-5.244-5.229-8.691-8.666-11.358-10.311a12.206,12.206,0,1,0-9.241,4.237l.133-.007Z" transform="translate(0 68.281)" stroke="rgba(0,0,0,0)" stroke-miterlimit="10" stroke-width="1"/>
+			<circle cx="23.353" cy="23.353" r="23.353" transform="translate(132.149 0)"/>
+			<circle cx="37.557" cy="37.557" r="37.557" transform="translate(117.944 298.67)"/>
 			</g>
 		</svg>';
+	}
+
+	/**
+	 * Suffix every id in an SVG (and its #references) so repeated icons keep ids unique.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $svg    SVG markup.
+	 * @param string $suffix Unique suffix for this copy.
+	 *
+	 * @return string
+	 */
+	public static function unique_svg_ids( $svg, $suffix ) {
+		if ( ! preg_match_all( '/\sid=(["\'])([^"\']+)\1/', $svg, $matches ) ) {
+			return $svg;
+		}
+
+		foreach ( array_unique( $matches[2] ) as $id ) {
+			$new = $id . '-' . $suffix;
+			$svg = preg_replace( '/(\sid=["\'])' . preg_quote( $id, '/' ) . '(["\'])/', '${1}' . $new . '${2}', $svg );
+			$svg = str_replace( array( 'url(#' . $id . ')', '"#' . $id . '"', "'#" . $id . "'" ), array( 'url(#' . $new . ')', '"#' . $new . '"', "'#" . $new . "'" ), $svg );
+		}
+
+		return $svg;
 	}
 
 	/**
@@ -323,13 +358,13 @@ class Loader {
 			return '';
 		}
 
-		// Read and sanitize SVG content.
+		// Read and sanitize SVG content (files uploaded before 2.0 were never cleaned).
 		$svg_content = $wp_filesystem->get_contents( $file_path );
 		if ( false === $svg_content ) {
 			return '';
 		}
 
-		return $svg_content;
+		return Svg_Sanitizer::sanitize( $svg_content );
 	}
 	/**
 	 * Get button markup.
@@ -350,7 +385,7 @@ class Loader {
 		<button class="ntfm-subscribe-btn notification-master-subscribe<?php echo esc_attr( $settings['extra_class'] ); ?>" <?php echo ! empty( $settings['id'] ) ? 'id="' . esc_attr( $settings['id'] ) . '"' : ''; ?>>
 			<?php echo esc_html( $settings['text'] ); ?>
 		</button>
-		<button class="ntfm-subscribe-btn subscribed notification-master-unsubscribe<?php echo esc_attr( $settings['extra_class'] ); ?>" <?php echo ! empty( $settings['id'] ) ? 'id="' . esc_attr( $settings['id'] ) . '"' : ''; ?>>
+		<button class="ntfm-subscribe-btn subscribed notification-master-unsubscribe<?php echo esc_attr( $settings['extra_class'] ); ?>" <?php echo ! empty( $settings['id'] ) ? 'id="' . esc_attr( $settings['id'] . '-subscribed' ) . '"' : ''; ?>>
 			<?php echo esc_html( $settings['unsubscribe_text'] ); ?>
 		</button>
 		<?php
@@ -376,6 +411,9 @@ class Loader {
 		$unsubscribe_text       = Settings::get_setting( 'normal_button_unsubscribe_text', __( 'Unsubscribe!', 'notification-master' ) );
 		$extra_class            = Settings::get_setting( 'normal_button_extra_class', '' );
 		$id                     = Settings::get_setting( 'normal_button_id', '' );
+		$font_size              = self::sanitize_font_size( Settings::get_setting( 'normal_button_font_size', '' ) );
+		$subscribed_opacity     = self::sanitize_opacity( Settings::get_setting( 'normal_button_subscribed_opacity', 0.5 ) );
+		$opacity_set            = array_key_exists( 'normal_button_subscribed_opacity', (array) Settings::get_settings() );
 
 		if ( ! empty( $extra_class ) ) {
 			$extra_class = ' ' . $extra_class;
@@ -395,7 +433,7 @@ class Loader {
 			),
 		);
 
-		return compact( 'text', 'styles', 'unsubscribe_text', 'extra_class', 'id' );
+		return compact( 'text', 'styles', 'unsubscribe_text', 'extra_class', 'id', 'font_size', 'subscribed_opacity', 'opacity_set' );
 	}
 
 	/**
@@ -431,6 +469,8 @@ class Loader {
 		$hide_mobile            = Settings::get_setting( 'floating_button_hide_on_mobile', false );
 		$icon_type              = Settings::get_setting( 'floating_button_icon_type', 'default' );
 		$custom_icon_id         = Settings::get_setting( 'floating_button_custom_icon_id', 0 );
+		$subscribed_opacity     = self::sanitize_opacity( Settings::get_setting( 'floating_button_subscribed_opacity', 0.5 ) );
+		$opacity_set            = array_key_exists( 'floating_button_subscribed_opacity', (array) Settings::get_settings() );
 
 		if ( ! empty( $extra_class ) ) {
 			$extra_class = ' ' . $extra_class;
@@ -454,7 +494,7 @@ class Loader {
 			),
 		);
 
-		return compact( 'text_subscribe', 'text_unsubscribe', 'styles', 'position', 'right', 'bottom', 'top', 'left', 'extra_class', 'id', 'z_index', 'enabled', 'animation', 'tooltip', 'hide_desktop', 'hide_tablet', 'hide_mobile', 'icon_type', 'custom_icon_id' );
+		return compact( 'text_subscribe', 'text_unsubscribe', 'styles', 'position', 'right', 'bottom', 'top', 'left', 'extra_class', 'id', 'z_index', 'enabled', 'animation', 'tooltip', 'hide_desktop', 'hide_tablet', 'hide_mobile', 'icon_type', 'custom_icon_id', 'subscribed_opacity', 'opacity_set' );
 	}
 
 	/**
@@ -475,12 +515,18 @@ class Loader {
 		$styles .= 'padding: ' . implode( ' ', $settings['styles']['normal']['padding'] ) . ' !important;' . PHP_EOL;
 		$styles .= 'margin: ' . implode( ' ', $settings['styles']['normal']['margin'] ) . ' !important;' . PHP_EOL;
 		$styles .= 'border-radius: ' . $settings['styles']['normal']['border-radius'] . 'px;' . PHP_EOL;
+		if ( '' !== $settings['font_size'] ) {
+			$styles .= 'font-size: ' . $settings['font_size'] . 'px !important;' . PHP_EOL;
+		}
 		$styles .= '}' . PHP_EOL;
 
 		$styles .= '.ntfm-subscribe-btn:hover {' . PHP_EOL;
 		$styles .= 'color: ' . $settings['styles']['hover']['color'] . ' !important;' . PHP_EOL;
 		$styles .= 'background-color: ' . $settings['styles']['hover']['background-color'] . ' !important;' . PHP_EOL;
 		$styles .= '}' . PHP_EOL;
+
+		$styles .= $this->get_subscribed_styles( '.ntfm-subscribe-btn', $settings['subscribed_opacity'], $settings['opacity_set'] );
+		$styles .= $this->get_subscribed_styles( '.ntfm-subscribe-floating-btn', $floating['subscribed_opacity'], $floating['opacity_set'] );
 
 		$styles .= '.ntfm-subscribe-floating-btn svg {' . PHP_EOL;
 		$styles .= 'fill: ' . $floating['styles']['normal']['color'] . ' !important;' . PHP_EOL;
@@ -510,6 +556,61 @@ class Loader {
 		$styles .= '}' . PHP_EOL;
 
 		return $styles;
+	}
+
+	/**
+	 * Opacity of a button in the subscribed state; hover goes back to 1 once the user saved a value.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $selector Button selector.
+	 * @param float  $opacity  Opacity 0-1.
+	 * @param bool   $is_set   Whether the setting was saved.
+	 *
+	 * @return string
+	 */
+	private function get_subscribed_styles( $selector, $opacity, $is_set ) {
+		$styles = $selector . '.subscribed {' . PHP_EOL . 'opacity: ' . $opacity . ';' . PHP_EOL . '}' . PHP_EOL;
+
+		if ( $is_set ) {
+			$styles .= $selector . '.subscribed:hover, ' . $selector . '.subscribed:focus-visible {' . PHP_EOL . 'opacity: 1;' . PHP_EOL . '}' . PHP_EOL;
+		}
+
+		return $styles;
+	}
+
+	/**
+	 * Font size in px, or '' for the theme default.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param mixed $value Saved value.
+	 *
+	 * @return string
+	 */
+	public static function sanitize_font_size( $value ) {
+		if ( ! is_numeric( $value ) || (float) $value <= 0 ) {
+			return '';
+		}
+
+		return (string) min( 200, round( (float) $value, 2 ) );
+	}
+
+	/**
+	 * Opacity clamped to 0-1, 0.5 when not a number.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param mixed $value Saved value.
+	 *
+	 * @return float
+	 */
+	public static function sanitize_opacity( $value ) {
+		if ( ! is_numeric( $value ) ) {
+			return 0.5;
+		}
+
+		return max( 0, min( 1, round( (float) $value, 2 ) ) );
 	}
 
 	/**

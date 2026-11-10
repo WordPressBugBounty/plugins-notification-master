@@ -9,6 +9,8 @@
 namespace Notification_Master\Admin;
 
 use Notification_Master\Utils;
+use Notification_Master\Settings;
+use Notification_Master\Svg_Sanitizer;
 use Notification_Master\Users\Users;
 use Notification_Master\DB\Models\Subscription_Model;
 
@@ -24,7 +26,16 @@ class Admin {
 	 *
 	 * @var string
 	 */
-	public $menu_slug = 'ntfm-home';
+	public $menu_slug = 'notification-master';
+
+	/**
+	 * The five admin pages (tabs), in menu order.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var string[]
+	 */
+	const PAGES = array( 'notification-master', 'ntfm-notifications', 'ntfm-log', 'ntfm-webpush', 'ntfm-settings' );
 
 	/**
 	 * Instance of this class.
@@ -75,9 +86,43 @@ class Admin {
 		// Initialize review notice.
 		new Review_Notice();
 
+		// Old page slugs redirect to the new tabs.
+		new Redirects();
+
+		// Ask old Pro users to update.
+		new Pro_Notice();
+
 		// Allow SVG uploads for admin users.
 		add_filter( 'upload_mimes', array( $this, 'allow_svg_upload' ) );
 		add_filter( 'wp_check_filetype_and_ext', array( $this, 'fix_svg_mime_type' ), 10, 5 );
+		add_filter( 'wp_handle_upload_prefilter', array( $this, 'sanitize_svg_upload' ) );
+	}
+
+	/**
+	 * Clean SVG uploads with the strict allowlist; refuse files with nothing usable left.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $file Upload data (name, tmp_name, ...).
+	 *
+	 * @return array
+	 */
+	public function sanitize_svg_upload( $file ) {
+		$name = isset( $file['name'] ) ? (string) $file['name'] : '';
+		$tmp  = isset( $file['tmp_name'] ) ? (string) $file['tmp_name'] : '';
+
+		if ( ! empty( $file['error'] ) || 'svg' !== strtolower( pathinfo( $name, PATHINFO_EXTENSION ) ) || '' === $tmp || ! is_readable( $tmp ) ) {
+			return $file;
+		}
+
+		$clean = Svg_Sanitizer::sanitize( (string) file_get_contents( $tmp ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Local temp upload.
+		if ( '' === $clean || false === file_put_contents( $tmp, $clean ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- Local temp upload.
+			$file['error'] = __( 'This SVG file could not be cleaned safely. Export it again as a plain SVG and try again.', 'notification-master' );
+		} else {
+			$file['size'] = strlen( $clean );
+		}
+
+		return $file;
 	}
 
 	/**
@@ -86,13 +131,22 @@ class Admin {
 	 * @since 1.0.0
 	 */
 	public function remove_notices() {
-		// Check if notification-master is the current page.
-		$current_screen = get_current_screen();
-		// Check if current screen has a ntfm- prefix.
-		if ( strpos( $current_screen->id, 'ntfm-' ) !== false ) {
-			// Remove notices.
+		if ( self::is_plugin_page() ) {
 			remove_all_actions( 'admin_notices' );
 		}
+	}
+
+	/**
+	 * Whether the current request is one of this plugin's admin pages.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return bool
+	 */
+	public static function is_plugin_page() {
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only page check.
+
+		return in_array( $page, self::PAGES, true );
 	}
 
 	/**
@@ -114,6 +168,11 @@ class Admin {
 			true
 		);
 
+		// JS strings use the free text domain (language-pack JSON files).
+		wp_set_script_translations( 'notification-master-admin', 'notification-master', NOTIFICATION_MASTER_DIR . 'languages' );
+
+		// The asset hash only tracks JS, so a CSS-only change would keep the cached file.
+		$style_file = NOTIFICATION_MASTER_DIR . 'dist/style.css';
 		wp_register_style(
 			'notification-master-admin',
 			NOTIFICATION_MASTER_URL . 'dist/style.css',
@@ -121,7 +180,7 @@ class Admin {
 				'wp-components',
 				'wp-editor',
 			),
-			$version
+			file_exists( $style_file ) ? $version . '-' . filemtime( $style_file ) : $version
 		);
 
 		// Localize script.
@@ -145,7 +204,9 @@ class Admin {
 					'ntfmSiteUrl'        => NOTIFICATION_MASTER_SITE,
 					'isPro'              => apply_filters( 'notification_master_is_pro', false ),
 					'userRoles'          => Users::get_instance()->get_roles_options(),
-					'subscriptionCount'  => Subscription_Model::get_count(),
+					'subscriptionCount'  => (int) Subscription_Model::get_count_by_status( 'subscribed' ),
+					'canInstallPlugins'  => current_user_can( 'install_plugins' ),
+					'logRetentionDays'   => (int) Settings::get_setting( 'notifications_delete_logs_every', 30 ),
 				)
 			)
 		);
@@ -176,60 +237,25 @@ class Admin {
 			2
 		);
 
-		// Add submenus.
-		add_submenu_page(
-			$this->menu_slug,
-			__( 'Home', 'notification-master' ),
-			__( 'Home', 'notification-master' ),
-			'manage_options',
-			$this->menu_slug,
-			array( $this, 'render_admin_page' )
+		// Add submenus: the five tabs of the app.
+		$tabs = array(
+			'notification-master' => __( 'Overview', 'notification-master' ),
+			'ntfm-notifications'  => __( 'Notifications', 'notification-master' ),
+			'ntfm-log'            => __( 'Log', 'notification-master' ),
+			'ntfm-webpush'        => __( 'Web Push', 'notification-master' ),
+			'ntfm-settings'       => __( 'Settings', 'notification-master' ),
 		);
 
-		add_submenu_page(
-			$this->menu_slug,
-			__( 'Notifications', 'notification-master' ),
-			__( 'Notifications', 'notification-master' ),
-			'manage_options',
-			'ntfm-notifications',
-			array( $this, 'render_admin_page' )
-		);
-
-		add_submenu_page(
-			$this->menu_slug,
-			__( 'Settings', 'notification-master' ),
-			__( 'Settings', 'notification-master' ),
-			'manage_options',
-			'ntfm-settings',
-			array( $this, 'render_admin_page' )
-		);
-
-		add_submenu_page(
-			$this->menu_slug,
-			__( 'Subscriptions', 'notification-master' ),
-			__( 'Subscriptions', 'notification-master' ),
-			'manage_options',
-			'ntfm-webpush-subscriptions',
-			array( $this, 'render_admin_page' )
-		);
-
-		add_submenu_page(
-			$this->menu_slug,
-			__( 'Notification Log', 'notification-master' ),
-			__( 'Notification Log', 'notification-master' ),
-			'manage_options',
-			'ntfm-notification-log',
-			array( $this, 'render_admin_page' )
-		);
-
-		add_submenu_page(
-			$this->menu_slug,
-			__( 'Debug Log', 'notification-master' ),
-			__( 'Debug Log', 'notification-master' ),
-			'manage_options',
-			'ntfm-debug-log',
-			array( $this, 'render_admin_page' )
-		);
+		foreach ( $tabs as $slug => $label ) {
+			add_submenu_page(
+				$this->menu_slug,
+				$label,
+				$label,
+				'manage_options',
+				$slug,
+				array( $this, 'render_admin_page' )
+			);
+		}
 	}
 
 	/**
@@ -246,14 +272,6 @@ class Admin {
 		wp_enqueue_media();
 		wp_enqueue_script( 'notification-master-admin' );
 		wp_enqueue_style( 'notification-master-admin' );
-
-		// Load "Poppins" font.
-		wp_enqueue_style(
-			'notification-master-poppins-font',
-			'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap',
-			array(),
-			'1.0.0'
-		);
 		?>
 		<div id="notification-master-admin"></div>
 		<?php
@@ -272,8 +290,8 @@ class Admin {
 	 */
 	public function allow_svg_upload( $mimes ) {
 		if ( current_user_can( 'manage_options' ) ) {
-			$mimes['svg']  = 'image/svg+xml';
-			$mimes['svgz'] = 'image/svg+xml';
+			// Plain .svg only: gzipped .svgz cannot be sanitized on upload.
+			$mimes['svg'] = 'image/svg+xml';
 		}
 
 		return $mimes;

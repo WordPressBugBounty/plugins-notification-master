@@ -56,8 +56,8 @@ class Comment_Trashed extends Comment_Trigger {
 	 * @return string
 	 */
 	public function get_description() {
-		/* translators: %s: Comment type name */
-		return sprintf( __( 'When a %s - comment is trashed.', 'notification-master' ), $this->get_name() );
+		/* translators: %s: content type label, e.g. post, page, category, comment. */
+		return sprintf( __( 'This trigger fires when any %s is moved to the trash.', 'notification-master' ), $this->label_in_sentence( $this->comment_type_name ) );
 	}
 
 	/**

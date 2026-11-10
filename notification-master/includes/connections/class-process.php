@@ -179,7 +179,7 @@ class Process {
 			$connection_settings = $connection['settings'] ?? array();
 
 			// Add action before process connection.
-			do_action( 'notification_master_before_process_connection', $connection_settings, $trigger, $notification_id );
+			do_action( 'notification_master_before_process_connection', $connection_settings, $trigger, $notification_id, $connection_id );
 
 			$integration->process();
 

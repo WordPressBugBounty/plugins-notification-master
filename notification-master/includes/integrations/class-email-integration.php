@@ -194,6 +194,8 @@ class Email_Integration extends Integration {
 				'message'       => $message,
 				'args'          => array(
 					'notification_name' => $this->notification_name,
+					'notification_id'   => $this->notification_id,
+					'connection_id'     => $this->connection_id,
 					'trigger'           => $this->trigger->get_slug(),
 				),
 			)
@@ -273,6 +275,14 @@ class Email_Integration extends Integration {
 			$this->notification_name = $args['notification_name'] ?? '';
 		}
 
+		if ( ! $this->notification_id && ! empty( $args['notification_id'] ) ) {
+			$this->notification_id = absint( $args['notification_id'] );
+		}
+
+		if ( '' === (string) $this->connection_id && ! empty( $args['connection_id'] ) ) {
+			$this->connection_id = (string) $args['connection_id'];
+		}
+
 		if ( ! $this->trigger && ! empty( $args['trigger'] ) ) {
 			$this->trigger = Triggers_Loader::get_instance()->get_trigger( $args['trigger'] );
 		}
@@ -306,6 +316,35 @@ class Email_Integration extends Integration {
 			$data['current_index'] = $current_index;
 			Utils::enqueue_async_action( $this->slug, $data );
 		}
+	}
+
+	/**
+	 * Send a test to one address: the override, else the first resolved recipient, else the current user.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array                                  $settings  Connection settings.
+	 * @param string                                 $recipient Override email.
+	 * @param \Notification_Master\Abstracts\Trigger $trigger   Trigger with sample data.
+	 *
+	 * @return array
+	 */
+	public function prepare_test_attributes( $settings, $recipient, $trigger ) {
+		$email = sanitize_email( (string) $recipient );
+
+		if ( '' === $email && ! empty( $settings['emails'] ) && is_array( $settings['emails'] ) ) {
+			$resolved = $this->sanitize_emails( $this->merge_tags_loader->process_merge_tags( $trigger, $settings['emails'] ) );
+			$email    = $resolved ? (string) reset( $resolved ) : '';
+		}
+
+		if ( '' === $email ) {
+			$email = wp_get_current_user()->user_email;
+		}
+
+		$settings['emails']          = array( $email );
+		$settings['excluded_emails'] = array();
+
+		return $settings;
 	}
 
 	/**

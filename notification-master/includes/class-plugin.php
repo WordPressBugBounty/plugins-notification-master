@@ -17,6 +17,7 @@ use Notification_Master\Integrations\Loader as Integrations_Loader;
 use Notification_Master\WebPush\Loader as WebPush_Loader;
 use Notification_Master\Connections\Process as Connections_Process;
 use Notification_Master\WebPush\Background_Process as WebPush_Background_Process;
+use Notification_Master\WebPush\Cache_Purge as WebPush_Cache_Purge;
 use Notification_Master\Email\Background_Process as Email_Background_Process;
 use Notification_Master\Logger;
 use Notification_Master\Notification_Logger;
@@ -150,6 +151,8 @@ class Plugin {
 		WebPush_Loader::get_instance();
 		// Load webpush background process class.
 		WebPush_Background_Process::get_instance();
+		// Purge page caches when the button or bell look changes.
+		WebPush_Cache_Purge::init();
 		// Load email background process class.
 		Email_Background_Process::get_instance();
 		// Load delay class.

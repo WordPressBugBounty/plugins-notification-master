@@ -147,6 +147,8 @@ class WebPush_Integration extends Integration {
 			'args'         => array(
 				'trigger'           => $this->trigger->get_slug(),
 				'notification_name' => $this->notification_name,
+				'notification_id'   => $this->notification_id,
+				'connection_id'     => $this->connection_id,
 				'send_to'           => $this->attributes['send_to'] ?? 'all',
 				'specific_users'    => $this->get_valid_user_ids( $this->attributes['specific_users'] ?? array() ),
 			),
@@ -228,6 +230,14 @@ class WebPush_Integration extends Integration {
 			$this->notification_name = $args['notification_name'];
 		}
 
+		if ( ! $this->notification_id && ! empty( $args['notification_id'] ) ) {
+			$this->notification_id = absint( $args['notification_id'] );
+		}
+
+		if ( '' === (string) $this->connection_id && ! empty( $args['connection_id'] ) ) {
+			$this->connection_id = (string) $args['connection_id'];
+		}
+
 		$title   = $notification['title'];
 		$message = $notification['message'];
 		$icon    = $notification['icon'];
@@ -236,11 +246,15 @@ class WebPush_Integration extends Integration {
 		$urgency = $notification['urgency'];
 		$limit   = 20;
 
+		// Pages continue after the last id sent: rows deleted or unsubscribed meanwhile must not shift the next page.
+		$before_id = isset( $data['before_id'] ) ? absint( $data['before_id'] ) : 0;
+		$offset_pg = $before_id > 0 ? 1 : $page;
+
 		$subscriptions = array();
 		if ( 'specific_users' === $args['send_to'] ) {
-			$subscriptions = Subscription_Model::get_subscriptions_by_user_ids( $args['specific_users'], $limit, $page, 'subscribed' );
+			$subscriptions = Subscription_Model::get_subscriptions_by_user_ids( $args['specific_users'], $limit, $offset_pg, 'subscribed', $before_id );
 		} else {
-			$subscriptions = Subscription_Model::get_rows( $limit, $page, 'subscribed' );
+			$subscriptions = Subscription_Model::get_rows( $limit, $offset_pg, 'subscribed', $before_id );
 		}
 
 		if ( empty( $subscriptions ) ) {
@@ -352,10 +366,10 @@ class WebPush_Integration extends Integration {
 			}
 		}
 
-		// Check if there are more subscriptions to process.
-		$count = Subscription_Model::get_count();
-		if ( $count > ( $page * $limit ) ) {
-			$data['page'] = $page + 1;
+		// A full page means there may be more; get_count() counted every row, so targeted sends queued empty jobs.
+		if ( count( $subscriptions ) >= $limit ) {
+			$data['page']      = $page + 1;
+			$data['before_id'] = (int) end( $subscriptions )->id;
 			Utils::enqueue_async_action( $this->slug, $data );
 		}
 	}
@@ -379,6 +393,33 @@ class WebPush_Integration extends Integration {
 				)
 			)
 		);
+	}
+
+	/**
+	 * Tests go only to the current user's own subscriptions.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array                                  $settings  Connection settings.
+	 * @param string                                 $recipient Unused.
+	 * @param \Notification_Master\Abstracts\Trigger $trigger   Unused.
+	 *
+	 * @return array|\WP_Error
+	 */
+	public function prepare_test_attributes( $settings, $recipient, $trigger ) {
+		if ( ! WebPush_Loader::get_instance()->is_configured() ) {
+			return new \WP_Error( 'ntfm_test_unsupported', __( 'Web Push is not set up yet. Generate the keys in Web Push first.', 'notification-master' ), array( 'status' => 400 ) );
+		}
+
+		$user_id = get_current_user_id();
+		if ( ! Subscription_Model::get_subscriptions_by_user_ids( array( $user_id ), 1, 1, 'subscribed' ) ) {
+			return new \WP_Error( 'ntfm_test_no_subscription', __( 'You have no push subscription yet. Open your site in this browser, click the subscribe button, then send the test again.', 'notification-master' ), array( 'status' => 400 ) );
+		}
+
+		$settings['send_to']        = 'specific_users';
+		$settings['specific_users'] = array( 'user:' . $user_id );
+
+		return $settings;
 	}
 
 	/**

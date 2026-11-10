@@ -2,8 +2,8 @@
 Contributors: notificationmaster
 Donate link: https://notification-master.com
 Tags: web push, email, notifications, sms, whatsapp
-Stable tag: 1.8.0
-Requires at least: 4.9
+Stable tag: 2.0.0
+Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
 License: GPL-3.0-or-later
@@ -210,12 +210,57 @@ Yes! We include privacy triggers for personal data export/erasure and respect us
 Yes, on WordPress 6.9 or newer with the free MCP Adapter plugin from the WordPress project. An assistant can list your notifications, triggers, channels and logs, create draft notifications from the starter templates, enable or disable a notification and cancel a scheduled send. Sending a queued notification right away is off MCP, and every call needs an administrator Application Password. Without the adapter nothing changes.
 
 == Screenshots ==
-1. Notification Master - Notifications Dashboard
-2. Notification Master - Notification Configuration
-3. Notification Master - Integration Settings
-4. Notification Master - Merge Tags Selection
+1. The Overview shows what went out this week, what failed and why.
+2. All your notifications in one list, with trigger, channels, last send and an on/off switch.
+3. Pick a trigger, add connections and insert merge tags like {{user.email}} from a searchable list.
+4. Send through email, webhooks, Discord, Web Push and Instagram. Pro adds Slack, WhatsApp, X (Twitter), Twilio and more.
+5. When a send fails, the Log tells you what happened, why, and what to do next.
+6. Style the Web Push subscribe button and watch it change live on desktop, tablet and mobile.
+7. The Web Push health check confirms HTTPS, your VAPID keys, the service worker and server support.
+8. Turn off trigger groups you don't use and choose which post types and taxonomies can send.
 
 == Changelog ==
+
+= 2.0.0 =
+* Updated: A new admin design. The menu now has five items: Overview, Notifications, Log, Web Push and Settings. Old links to the Notification Log, Debug Log and Web Push Subscriptions pages still work and take you to the right place.
+* Added: An Overview page with sends and failures for the last 7, 30 or 90 days, and a list of recent failures you can open in the Log.
+* Added: The Log now explains each failure in plain words: what happened, why, and what to do next. The raw error is still there under Technical details.
+* Added: Send a test. In the notification editor, pick a connection and send a test before you turn the notification on.
+* Added: A live preview for the Web Push subscribe button and bell, so you see each change as you make it.
+* Added: A Web Push health check. It checks HTTPS, your VAPID keys, the service worker and the PHP extensions push needs, and tells you what to fix.
+* Added: A font size setting for the subscribe button, and an opacity setting for how the button looks after a visitor subscribes.
+* Fixed: The subscribe button printed the same HTML id twice when you set a custom id. The subscribed state now gets its own id ending in "-subscribed".
+* Fixed: The webhook option labelled "Show empty fields" actually removed them. It is now called "Remove empty fields", and a field with the value "0" is no longer treated as empty.
+* Removed: The Google Fonts (Poppins) request in the admin. The Inter font now ships with the plugin.
+* Updated: The admin script is about half the size it was in 1.8.0.
+* Updated: Notification Master now needs WordPress 6.2 or newer. The new admin runs on React 18, which older WordPress versions don't include.
+* Fixed: Web Push notifications sent to specific users no longer queue empty background jobs.
+* Fixed: Trigger descriptions in the editor read properly again. Since 1.8.0 some said things like "when a Post Published is published".
+* Added: Undo after you move notifications to the trash.
+* Added: Arrow keys move through the Add connection list.
+* Added: Page caches are cleared when you change the look of the subscribe button or bell, so visitors see the new style at once. Works with WP Rocket, W3 Total Cache, LiteSpeed Cache, WP Super Cache, WP-Optimize, SiteGround Optimizer, WP Fastest Cache, Breeze, Hummingbird, Cache Enabler and Nginx Helper. Hosts can hook `notification_master_webpush_settings_changed` to clear their own cache.
+* Updated: Overview ranges longer than your log retention are turned off, with a note that says why.
+* Updated: The Log gives clearer reasons when a webhook fails.
+* Updated: Deleting every subscriber through the REST API now needs `all=true`. A request with no IDs and no flag is refused and deletes nothing.
+* Fixed: Older notifications with an empty, paused connection could not be updated. A paused connection is now a draft and saves with empty fields. Only a connection that is switched on must be complete.
+* Fixed: A webhook connection set to GET or DELETE could not be switched on.
+* Fixed: A webhook, Discord, Slack, Zapier or Make address that is not a full http(s) URL was saved without a warning.
+* Fixed: The Add connection list could open under the WordPress admin bar.
+* Fixed: Keyboard focus jumped to the top of the page after closing a dialog, saving or switching tabs. It now moves to the page heading.
+* Fixed: Some screens scrolled sideways on phones.
+* Fixed: "View all in Log" on the Overview now keeps the date range you picked.
+* Fixed: The Web Push welcome title and message could be saved empty.
+* Fixed: With "Auto-delete failed subscriptions" on, a large send skipped some subscribers.
+* Fixed: Uploaded SVG bell icons lost their viewBox and showed at the wrong size. Icons uploaded before this fix are corrected when the bell is shown.
+* Fixed: The keys form accepted text that is not a valid VAPID key.
+* Fixed: The subscriber count ignored the status filter, and the REST API accepted any text as a subscriber status.
+* Fixed: The warning before generating new keys also counted unsubscribed browsers.
+* Fixed: The "User password changed" trigger now fires when a password is changed on the profile screen as well as after a reset.
+* Fixed: The active subscriber count now updates as soon as subscribers are changed in Pro.
+* Fixed: A webhook HTTPS certificate error was shown in the Log as a Web Push server problem.
+* Fixed: The editor's "Try again" button now reloads the notification.
+* Fixed: A webhook that answers with an error code (like 404 or 500) is now logged as failed, not sent.
+* Updated: The Overview only compares Sent and Failed with the previous period when the logs for that period are still kept.
 
 = 1.8.0 =
 * Added: Support for AI assistants through the WordPress Abilities API and MCP. Assistants such as Claude or ChatGPT can list your notifications, triggers, channels, templates, scheduled sends and logs, create draft notifications from templates, turn notifications on or off and cancel scheduled sends. Your credentials and recipient lists are never shown to them.
@@ -381,6 +426,9 @@ Yes, on WordPress 6.9 or newer with the free MCP Adapter plugin from the WordPre
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.0.0 =
+New admin design with an Overview page, plain-language failure help in the Log, Send a test and a Web Push health check. If you use Notification Master Pro, update it to 2.0 too so its screens match the new design.
 
 = 1.8.0 =
 Requires PHP 7.4 or newer. Adds support for AI assistants (WordPress Abilities API and MCP) and WordPress 7.1 compatibility.

@@ -58,6 +58,18 @@ class Comment_Replied extends Comment_Trigger {
 	}
 
 	/**
+	 * Get description.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return string
+	 */
+	public function get_description() {
+		/* translators: %s: comment type label, e.g. comment. */
+		return sprintf( __( 'This trigger fires when someone replies to any %s.', 'notification-master' ), $this->label_in_sentence( $this->comment_type_name ) );
+	}
+
+	/**
 	 * Process.
 	 *
 	 * @since 1.0.0

@@ -295,6 +295,10 @@ class Notifications {
 			$integration = $integrations[ $slug ];
 			$attributes  = $integration->get_attributes_schema();
 			$settings    = isset( $connection['settings'] ) ? $connection['settings'] : null;
+			// A paused connection is a draft: types are checked, required fields are not (same rule as the editor).
+			if ( isset( $connection['enabled'] ) && ! $connection['enabled'] ) {
+				$attributes = self::without_required( $attributes );
+			}
 			/* translators: %s: integration name */
 			$settings = rest_validate_object_value_from_schema( $settings, $attributes, sprintf( '(%s) integration', $integration->name ) );
 
@@ -304,6 +308,30 @@ class Notifications {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Copy of a schema with every `required` flag removed, at any depth.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $schema Schema.
+	 *
+	 * @return array
+	 */
+	public static function without_required( $schema ) {
+		if ( ! is_array( $schema ) ) {
+			return $schema;
+		}
+		unset( $schema['required'] );
+		foreach ( array( 'properties', 'items', 'additionalProperties' ) as $key ) {
+			if ( ! isset( $schema[ $key ] ) || ! is_array( $schema[ $key ] ) ) {
+				continue;
+			}
+			$schema[ $key ] = 'properties' === $key ? array_map( array( __CLASS__, 'without_required' ), $schema[ $key ] ) : self::without_required( $schema[ $key ] );
+		}
+
+		return $schema;
 	}
 
 	/**

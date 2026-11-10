@@ -63,8 +63,8 @@ class Post_Sent_To_Review extends Post_Trigger {
 	 * @return string
 	 */
 	public function get_description() {
-		/* translators: %s: Trigger name */
-		return sprintf( __( 'When a %s is sent to review.', 'notification-master' ), $this->get_name() );
+		/* translators: %s: content type label, e.g. post, page, category, comment. */
+		return sprintf( __( 'This trigger fires when any %s is sent for review.', 'notification-master' ), $this->label_in_sentence( $this->post_type_object->labels->singular_name ) );
 	}
 
 	/**

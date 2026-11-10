@@ -123,6 +123,25 @@ abstract class Trigger {
 	}
 
 	/**
+	 * A post type/taxonomy/comment label ready for the middle of a sentence (lowercased in English only).
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $label Singular label, e.g. "Post".
+	 *
+	 * @return string
+	 */
+	protected function label_in_sentence( $label ) {
+		$label = (string) $label;
+
+		if ( 0 !== strpos( determine_locale(), 'en' ) ) {
+			return $label;
+		}
+
+		return function_exists( 'mb_strtolower' ) ? mb_strtolower( $label ) : strtolower( $label );
+	}
+
+	/**
 	 * Get slug.
 	 *
 	 * @since 1.0.0

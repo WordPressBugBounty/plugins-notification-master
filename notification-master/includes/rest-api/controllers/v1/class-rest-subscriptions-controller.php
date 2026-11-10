@@ -31,6 +31,15 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 	protected $rest_base = 'subscriptions';
 
 	/**
+	 * Statuses a subscription can have.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var string[]
+	 */
+	const STATUSES = array( 'subscribed', 'unsubscribed' );
+
+	/**
 	 * Register routes.
 	 *
 	 * @since 1.4.0
@@ -93,6 +102,12 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 							'type'        => 'array',
 							'description' => __( 'Subscription IDs.', 'notification-master' ),
 							'required'    => false,
+						),
+						'all' => array(
+							'type'        => 'boolean',
+							'description' => __( 'Set to true to delete every subscription when no IDs are sent.', 'notification-master' ),
+							'required'    => false,
+							'default'     => false,
 						),
 					),
 				),
@@ -195,8 +210,8 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function get_subscriptions( $request ) {
-		$page     = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-		$per_page = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
+		$page     = max( 1, (int) $request->get_param( 'page' ) );
+		$per_page = $request->get_param( 'per_page' ) ? min( 500, max( 1, (int) $request->get_param( 'per_page' ) ) ) : 10;
 		$status   = $request->get_param( 'status' ) ? $request->get_param( 'status' ) : 'all';
 
 		$subscriptions = Subscription_Model::get_rows( $per_page, $page, $status );
@@ -212,7 +227,8 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 			}
 		}
 
-		$conut = Subscription_Model::get_count();
+		// The count follows the status filter, so a filtered list pages correctly.
+		$conut = in_array( $status, self::STATUSES, true ) ? Subscription_Model::get_count_by_status( $status ) : Subscription_Model::get_count();
 
 		$result = array(
 			'subscriptions' => $subscriptions,
@@ -338,22 +354,32 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 	}
 
 	/**
-	 * Delete subscriptions.
+	 * Delete some subscriptions by id, or all of them when `all` is true.
 	 *
 	 * @since 1.4.0
+	 * @since 2.0.0 Deleting every row needs `all=true`; no ids and no flag is a 400.
 	 *
 	 * @param WP_REST_Request $request Request.
 	 *
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function delete_subcriptions( $request ) {
-		$ids = $request->get_param( 'ids' ) ? $request->get_param( 'ids' ) : array();
+		$ids = $request->get_param( 'ids' ) ? array_filter( array_map( 'absint', (array) $request->get_param( 'ids' ) ) ) : array();
 
 		if ( ! empty( $ids ) ) {
 			Subscription_Model::delete_by_ids( $ids );
-		} else {
-			Subscription_Model::delete();
+			return new WP_REST_Response( true, 200 );
 		}
+
+		if ( true !== rest_sanitize_boolean( $request->get_param( 'all' ) ) ) {
+			return new WP_Error(
+				'ntfm_delete_all_not_confirmed',
+				__( 'No subscriptions were deleted. Send the IDs to delete, or set "all" to true to delete every subscription.', 'notification-master' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		Subscription_Model::delete();
 
 		return new WP_REST_Response( true, 200 );
 	}
@@ -386,6 +412,10 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 
 		if ( empty( $ids ) || empty( $status ) ) {
 			return new WP_Error( 'invalid_data', __( 'Invalid data.', 'notification-master' ), array( 'status' => 400 ) );
+		}
+
+		if ( ! in_array( $status, self::STATUSES, true ) ) {
+			return new WP_Error( 'invalid_status', __( 'Status must be subscribed or unsubscribed.', 'notification-master' ), array( 'status' => 400 ) );
 		}
 
 		Subscription_Model::update_status( $ids, $status );
@@ -455,6 +485,10 @@ class Rest_Subscriptions_Controller extends Rest_Controller {
 
 		if ( empty( $id ) || empty( $status ) ) {
 			return new WP_Error( 'invalid_data', __( 'Invalid data.', 'notification-master' ), array( 'status' => 400 ) );
+		}
+
+		if ( ! in_array( $status, self::STATUSES, true ) ) {
+			return new WP_Error( 'invalid_status', __( 'Status must be subscribed or unsubscribed.', 'notification-master' ), array( 'status' => 400 ) );
 		}
 
 		Subscription_Model::update_status( array( $id ), $status );

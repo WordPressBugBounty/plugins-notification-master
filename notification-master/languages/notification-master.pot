@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Notification Master 1.8.0\n"
+"Project-Id-Version: Notification Master 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/notification-master\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-22T12:06:38+00:00\n"
+"POT-Creation-Date: 2026-11-08T11:04:47+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: notification-master\n"
@@ -17,9 +17,10 @@ msgstr ""
 #. Plugin Name of the plugin
 #. Author of the plugin
 #: notifications-master.php
-#: includes/admin/class-admin.php:161
-#: includes/admin/class-admin.php:162
+#: includes/admin/class-admin.php:222
+#: includes/admin/class-admin.php:223
 #: includes/admin/class-review-notice.php:106
+#: dist/index.js:74
 msgid "Notification Master"
 msgstr ""
 
@@ -119,7 +120,7 @@ msgstr ""
 
 #. translators: %s: trigger slug
 #: includes/abilities/class-catalog-abilities.php:232
-#: includes/class-notifications.php:361
+#: includes/class-notifications.php:389
 #, php-format
 msgid "The \"%s\" trigger"
 msgstr ""
@@ -131,7 +132,7 @@ msgstr ""
 #. translators: %s: trigger slug
 #: includes/abilities/class-catalog-abilities.php:240
 #: includes/abilities/class-notification-abilities.php:164
-#: includes/class-notifications.php:367
+#: includes/class-notifications.php:395
 #, php-format
 msgid "Unknown trigger \"%s\"."
 msgstr ""
@@ -180,11 +181,11 @@ msgstr ""
 
 #: includes/abilities/class-catalog-abilities.php:773
 #: includes/integrations/class-loader.php:162
+#: dist/index.js:1
 msgid "Facebook"
 msgstr ""
 
 #: includes/abilities/class-catalog-abilities.php:774
-#: includes/integrations/class-loader.php:167
 msgid "X"
 msgstr ""
 
@@ -195,21 +196,25 @@ msgstr ""
 
 #: includes/abilities/class-catalog-abilities.php:776
 #: includes/integrations/class-loader.php:177
+#: dist/index.js:1
 msgid "Slack"
 msgstr ""
 
 #: includes/abilities/class-catalog-abilities.php:777
 #: includes/integrations/class-loader.php:182
+#: dist/index.js:1
 msgid "Zapier"
 msgstr ""
 
 #: includes/abilities/class-catalog-abilities.php:778
 #: includes/integrations/class-loader.php:187
+#: dist/index.js:1
 msgid "Make"
 msgstr ""
 
 #: includes/abilities/class-catalog-abilities.php:779
 #: includes/integrations/class-loader.php:192
+#: dist/index.js:1
 msgid "WhatsApp"
 msgstr ""
 
@@ -283,7 +288,7 @@ msgid "Get send stats"
 msgstr ""
 
 #: includes/abilities/class-delivery-abilities.php:317
-msgid "Counts Notification Master's sends over the last N days (1 to 30, default 7) without returning a single log row: overall total, success and failed counts, a daily series with exactly one entry per requested day (days with no sends are present with zeros), and the same split per channel in by_integration. Use it to spot a channel that started failing or a day with no deliveries. Dates use the site timezone because the log rows were written with current_time(); the from/to values show the exact window counted. Runs two grouped queries regardless of log size. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[days]=14."
+msgid "Counts Notification Master's sends over the last N days (1 to 30, default 7) without returning a single log row: overall total, success and failed counts, a daily series with exactly one entry per requested day (days with no sends are present with zeros), and the same split per channel in by_integration. Use it to spot a channel that started failing or a day with no deliveries. Dates use the site timezone because the log rows were written with current_time(); the from/to values show the exact window counted. Test sends (made with Send a test in the editor) are not counted, matching the admin Overview. Runs two grouped queries regardless of log size. Because this ability is read-only its run endpoint is a GET and the input is read from the query string, so bracket-encode it: ?input[days]=14."
 msgstr ""
 
 #: includes/abilities/class-delivery-abilities.php:326
@@ -610,10 +615,16 @@ msgstr ""
 msgid "Media %s"
 msgstr ""
 
-#. translators: %s: Media name
-#: includes/abstracts/class-media-trigger.php:78
-#, php-format
-msgid "Triggered when %s media."
+#: includes/abstracts/class-media-trigger.php:79
+msgid "This trigger fires when a file is uploaded to the media library."
+msgstr ""
+
+#: includes/abstracts/class-media-trigger.php:81
+msgid "This trigger fires when a media file is edited."
+msgstr ""
+
+#: includes/abstracts/class-media-trigger.php:83
+msgid "This trigger fires when a media file is deleted."
 msgstr ""
 
 #. translators: %s: Plugin name
@@ -634,41 +645,54 @@ msgstr ""
 msgid "User %s"
 msgstr ""
 
-#: includes/admin/class-admin.php:182
-#: includes/admin/class-admin.php:183
-#: dist/index.js:62
-msgid "Home"
+#: includes/admin/class-admin.php:120
+msgid "This SVG file could not be cleaned safely. Export it again as a plain SVG and try again."
 msgstr ""
 
-#: includes/admin/class-admin.php:191
-#: includes/admin/class-admin.php:192
-#: dist/index.js:62
-#: dist/index.js:66
+#: includes/admin/class-admin.php:242
+#: dist/index.js:1
+#: dist/index.js:203
+#: dist/index.js:436
+msgid "Overview"
+msgstr ""
+
+#: includes/admin/class-admin.php:243
+#: dist/index.js:1
+#: dist/index.js:275
+#: dist/index.js:356
+#: dist/index.js:436
 msgid "Notifications"
 msgstr ""
 
-#: includes/admin/class-admin.php:200
-#: includes/admin/class-admin.php:201
-#: dist/index.js:66
+#: includes/admin/class-admin.php:244
+#: dist/index.js:1
+#: dist/index.js:350
+#: dist/index.js:394
+#: dist/index.js:406
+#: dist/index.js:436
+msgid "Log"
+msgstr ""
+
+#: includes/admin/class-admin.php:245
+#: dist/index.js:1
+#: dist/index.js:281
+#: dist/index.js:433
+#: dist/index.js:436
+msgid "Web Push"
+msgstr ""
+
+#: includes/admin/class-admin.php:246
+#: dist/index.js:1
+#: dist/index.js:436
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/class-admin.php:209
-#: includes/admin/class-admin.php:210
-#: dist/index.js:66
-msgid "Subscriptions"
+#: includes/admin/class-pro-notice.php:88
+msgid "Update Notification Master Pro to 2.0 for the new design."
 msgstr ""
 
-#: includes/admin/class-admin.php:218
-#: includes/admin/class-admin.php:219
-#: dist/index.js:66
-msgid "Notification Log"
-msgstr ""
-
-#: includes/admin/class-admin.php:227
-#: includes/admin/class-admin.php:228
-#: dist/index.js:66
-msgid "Debug Log"
+#: includes/admin/class-pro-notice.php:89
+msgid "Go to Plugins"
 msgstr ""
 
 #: includes/admin/class-review-notice.php:110
@@ -717,18 +741,14 @@ msgid "Add New"
 msgstr ""
 
 #: includes/class-notifications.php:79
-#: dist/index.js:62
-#: dist/index.js:66
 msgid "Add New Notification"
 msgstr ""
 
 #: includes/class-notifications.php:80
-#: dist/index.js:66
 msgid "New Notification"
 msgstr ""
 
 #: includes/class-notifications.php:81
-#: dist/index.js:66
 msgid "Edit Notification"
 msgstr ""
 
@@ -808,33 +828,33 @@ msgstr ""
 msgid "Unknown integration \"%1$s\". Registered integrations: %2$s."
 msgstr ""
 
-#: includes/class-notifications.php:329
+#: includes/class-notifications.php:357
 msgid "trigger must be a string."
 msgstr ""
 
-#: includes/class-notifications.php:342
+#: includes/class-notifications.php:370
 msgid "trigger cannot be removed from a saved notification. Pick another trigger instead."
 msgstr ""
 
-#: includes/class-notifications.php:401
+#: includes/class-notifications.php:429
 msgid "Sorry, you are not allowed to do that."
 msgstr ""
 
-#: includes/class-plugin.php:252
+#: includes/class-plugin.php:255
 msgid "Running cleanup task for failed subscriptions..."
 msgstr ""
 
-#: includes/class-plugin.php:260
+#: includes/class-plugin.php:263
 msgid "Auto-delete is disabled. Skipping cleanup."
 msgstr ""
 
 #. translators: %d: number of deleted subscriptions
-#: includes/class-plugin.php:273
+#: includes/class-plugin.php:276
 #, php-format
 msgid "Cleaned up %d old failed subscriptions."
 msgstr ""
 
-#: includes/class-plugin.php:280
+#: includes/class-plugin.php:283
 msgid "No old failed subscriptions found to clean up."
 msgstr ""
 
@@ -851,13 +871,12 @@ msgstr ""
 #: includes/class-templates.php:264
 #: includes/merge-tags/plugin/class-plugin.php:68
 #: includes/merge-tags/theme/traits/class-theme.php:35
-#: dist/index.js:1
 msgid "Author"
 msgstr ""
 
 #: includes/class-templates.php:175
-#: dist/index.js:62
-#: dist/index.js:66
+#: dist/index.js:394
+#: dist/index.js:400
 msgid "Date"
 msgstr ""
 
@@ -866,15 +885,15 @@ msgstr ""
 #: includes/merge-tags/comment-type/class-comment.php:63
 #: includes/merge-tags/comment-type/class-parent-comment.php:64
 #: includes/merge-tags/post-type/class-post.php:102
-#: dist/index.js:62
-#: dist/index.js:66
+#: dist/index.js:272
+#: dist/index.js:384
+#: dist/index.js:394
 msgid "Status"
 msgstr ""
 
 #: includes/class-templates.php:178
 #: includes/class-templates.php:245
-#: dist/index.js:62
-#: dist/index.js:66
+#: dist/index.js:400
 msgid "View"
 msgstr ""
 
@@ -883,7 +902,6 @@ msgstr ""
 #: includes/class-templates.php:305
 #: includes/class-utils.php:214
 #: includes/merge-tags/user/class-user.php:47
-#: dist/index.js:1
 msgid "User"
 msgstr ""
 
@@ -900,6 +918,7 @@ msgstr ""
 #: includes/merge-tags/post-type/class-post-last-editor.php:69
 #: includes/merge-tags/post-type/traits/class-post-user.php:43
 #: includes/merge-tags/user/class-user.php:81
+#: dist/index.js:1
 msgid "Email"
 msgstr ""
 
@@ -913,7 +932,6 @@ msgstr ""
 
 #: includes/class-templates.php:198
 #: includes/merge-tags/user/class-user.php:105
-#: dist/index.js:1
 msgid "Role"
 msgstr ""
 
@@ -983,13 +1001,12 @@ msgstr ""
 #: includes/class-templates.php:285
 #: includes/merge-tags/comment-type/class-comment.php:68
 #: includes/merge-tags/comment-type/class-parent-comment.php:69
-#: dist/index.js:1
-#: dist/index.js:62
+#: dist/index.js:394
+#: dist/index.js:400
 msgid "Type"
 msgstr ""
 
 #: includes/class-templates.php:286
-#: dist/index.js:38
 msgid "Size"
 msgstr ""
 
@@ -999,7 +1016,7 @@ msgstr ""
 
 #: includes/class-templates.php:293
 #: includes/class-utils.php:235
-#: dist/index.js:1
+#: dist/index.js:436
 msgid "Privacy"
 msgstr ""
 
@@ -1015,6 +1032,7 @@ msgstr ""
 
 #: includes/class-templates.php:314
 #: includes/class-utils.php:221
+#: dist/index.js:424
 msgid "Theme"
 msgstr ""
 
@@ -1065,7 +1083,7 @@ msgid "Trackback"
 msgstr ""
 
 #. translators: %1$s: endpoint, %2$d: failure count
-#: includes/db/models/class-subscription-model.php:514
+#: includes/db/models/class-subscription-model.php:534
 #, php-format
 msgid "Auto-deleted subscription %1$s after %2$d failed attempts."
 msgstr ""
@@ -1079,7 +1097,7 @@ msgstr ""
 
 #: includes/integrations/class-discord-integration.php:120
 #: includes/integrations/class-discord-integration.php:136
-#: includes/integrations/class-webhook-integration.php:142
+#: includes/integrations/class-webhook-integration.php:148
 msgid "Error sending request."
 msgstr ""
 
@@ -1104,20 +1122,20 @@ msgid "Body is required."
 msgstr ""
 
 #: includes/integrations/class-email-integration.php:125
-#: includes/integrations/class-email-integration.php:238
+#: includes/integrations/class-email-integration.php:240
 msgid "Email sent successfully."
 msgstr ""
 
 #: includes/integrations/class-email-integration.php:131
-#: includes/integrations/class-email-integration.php:225
+#: includes/integrations/class-email-integration.php:227
 msgid "Failed to send email."
 msgstr ""
 
-#: includes/integrations/class-email-integration.php:286
+#: includes/integrations/class-email-integration.php:296
 msgid "Email skipped: empty message."
 msgstr ""
 
-#: includes/integrations/class-email-integration.php:286
+#: includes/integrations/class-email-integration.php:296
 msgid "Email skipped: empty subject."
 msgstr ""
 
@@ -1217,8 +1235,13 @@ msgstr ""
 msgid "Send notifications to Facebook."
 msgstr ""
 
+#: includes/integrations/class-loader.php:167
+#: dist/index.js:1
+msgid "X (Twitter)"
+msgstr ""
+
 #: includes/integrations/class-loader.php:168
-msgid "Send notifications to TwitterX."
+msgid "Send notifications to X (Twitter)."
 msgstr ""
 
 #: includes/integrations/class-loader.php:173
@@ -1245,8 +1268,15 @@ msgstr ""
 msgid "Webhook URL is empty."
 msgstr ""
 
-#: includes/integrations/class-webhook-integration.php:156
-#: includes/integrations/class-webpush-integration.php:320
+#. translators: %d: HTTP status code
+#: includes/integrations/class-webhook-integration.php:147
+#: includes/testing/class-test-sender.php:169
+#, php-format
+msgid "The server answered with HTTP %d."
+msgstr ""
+
+#: includes/integrations/class-webhook-integration.php:162
+#: includes/integrations/class-webpush-integration.php:334
 msgid "Notification sent successfully."
 msgstr ""
 
@@ -1258,14 +1288,22 @@ msgstr ""
 msgid "Invalid attributes"
 msgstr ""
 
-#: includes/integrations/class-webpush-integration.php:275
+#: includes/integrations/class-webpush-integration.php:289
 msgid "Skipped: the stored subscription keys are not valid."
 msgstr ""
 
 #. translators: %s: error message from the push library
-#: includes/integrations/class-webpush-integration.php:346
+#: includes/integrations/class-webpush-integration.php:360
 #, php-format
 msgid "Push batch stopped early: %s"
+msgstr ""
+
+#: includes/integrations/class-webpush-integration.php:411
+msgid "Web Push is not set up yet. Generate the keys in Web Push first."
+msgstr ""
+
+#: includes/integrations/class-webpush-integration.php:416
+msgid "You have no push subscription yet. Open your site in this browser, click the subscribe button, then send the test again."
 msgstr ""
 
 #. translators: %s: Comment type name
@@ -1357,9 +1395,9 @@ msgstr ""
 #: includes/merge-tags/post-type/class-post-last-editor.php:54
 #: includes/merge-tags/post-type/class-post.php:52
 #: includes/merge-tags/post-type/traits/class-post-user.php:28
-#: dist/index.js:20
-#: dist/index.js:38
-#: dist/index.js:62
+#: dist/index.js:400
+#: dist/index.js:412
+#: dist/index.js:424
 msgid "ID"
 msgstr ""
 
@@ -1372,7 +1410,6 @@ msgstr ""
 #: includes/merge-tags/comment-type/class-comment.php:58
 #: includes/merge-tags/comment-type/class-parent-comment.php:59
 #: includes/merge-tags/post-type/class-post.php:62
-#: dist/index.js:1
 msgid "Content"
 msgstr ""
 
@@ -1411,7 +1448,8 @@ msgstr ""
 
 #: includes/merge-tags/comment-type/class-comment.php:106
 #: includes/merge-tags/comment-type/class-parent-comment.php:106
-#: dist/index.js:66
+#: dist/index.js:1
+#: dist/index.js:384
 msgid "Pending"
 msgstr ""
 
@@ -1716,9 +1754,7 @@ msgstr ""
 #: includes/merge-tags/plugin/class-plugin.php:60
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:83
 #: includes/merge-tags/theme/traits/class-theme.php:27
-#: dist/index.js:1
-#: dist/index.js:62
-#: dist/index.js:66
+#: dist/index.js:272
 msgid "Name"
 msgstr ""
 
@@ -1746,7 +1782,7 @@ msgstr ""
 #: includes/merge-tags/plugin/class-plugin.php:76
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:68
 #: includes/merge-tags/theme/traits/class-theme.php:43
-#: dist/index.js:1
+#: dist/index.js:59
 msgid "Description"
 msgstr ""
 
@@ -1964,9 +2000,9 @@ msgid "The ID of the %s."
 msgstr ""
 
 #: includes/merge-tags/post-type/class-post.php:57
-#: dist/index.js:1
-#: dist/index.js:11
-#: dist/index.js:62
+#: dist/index.js:59
+#: dist/index.js:71
+#: dist/index.js:436
 msgid "Title"
 msgstr ""
 
@@ -2023,7 +2059,7 @@ msgid "The thumbnail URL of the %s."
 msgstr ""
 
 #: includes/merge-tags/post-type/class-post.php:87
-#: dist/index.js:1
+#: dist/index.js:59
 msgid "Format"
 msgstr ""
 
@@ -2212,7 +2248,8 @@ msgid "The description of the %s term."
 msgstr ""
 
 #: includes/merge-tags/taxonomy-type/class-taxonomy.php:73
-#: dist/index.js:1
+#: dist/index.js:59
+#: dist/index.js:71
 msgid "URL"
 msgstr ""
 
@@ -2357,14 +2394,14 @@ msgid "The role of the user."
 msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-logs-controller.php:51
-#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:51
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:50
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:55
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:59
 msgid "Current page."
 msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-logs-controller.php:56
-#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:56
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:55
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:60
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:64
 msgid "Number of items per page."
 msgstr ""
 
@@ -2373,7 +2410,7 @@ msgid "Log type."
 msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-logs-controller.php:73
-#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:73
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:77
 msgid "Log IDs."
 msgstr ""
 
@@ -2397,8 +2434,67 @@ msgstr ""
 msgid "Imported notification"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:61
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:65
 msgid "Log status."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:96
+#: includes/rest-api/controllers/v1/class-rest-overview-controller.php:53
+#: includes/rest-api/controllers/v1/class-rest-overview-controller.php:115
+msgid "Number of days: 7, 30 or 90."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:116
+msgid "Log ID."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:136
+msgid "Integration slug."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:141
+msgid "Search text."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:146
+msgid "First day (Y-m-d, site time)."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:151
+msgid "Last day (Y-m-d, site time)."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:156
+msgid "Notification ID."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:161
+msgid "Notification name."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:166
+msgid "Leave out \"Send a test\" rows."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:189
+msgid "Use a date in Y-m-d format."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:206
+#: includes/rest-api/controllers/v1/class-rest-overview-controller.php:227
+msgid "Days must be 7, 30 or 90."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-logs-controller.php:293
+msgid "Log entry not found."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-notification-restore-controller.php:72
+msgid "IDs of trashed notifications to restore."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-overview-controller.php:94
+msgid "Notification IDs: comma-separated or an array (max 100)."
 msgstr ""
 
 #: includes/rest-api/controllers/v1/class-rest-scheduled-controller.php:141
@@ -2409,176 +2505,305 @@ msgstr ""
 msgid "Could not dispatch the scheduled action."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:115
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:196
 msgid "Enable background processing."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:120
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:201
 msgid "Post status change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:124
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:205
 msgid "Post types."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:131
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:212
 msgid "Taxonomy term change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:135
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:216
 msgid "Taxonomies."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:142
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:223
 msgid "Comment change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:146
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:227
 msgid "Comment types."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:153
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:234
 msgid "User change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:157
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:238
 msgid "Theme change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:161
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:242
 msgid "Plugin change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:165
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:246
 msgid "Media change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:169
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:250
 msgid "Privacy trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:173
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:254
 msgid "WooCommerce change trigger."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:177
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:258
 msgid "Delete logs every."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:181
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:262
 msgid "Notifications delete logs every."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:185
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:266
 msgid "Web Push Public Key."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:189
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:270
 msgid "Web Push Private Key."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:193
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:274
 msgid "Web Push Action Type."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:197
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:278
 msgid "Enable automatic deletion of failed subscriptions."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:201
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:282
 msgid "Number of consecutive failures before auto-deleting subscription."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:207
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:288
 msgid "Auto delete subscription after failed attempts."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:231
-#: includes/webpush/class-loader.php:368
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:292
+msgid "Subscribe button font size in px; empty uses the theme size."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:296
+msgid "Subscribe button opacity when subscribed (0 to 1)."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:300
+msgid "Floating button corner, one for all devices or one per device."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:304
+msgid "Floating button opacity when subscribed (0 to 1)."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:328
+#: includes/webpush/class-loader.php:403
 msgid "Subscribe to Notifications!"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:239
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:246
-#: includes/webpush/class-loader.php:376
-#: includes/webpush/class-loader.php:413
-#: includes/webpush/class-loader.php:812
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:336
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:346
+#: includes/webpush/class-loader.php:411
+#: includes/webpush/class-loader.php:451
+#: includes/webpush/class-loader.php:913
 msgid "Unsubscribe!"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:245
-#: includes/webpush/class-loader.php:412
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:345
+#: includes/webpush/class-loader.php:450
 msgid "Subscribe!"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:280
-#: includes/webpush/class-loader.php:110
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:380
+#: includes/webpush/class-loader.php:120
 msgid "Welcome!"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:281
-#: includes/webpush/class-loader.php:111
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:381
+#: includes/webpush/class-loader.php:121
 msgid "Thanks for subscribing to our notifications!"
 msgstr ""
 
 #. translators: %s: setting key
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:343
-#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:398
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:443
+#: includes/rest-api/controllers/v1/class-rest-settings-controller.php:486
 #, php-format
 msgid "The \"%s\" setting"
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:60
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:111
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:69
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:126
 msgid "Status."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:72
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:159
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:179
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:81
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:174
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:194
 msgid "Endpoint."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:77
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:86
 msgid "Auth."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:82
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:91
 msgid "P256dh."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:94
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:106
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:103
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:121
 msgid "Subscription IDs."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:125
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:108
+msgid "Set to true to delete every subscription when no IDs are sent."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:140
 msgid "Subscription ID."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:267
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:283
 msgid "The push subscription is incomplete or malformed."
 msgstr ""
 
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:388
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:424
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:457
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:491
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:377
+msgid "No subscriptions were deleted. Send the IDs to delete, or set \"all\" to true to delete every subscription."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:414
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:454
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:487
 #: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:525
-#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:562
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:559
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:596
 msgid "Invalid data."
 msgstr ""
 
-#. translators: %s: Comment type name
-#: includes/triggers/comment/class-comment-added.php:60
-#, php-format
-msgid "When a %s - comment is added."
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:418
+#: includes/rest-api/controllers/v1/class-rest-subscriptions-controller.php:491
+msgid "Status must be subscribed or unsubscribed."
 msgstr ""
 
-#. translators: %s: Comment type name
-#: includes/triggers/comment/class-comment-trashed.php:60
+#: includes/rest-api/controllers/v1/class-rest-test-controller.php:68
+msgid "Integration slug of the connection."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-test-controller.php:73
+msgid "The connection settings to send with."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-test-controller.php:78
+msgid "Trigger slug used for sample merge-tag values."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-test-controller.php:83
+msgid "Saved notification ID."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-test-controller.php:87
+msgid "Notification name for the log."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-test-controller.php:91
+msgid "Email address to send the test to (Email only)."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-test-controller.php:154
+msgid "Too many tests in a row. Wait a minute, then try again."
+msgstr ""
+
+#: includes/rest-api/controllers/v1/class-rest-webpush-controller.php:61
+msgid "Unsaved button and bell settings."
+msgstr ""
+
+#: includes/testing/class-test-sender.php:46
+msgid "This connection type is not available."
+msgstr ""
+
+#: includes/testing/class-test-sender.php:52
+msgid "Choose a trigger before sending a test."
+msgstr ""
+
+#: includes/testing/class-test-sender.php:56
+msgid "Enter a valid email address."
+msgstr ""
+
+#: includes/testing/class-test-sender.php:74
+#: dist/index.js:182
+#: dist/index.js:362
+#: dist/index.js:394
+msgid "Test"
+msgstr ""
+
+#: includes/testing/class-test-sender.php:103
+msgid "Some required fields are empty or not valid. Fill them in, then send the test again."
+msgstr ""
+
+#: includes/testing/class-test-sender.php:145
+msgid "The test stopped with an error."
+msgstr ""
+
+#: includes/testing/class-test-sender.php:149
+msgid "Nothing was sent. The connection did not report a result; check the Debug log."
+msgstr ""
+
+#: includes/testing/class-test-sender.php:176
+#: dist/index.js:341
+msgid "Test sent."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/comment/class-comment-added.php:60
 #, php-format
-msgid "When a %s - comment is trashed."
+msgid "This trigger fires when any %s is added."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/comment/class-comment-approved.php:60
+#, php-format
+msgid "This trigger fires when any %s is approved."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/comment/class-comment-published.php:60
+#: includes/triggers/post/class-post-published.php:68
+#, php-format
+msgid "This trigger fires when any %s is published."
+msgstr ""
+
+#. translators: %s: comment type label, e.g. comment.
+#: includes/triggers/comment/class-comment-replied.php:69
+#, php-format
+msgid "This trigger fires when someone replies to any %s."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/comment/class-comment-spammed.php:60
+#, php-format
+msgid "This trigger fires when any %s is marked as spam."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/comment/class-comment-trashed.php:60
+#: includes/triggers/post/class-post-trashed.php:68
+#, php-format
+msgid "This trigger fires when any %s is moved to the trash."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/comment/class-comment-unapproved.php:60
+#, php-format
+msgid "This trigger fires when any %s is unapproved."
 msgstr ""
 
 #: includes/triggers/plugin/class-plugin-activated.php:70
@@ -2605,56 +2830,58 @@ msgstr ""
 msgid "This trigger fires when a plugin is updated."
 msgstr ""
 
-#. translators: %s: Trigger name
-#: includes/triggers/post/class-post-published-privately.php:67
-#, php-format
-msgid "When a %s is published privately."
-msgstr ""
-
-#. translators: %s: Trigger name
-#: includes/triggers/post/class-post-published.php:68
-#, php-format
-msgid "This trigger will send a notification when a %s is published."
-msgstr ""
-
-#. translators: %s: Trigger name
-#: includes/triggers/post/class-post-scheduled.php:67
-#, php-format
-msgid "When a %s is scheduled."
-msgstr ""
-
-#. translators: %s: Trigger name
-#: includes/triggers/post/class-post-sent-to-review.php:67
-#, php-format
-msgid "When a %s is sent to review."
-msgstr ""
-
-#. translators: %s: Trigger name
-#: includes/triggers/post/class-post-trashed.php:68
-#, php-format
-msgid "When a %s is trashed."
-msgstr ""
-
-#. translators: %s: Taxonomy singular name
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/post/class-post-added.php:67
 #: includes/triggers/taxonomy/class-taxonomy-created.php:67
 #, php-format
-msgid "This trigger will be fired when a new %s is created."
+msgid "This trigger fires when any %s is created."
 msgstr ""
 
-#. translators: %s: Taxonomy singular name
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/post/class-post-approved.php:67
+#, php-format
+msgid "This trigger fires when any pending %s is approved and published."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/post/class-post-drafted.php:68
+#, php-format
+msgid "This trigger fires when any %s is saved as a draft."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/post/class-post-published-privately.php:67
+#, php-format
+msgid "This trigger fires when any %s is published privately."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/post/class-post-scheduled.php:67
+#, php-format
+msgid "This trigger fires when any %s is scheduled."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/post/class-post-sent-to-review.php:67
+#, php-format
+msgid "This trigger fires when any %s is sent for review."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
+#: includes/triggers/post/class-post-updated.php:67
+#: includes/triggers/taxonomy/class-taxonomy-updated.php:67
+#, php-format
+msgid "This trigger fires when any %s is updated."
+msgstr ""
+
+#. translators: %s: content type label, e.g. post, page, category, comment.
 #: includes/triggers/taxonomy/class-taxonomy-deleted.php:67
 #, php-format
-msgid "When a %s is deleted."
+msgid "This trigger fires when any %s is deleted."
 msgstr ""
 
 #: includes/triggers/taxonomy/class-taxonomy-deleted.php:91
 msgid "N/A"
-msgstr ""
-
-#. translators: %s: Taxonomy singular name
-#: includes/triggers/taxonomy/class-taxonomy-updated.php:67
-#, php-format
-msgid "When a %s is updated."
 msgstr ""
 
 #: includes/triggers/theme/class-theme-installed.php:56
@@ -2691,1678 +2918,4165 @@ msgstr ""
 msgid "All users with the role %1$s. (%2$d)"
 msgstr ""
 
-#: includes/webpush/class-loader.php:100
+#: includes/webpush/class-health.php:71
+msgid "Browsers only allow push on secure sites. This site uses HTTPS."
+msgstr ""
+
+#: includes/webpush/class-health.php:73
+msgid "This site runs on localhost, where browsers allow push without HTTPS. A live site needs HTTPS."
+msgstr ""
+
+#: includes/webpush/class-health.php:75
+msgid "Browsers only allow push on secure sites. Switch your site address to https:// to use Web Push."
+msgstr ""
+
+#: includes/webpush/class-health.php:78
+msgid "HTTPS"
+msgstr ""
+
+#: includes/webpush/class-health.php:91
+msgid "VAPID keys"
+msgstr ""
+
+#: includes/webpush/class-health.php:94
+msgid "The keys that sign your push messages are missing. Generate them below."
+msgstr ""
+
+#: includes/webpush/class-health.php:98
+msgid "The saved keys are not in the right format. Generate new keys below."
+msgstr ""
+
+#: includes/webpush/class-health.php:101
+msgid "The keys that sign your push messages are saved."
+msgstr ""
+
+#: includes/webpush/class-health.php:112
+msgid "Service worker"
+msgstr ""
+
+#. translators: 1: error message, 2: service worker URL
+#: includes/webpush/class-health.php:128
+#, php-format
+msgid "Your server could not load the service worker (%1$s). Open %2$s in your browser to check it."
+msgstr ""
+
+#. translators: 1: HTTP status code, 2: service worker URL
+#: includes/webpush/class-health.php:136
+#, php-format
+msgid "The service worker returned HTTP %1$d. Check that %2$s opens in your browser."
+msgstr ""
+
+#. translators: %s: content type
+#: includes/webpush/class-health.php:141
+#, php-format
+msgid "The service worker is served as \"%s\". Browsers need a JavaScript content type."
+msgstr ""
+
+#: includes/webpush/class-health.php:144
+msgid "The browser can load it from your site."
+msgstr ""
+
+#: includes/webpush/class-health.php:155
+msgid "Server support"
+msgstr ""
+
+#. translators: %s: comma-separated PHP extension names
+#: includes/webpush/class-health.php:167
+#, php-format
+msgid "PHP is missing these extensions: %s. Ask your host to enable them."
+msgstr ""
+
+#: includes/webpush/class-health.php:172
+msgid "PHP cannot create the keys that encrypt push messages. Ask your host to enable the GMP extension or fix the OpenSSL setup."
+msgstr ""
+
+#: includes/webpush/class-health.php:175
+msgid "PHP can encrypt and send push messages."
+msgstr ""
+
+#. translators: %s: number of subscribers
+#: includes/webpush/class-health.php:212
+#, php-format
+msgid "%s active subscriber."
+msgid_plural "%s active subscribers."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/webpush/class-health.php:213
+msgid "No one has subscribed yet. Add the subscribe button or the floating bell to your site."
+msgstr ""
+
+#: includes/webpush/class-health.php:215
+#: dist/index.js:433
+msgid "Subscribers"
+msgstr ""
+
+#: includes/webpush/class-loader.php:110
 msgid "Welcome notification skipped: VAPID keys are not configured."
 msgstr ""
 
-#: includes/webpush/class-loader.php:171
+#: includes/webpush/class-loader.php:181
 msgid "Welcome notification sent successfully."
 msgstr ""
 
-#: includes/webpush/class-loader.php:765
+#: includes/webpush/class-loader.php:866
 msgid "Invalid response."
 msgstr ""
 
-#: includes/webpush/class-loader.php:813
+#: includes/webpush/class-loader.php:914
 msgid "Your browser does not support push notifications, if you are using iPhone/iPad, please add this website to your home screen to receive notifications."
 msgstr ""
 
-#: includes/webpush/class-loader.php:814
+#: includes/webpush/class-loader.php:915
 msgid "You have denied the permission to send notifications. Please allow it to subscribe to push notifications."
 msgstr ""
 
 #: dist/index.js:1
-msgid "Select a user"
+#: dist/index.js:77
+#: dist/index.js:83
+#: dist/index.js:89
+#: dist/index.js:104
+#: dist/index.js:203
+#: dist/index.js:350
+#: dist/index.js:359
+#: dist/index.js:384
+msgid "Sent"
 msgstr ""
 
 #: dist/index.js:1
-msgid "No users found"
+#: dist/index.js:77
+#: dist/index.js:83
+#: dist/index.js:89
+#: dist/index.js:104
+#: dist/index.js:203
+#: dist/index.js:350
+#: dist/index.js:359
+#: dist/index.js:384
+msgid "Failed"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Select Type"
+msgid "Error"
 msgstr ""
 
 #: dist/index.js:1
-#: dist/index.js:38
-msgid "Custom"
+msgid "Scheduled"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Email Settings"
+msgid "Info"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Read the documentation to learn more about how to set up email notifications."
+msgid "Warning"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Find out more"
+msgid "OK"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Email Addresses"
+#: dist/index.js:221
+#: dist/index.js:332
+msgid "Active"
 msgstr ""
 
 #: dist/index.js:1
-msgid "You can use merge tags. For example, you can use {{general.admin_email}} to send the email to the admin email address."
+#: dist/index.js:221
+#: dist/index.js:332
+msgid "Paused"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Select Role"
+msgid "Draft"
 msgstr ""
 
 #: dist/index.js:1
-msgid "example@domain.com or {{general.admin_email}}"
+msgid "PRO"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Add Email"
+msgid "Loading"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Exclude Email Addresses"
+msgid "Webhook"
 msgstr ""
 
 #: dist/index.js:1
-msgid "You can use merge tags. For example, you can use {{general.admin_email}} to exclude the admin email address."
+msgid "Discord"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Subject"
+msgid "Instagram"
 msgstr ""
 
 #: dist/index.js:1
-#: dist/index.js:11
-msgid "Message"
+msgid "Twilio SMS"
 msgstr ""
 
 #: dist/index.js:1
-#: dist/index.js:62
-msgid "Merge Tags"
+msgid "(optional)"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Webhook Settings"
+msgid "Pick a colour"
 msgstr ""
 
 #: dist/index.js:1
-msgid "Read the documentation to learn more about how to setup webhooks."
+msgid "Opacity"
 msgstr ""
 
-#: dist/index.js:1
-msgid "Method"
+#. translators: %s: item name.
+#: dist/index.js:4
+#, js-format
+msgid "Remove %s"
 msgstr ""
 
-#: dist/index.js:1
-msgid "Headers"
+#. translators: %s: typed text.
+#: dist/index.js:7
+#, js-format
+msgid "Add “%s”"
 msgstr ""
 
-#: dist/index.js:1
+#: dist/index.js:7
+msgid "Searching…"
+msgstr ""
+
+#: dist/index.js:7
+msgid "No matches"
+msgstr ""
+
+#: dist/index.js:7
+msgid "Undo (Ctrl+Z)"
+msgstr ""
+
+#: dist/index.js:7
+msgid "Dismiss"
+msgstr ""
+
+#: dist/index.js:7
+msgid "Messages"
+msgstr ""
+
+#. translators: %s: what is copied, e.g. "public key".
+#: dist/index.js:10
+#, js-format
+msgid "Copy %s"
+msgstr ""
+
+#: dist/index.js:10
+#: dist/index.js:359
+#: dist/index.js:397
+msgid "Copy"
+msgstr ""
+
+#: dist/index.js:10
+#: dist/index.js:359
+#: dist/index.js:397
+#: dist/index.js:430
+msgid "Copied"
+msgstr ""
+
+#: dist/index.js:10
+#: dist/index.js:430
+msgid "Could not copy. Select the text and copy it by hand."
+msgstr ""
+
+#: dist/index.js:10
+msgid "Hide"
+msgstr ""
+
+#: dist/index.js:10
+msgid "Show"
+msgstr ""
+
+#: dist/index.js:10
+msgid "Close details"
+msgstr ""
+
+#. translators: %s: row name, e.g. a notification title.
+#: dist/index.js:13
+#, js-format
+msgid "More actions for %s"
+msgstr ""
+
+#: dist/index.js:13
+msgid "Could not load this data"
+msgstr ""
+
+#: dist/index.js:13
+#: dist/index.js:26
+#: dist/index.js:233
+#: dist/index.js:290
+#: dist/index.js:350
+msgid "Try again"
+msgstr ""
+
+#: dist/index.js:13
+#: dist/index.js:29
 msgid "Key"
 msgstr ""
 
-#: dist/index.js:1
-#: dist/index.js:62
+#: dist/index.js:13
+msgid "key"
+msgstr ""
+
+#: dist/index.js:13
+#: dist/index.js:32
+#: dist/index.js:293
 msgid "Value"
 msgstr ""
 
-#: dist/index.js:1
-msgid "Add Header"
+#: dist/index.js:13
+msgid "value"
 msgstr ""
 
-#: dist/index.js:1
-msgid "Body"
+#: dist/index.js:13
+msgid "Remove row"
 msgstr ""
 
-#: dist/index.js:1
-msgid "Add Field"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select Format"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Show Empty Fields"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Discord Settings"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Read the documentation to learn more about how to setup Discord Webhook."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Title Link"
-msgstr ""
-
-#: dist/index.js:1
-msgid "This will be the main content of the message."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Allows you to add dynamic content to the author."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Icon URL"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Fields"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Label"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Inline"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Notification Settings"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Read the documentation to learn more about how to setup webpush notifications."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Send To"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select who to send the notification to"
-msgstr ""
-
-#: dist/index.js:1
-msgid "All Users"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Specific Users"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Note: User should have subscribed to web push notifications to receive the notification."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Add New User"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Merge Tag / ID"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the ID of the user or a merge tag e.g. {{order.customer_id}}"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Please select a user or enter a merge tag."
-msgstr ""
-
-#: dist/index.js:1
-msgid "User is already added."
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:62
-msgid "Add"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Add User"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the title of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the message of the notification"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Icon"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the icon URL of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Image"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the image URL of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter the URL of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Urgency"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select the urgency of the notification"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Very Low"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Low"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Normal"
-msgstr ""
-
-#: dist/index.js:1
-msgid "High"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Access token generated successfully."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Please enter your App ID and App Secret"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Instagram Settings"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Please make sure your WordPress admin URL is SSL secured. Instagram requires SSL for the redirect URL."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Read the documentation to learn more about how to get the access token."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Redirect URL"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Click to copy"
-msgstr ""
-
-#: dist/index.js:1
-msgid "App ID"
-msgstr ""
-
-#: dist/index.js:1
-msgid "App Secret"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Loading..."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Regenerate Access Token"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Generate Access Token"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Caption"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter your post text"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Image URL"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Alt Text"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Enter your post alt text"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Documentation"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Supercharge Your Notifications Today 🚀"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Elevate your experience with Notification Master Pro! Unlock advanced features, seamless integrations, and take your notifications to the next level. Join the pro community now and transform how you communicate 🔥."
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:66
-msgid "Upgrade to Pro"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:62
-msgid "Pro"
-msgstr ""
-
-#: dist/index.js:1
-msgid "WooCommerce"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the WooCommerce product, review, or order changes."
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:38
-msgid "Enable"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:11
-#: dist/index.js:38
-#: dist/index.js:62
-msgid "On"
-msgstr ""
-
-#: dist/index.js:1
-#: dist/index.js:11
-#: dist/index.js:38
-#: dist/index.js:62
-msgid "Off"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Post status change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the post status changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Post types"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select the post types for which you want to send notifications when the post status changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select post types"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Taxonomy term change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the taxonomy term changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Taxonomies"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select the taxonomies for which you want to send notifications when the taxonomy term changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select taxonomies"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Comment change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the comment status changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Comment types"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select the comment types for which you want to send notifications when the comment status changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Select comment types"
-msgstr ""
-
-#: dist/index.js:1
-msgid "Media change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the media changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "User change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the user changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Theme change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the theme changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Plugin change"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, will be able to add notifications when the plugin changes."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Process notifications in the background"
-msgstr ""
-
-#: dist/index.js:1
-msgid "If enabled, notifications will be processed in the background. This will improve the performance of your website."
-msgstr ""
-
-#: dist/index.js:1
-msgid "Delete Notification Logs Older Than: "
-msgstr ""
-
-#. translators: %s: Number of days
-#: dist/index.js:4
-#, js-format
-msgid "All notification logs older than {%s} days will be deleted."
-msgstr ""
-
-#: dist/index.js:4
-msgid "Delete Debug Logs Older Than: "
-msgstr ""
-
-#. translators: %s: Number of days
-#: dist/index.js:7
-#, js-format
-msgid "All debug logs older than {%s} days will be deleted."
-msgstr ""
-
-#: dist/index.js:7
-msgid "Important Setup Instructions:"
-msgstr ""
-
-#: dist/index.js:7
-msgid "Make sure you have allowed notifications in your browser and operating system settings."
-msgstr ""
-
-#: dist/index.js:7
-msgid "Check that you have enabled notifications for this site in your browser."
-msgstr ""
-
-#: dist/index.js:7
-msgid "If your device has \"Do Not Disturb\" mode enabled, please disable it to allow notifications."
-msgstr ""
-
-#: dist/index.js:7
-msgid "If you’re having trouble generating the keys, try temporarily disabling any caching plugins and try again."
-msgstr ""
-
-#. translators: %s is the contact form url
-#: dist/index.js:9
-#, js-format
-msgid "If you face any issues with key generation or receiving notifications, please contact us via our <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Contact Form</a>."
-msgstr ""
-
-#. translators: %s is the documentation url
-#: dist/index.js:11
-#, js-format
-msgid "For detailed instructions, please refer to the <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">documentation</a>."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Web Push Public Key"
-msgstr ""
-
-#: dist/index.js:11
-msgid "This key is used to identify your web push service. use your own key or generate a new one."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Web Push Private Key"
-msgstr ""
-
-#: dist/index.js:11
-msgid "This key is used to authenticate your web push service. use your own key or generate a new one."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Keys generated successfully"
-msgstr ""
-
-#: dist/index.js:11
-#: dist/index.js:66
-msgid "An error occurred"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Generate Keys"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Automatically save the keys after generating."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Welcome Notification"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Enable Welcome Notification"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Auto-Delete Failed Subscriptions"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Automatically remove subscriptions that fail repeatedly to keep your database clean and improve delivery performance."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Enable Auto-Delete"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Failure Threshold"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Number of consecutive failed notification attempts before automatically deleting the subscription. Recommended: 3-5 failures."
-msgstr ""
-
-#: dist/index.js:11
-msgid "Enter number of failures (1-50)"
-msgstr ""
-
-#: dist/index.js:11
-msgid "How it works:"
-msgstr ""
-
-#: dist/index.js:11
-msgid "• When a notification successfully reaches a subscriber, their failure count resets to 0"
-msgstr ""
-
-#: dist/index.js:11
-msgid "• When a notification fails (invalid endpoint, expired subscription, etc.), the failure count increases by 1"
-msgstr ""
-
-#: dist/index.js:11
-msgid "• When the failure count reaches your threshold, the subscription is automatically deleted"
-msgstr ""
-
-#: dist/index.js:11
-msgid "• This helps maintain a clean subscriber list and improves overall delivery rates"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Subscribe Buttons"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Normal Button"
-msgstr ""
-
-#: dist/index.js:11
-msgid "Use this shortcode to display the subscribe button:"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Text"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Unsubscribe Text"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Colors"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Color"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Background Color"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Hover"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Hover Color"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Hover Background Color"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Spacing"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Padding"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Top"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Right"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Bottom"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Left"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Margin"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Border"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Border Radius"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Advanced"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Extra Class"
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Add extra class to the button for custom styling."
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:38
-msgid "Add ID to the button for custom styling."
-msgstr ""
-
-#: dist/index.js:20
-msgid "Floating Button"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Enable floating button to show a subscribe button on the all pages."
-msgstr ""
-
-#: dist/index.js:20
-#: dist/index.js:62
-msgid "OR"
-msgstr ""
-
-#: dist/index.js:20
-msgid "Use this shortcode to display the floating button on a specific page:"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Custom Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Icon Type"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Default"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Custom SVG Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Upload a custom SVG icon for the floating button. The icon will support color customization."
-msgstr ""
-
-#: dist/index.js:38
-msgid "WordPress Media Library is not available"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Select SVG Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Use this icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Please select an SVG file."
-msgstr ""
-
-#: dist/index.js:38
-msgid "Change Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Select Icon"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Custom Icon Preview"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Remove"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Tooltip"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enable tooltip to show a message when user hover on the button. (Hover Effect will be shown in frontend)"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enable Tooltip"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Subscribe Text"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Animation"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Enable Animation"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Animation Color"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Position"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Top Left"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Top Right"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Bottom Left"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Bottom Right"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Top Offset"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Bottom Offset (PX)"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Left Offset (PX)"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Right Offset"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Z-Index"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Icon Color"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Hover Icon Color"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Width"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Height"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Responsive"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Hide on Desktop"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Hide on Tablet"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Hide on Mobile"
-msgstr ""
-
-#: dist/index.js:38
-msgid "Auto Display Web Push Prompt"
-msgstr ""
-
-#: dist/index.js:38
-msgid "If enabled, the web push prompt will be displayed automatically after user click on the page."
-msgstr ""
-
-#: dist/index.js:38
-msgid "Could not load starter templates."
-msgstr ""
-
-#: dist/index.js:38
-msgid "Install a ready-made set of notifications for common events."
-msgstr ""
-
-#: dist/index.js:38
+#: dist/index.js:13
 #: dist/index.js:41
-msgid "Starter Templates"
+msgid "Add row"
 msgstr ""
 
-#: dist/index.js:38
-#: dist/index.js:59
-msgid "Import"
-msgstr ""
-
-#. translators: %d: number of notifications exported.
-#: dist/index.js:41
+#. translators: %s: time of day.
+#: dist/index.js:15
 #, js-format
-msgid "%d notification exported."
-msgid_plural "%d notifications exported."
-msgstr[0] ""
-msgstr[1] ""
-
-#: dist/index.js:41
-msgid "Export failed."
+msgid "Today, %s"
 msgstr ""
 
-#: dist/index.js:41
-msgid "Export"
-msgstr ""
-
-#: dist/index.js:41
-msgid "Select all shown"
-msgstr ""
-
-#. translators: %d: number selected.
-#: dist/index.js:44
+#. translators: %s: time of day.
+#: dist/index.js:17
 #, js-format
-msgid "%d selected"
+msgid "Yesterday, %s"
 msgstr ""
 
-#: dist/index.js:44
-#: dist/index.js:53
-#: dist/index.js:62
+#: dist/index.js:17
+msgid "just now"
+msgstr ""
+
+#: dist/index.js:17
+msgid "Close"
+msgstr ""
+
+#: dist/index.js:17
+#: dist/index.js:236
+#: dist/index.js:245
+#: dist/index.js:387
 msgid "Cancel"
 msgstr ""
 
-#. translators: %d: number of notifications installed.
-#: dist/index.js:47
+#: dist/index.js:17
+msgid "Select…"
+msgstr ""
+
+#. translators: 1: first row number, 2: last row number, 3: total rows.
+#: dist/index.js:20
 #, js-format
-msgid "%d starter notification installed as a draft. Review and activate it from the list."
-msgid_plural "%d starter notifications installed as drafts. Review and activate them from the list."
+msgid "Showing %1$s–%2$s of %3$s"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Pagination"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Previous page"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Next page"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Select all rows on this page"
+msgstr ""
+
+#: dist/index.js:20
+#: dist/index.js:269
+#: dist/index.js:391
+#: dist/index.js:397
+msgid "Select"
+msgstr ""
+
+#: dist/index.js:20
+msgid "Select row"
+msgstr ""
+
+#. translators: %s: row name.
+#. translators: %s: notification name.
+#: dist/index.js:23
+#: dist/index.js:272
+#, js-format
+msgid "Select %s"
+msgstr ""
+
+#. translators: %s: number of selected rows.
+#. translators: %s: number of selected entries.
+#: dist/index.js:26
+#: dist/index.js:374
+#, js-format
+msgid "%s selected"
+msgid_plural "%s selected"
 msgstr[0] ""
 msgstr[1] ""
 
+#: dist/index.js:26
+#: dist/index.js:224
+#: dist/index.js:374
+msgid "Clear selection"
+msgstr ""
+
+#: dist/index.js:26
+#: dist/index.js:275
+#: dist/index.js:387
+#: dist/index.js:394
+msgid "Actions"
+msgstr ""
+
+#: dist/index.js:26
+msgid "Search merge tags"
+msgstr ""
+
+#: dist/index.js:26
+#: dist/index.js:350
+msgid "Merge tags"
+msgstr ""
+
+#: dist/index.js:26
+msgid "Merge tags could not be loaded."
+msgstr ""
+
+#: dist/index.js:26
+msgid "No merge tags match."
+msgstr ""
+
+#: dist/index.js:26
+msgid "These merge tags come with Pro. See what Pro adds"
+msgstr ""
+
+#. translators: %s: plugin name.
+#: dist/index.js:29
+#, js-format
+msgid "Activate the %s plugin to use these merge tags."
+msgstr ""
+
+#: dist/index.js:29
+msgid "Tip: type {{ in a field to open this list."
+msgstr ""
+
+#: dist/index.js:29
+msgid "Choose a trigger to see its merge tags."
+msgstr ""
+
+#: dist/index.js:29
+msgid "Insert a merge tag"
+msgstr ""
+
+#. translators: 1: group label, 2: row number.
+#: dist/index.js:32
+#, js-format
+msgid "%1$s key %2$d"
+msgstr ""
+
+#. translators: 1: group label, 2: row number.
+#: dist/index.js:35
+#, js-format
+msgid "%1$s value %2$d"
+msgstr ""
+
+#. translators: %d: row number.
+#: dist/index.js:38
+#, js-format
+msgid "Move row %d"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Move up"
+msgstr ""
+
+#: dist/index.js:38
+msgid "Move down"
+msgstr ""
+
+#. translators: %d: row number.
+#: dist/index.js:41
+#, js-format
+msgid "Remove row %d"
+msgstr ""
+
+#: dist/index.js:41
+msgid "Choose an image"
+msgstr ""
+
+#: dist/index.js:41
+msgid "Use this image"
+msgstr ""
+
+#: dist/index.js:41
+msgid "Choose"
+msgstr ""
+
+#: dist/index.js:41
+msgid "Insert merge tag"
+msgstr ""
+
+#. translators: %s: user role name.
+#: dist/index.js:44
+#, js-format
+msgid "Role: %s"
+msgstr ""
+
+#: dist/index.js:44
+#: dist/index.js:71
+msgid "Users"
+msgstr ""
+
+#: dist/index.js:44
+msgid "Roles"
+msgstr ""
+
+#. translators: %s: user id.
 #: dist/index.js:47
+#, js-format
+msgid "User #%s"
+msgstr ""
+
+#: dist/index.js:47
+msgid "Type a full email address, a role or a user name"
+msgstr ""
+
+#: dist/index.js:47
+#: dist/index.js:65
+msgid "Add a merge tag as a recipient"
+msgstr ""
+
+#: dist/index.js:47
+msgid "No recipients yet"
+msgstr ""
+
+#. translators: 1: first recipient, 2: number of other recipients.
+#: dist/index.js:50
+#, js-format
+msgid "To %1$s +%2$d"
+msgstr ""
+
+#. translators: %s: recipient.
+#: dist/index.js:53
+#, js-format
+msgid "To %s"
+msgstr ""
+
+#. translators: 1: recipients text, 2: email subject.
 #: dist/index.js:56
-msgid "Import failed."
-msgstr ""
-
-#: dist/index.js:47
-msgid "Please select at least one template."
-msgstr ""
-
-#. translators: %d: number selected.
-#: dist/index.js:50
 #, js-format
-msgid "Install %d"
+msgid "%1$s · Subject: %2$s"
 msgstr ""
 
-#: dist/index.js:50
-msgid "Installed as inactive drafts with Email and Web Push pre-configured. Discord, Webhook and Instagram are added as ready-to-fill connections. Review each one, then switch it on."
+#: dist/index.js:56
+msgid "Email addresses"
 msgstr ""
 
-#. translators: %d: total templates.
-#: dist/index.js:53
+#: dist/index.js:56
+msgid "A role, a user or any email address. Merge tags such as {{general.admin_email}} work too."
+msgstr ""
+
+#: dist/index.js:56
+msgid "Email guide"
+msgstr ""
+
+#: dist/index.js:56
+msgid "Add role, user or email"
+msgstr ""
+
+#: dist/index.js:56
+msgid "Exclude email addresses"
+msgstr ""
+
+#: dist/index.js:56
+msgid "These addresses never get this email, even when a role above includes them."
+msgstr ""
+
+#: dist/index.js:56
+msgid "e.g. no-reply@example.test"
+msgstr ""
+
+#: dist/index.js:56
+msgid "Subject"
+msgstr ""
+
+#: dist/index.js:56
+#: dist/index.js:65
+#: dist/index.js:71
+#: dist/index.js:359
+#: dist/index.js:436
+msgid "Message"
+msgstr ""
+
+#: dist/index.js:56
+msgid "This site does not use HTTPS, so images and videos may not show in the email."
+msgstr ""
+
+#: dist/index.js:56
+msgid "Not set up yet"
+msgstr ""
+
+#. translators: %d: number of headers.
+#: dist/index.js:59
 #, js-format
-msgid "All %d"
+msgid "%d header"
+msgid_plural "%d headers"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:59
+msgid "You can use any URL merge tags."
 msgstr ""
 
-#: dist/index.js:53
+#: dist/index.js:59
+msgid "Webhook guide"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Method"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Select method"
+msgstr ""
+
+#: dist/index.js:59
+msgid "JSON"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Form Data"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Headers"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Add header"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Body"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Add field"
+msgstr ""
+
+#: dist/index.js:59
+msgid "With GET and DELETE these fields are sent in the URL query."
+msgstr ""
+
+#: dist/index.js:59
+msgid "Remove empty fields"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Leave out body fields whose value is empty after merge tags."
+msgstr ""
+
+#: dist/index.js:59
+msgid "Embed (optional)"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Title link"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Author name"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Author link"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Author icon URL"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Fields"
+msgstr ""
+
+#: dist/index.js:59
+msgid "Label"
+msgstr ""
+
+#. translators: %d: field number.
 #: dist/index.js:62
-msgid "Search"
-msgstr ""
-
-#: dist/index.js:53
-msgid "Email — ready to send"
-msgstr ""
-
-#: dist/index.js:53
-msgid "Web Push — ready to send"
-msgstr ""
-
-#: dist/index.js:53
-msgid "+ Discord · Webhook · Instagram"
-msgstr ""
-
-#: dist/index.js:53
-msgid "No templates match your filter."
-msgstr ""
-
-#: dist/index.js:53
-msgid "Import Notifications"
-msgstr ""
-
-#. translators: 1: imported count, 2: skipped count.
-#: dist/index.js:56
 #, js-format
-msgid "%1$d notifications imported, %2$d skipped."
+msgid "Field %d inline"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Inline"
+msgstr ""
+
+#: dist/index.js:62
+msgid "Fields without a label are not sent."
+msgstr ""
+
+#: dist/index.js:62
+msgid "Embed on"
+msgstr ""
+
+#: dist/index.js:62
+msgid "No embed"
+msgstr ""
+
+#. translators: 1: webhook URL (shortened), 2: "Embed on" or "No embed".
+#: dist/index.js:65
+#, js-format
+msgid "%1$s · %2$s"
+msgstr ""
+
+#: dist/index.js:65
+msgid "Webhook URL"
+msgstr ""
+
+#: dist/index.js:65
+msgid "In Discord: Server settings → Integrations → Webhooks."
+msgstr ""
+
+#: dist/index.js:65
+msgid "Discord guide"
+msgstr ""
+
+#: dist/index.js:65
+msgid "The main text of the message."
+msgstr ""
+
+#: dist/index.js:65
+msgid "Add a user, user ID or merge tag"
+msgstr ""
+
+#: dist/index.js:65
+msgid "No users found. Type a user ID or a merge tag."
+msgstr ""
+
+#. translators: %d: number of users.
+#: dist/index.js:68
+#, js-format
+msgid "%d specific user"
+msgid_plural "%d specific users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:68
+msgid "All subscribers"
+msgstr ""
+
+#. translators: 1: who receives it, 2: notification title in quotes.
+#: dist/index.js:71
+#, js-format
+msgid "%1$s · Title %2$s"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Send to"
+msgstr ""
+
+#: dist/index.js:71
+msgid "All users"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Specific users"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Only users who subscribed to push notifications get it. Type a user ID or a merge tag like {{order.customer_id}}."
+msgstr ""
+
+#: dist/index.js:71
+msgid "Opens when someone clicks the notification."
+msgstr ""
+
+#: dist/index.js:71
+msgid "Web Push guide"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Icon, image and urgency"
+msgstr ""
+
+#: dist/index.js:71
+#: dist/index.js:412
+msgid "Icon"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Choose the notification icon"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Image"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Choose the notification image"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Urgency"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Select urgency"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Very Low"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Low"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Normal"
+msgstr ""
+
+#: dist/index.js:71
+msgid "High"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Not connected yet · generate an access token"
+msgstr ""
+
+#: dist/index.js:71
+msgid "Account connected"
+msgstr ""
+
+#. translators: 1: "Account connected", 2: caption in quotes.
+#: dist/index.js:74
+#, js-format
+msgid "%1$s · Caption %2$s"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Access token generated successfully."
+msgstr ""
+
+#: dist/index.js:74
+msgid "The access token could not be generated."
+msgstr ""
+
+#: dist/index.js:74
+msgid "Please enter your App ID and App Secret"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Generate Access Token"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Loading…"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Regenerate Access Token"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Please make sure your WordPress admin URL is SSL secured. Instagram requires SSL for the redirect URL."
+msgstr ""
+
+#: dist/index.js:74
+msgid "App ID"
+msgstr ""
+
+#: dist/index.js:74
+msgid "App Secret"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Redirect URL"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Add this URL to your Meta app, then generate a token."
+msgstr ""
+
+#: dist/index.js:74
+msgid "Instagram guide"
+msgstr ""
+
+#: dist/index.js:74
+msgid "redirect URL"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Access token saved"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Caption"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Image URL"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Alt text"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Generate an access token to write the post caption and image."
+msgstr ""
+
+#: dist/index.js:74
+#: dist/index.js:356
+msgid "New notification"
+msgstr ""
+
+#: dist/index.js:74
+msgid "More connections: Slack, WhatsApp, Twilio SMS, X, Facebook, Make and Zapier"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Conditions, so a connection only sends when your rules match"
+msgstr ""
+
+#: dist/index.js:74
+msgid "WooCommerce and more plugin triggers"
+msgstr ""
+
+#: dist/index.js:74
+msgid "See and remove single Web Push subscriptions"
+msgstr ""
+
+#: dist/index.js:74
+msgid "This is a Pro feature"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Notification Master Pro adds more ways to send and more control over when you send."
+msgstr ""
+
+#: dist/index.js:74
+msgid "Not now"
+msgstr ""
+
+#: dist/index.js:74
+msgid "See Pro plans"
+msgstr ""
+
+#: dist/index.js:74
+msgid "This page could not be shown"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Dismiss this notice"
+msgstr ""
+
+#: dist/index.js:74
+msgid "The notice could not be dismissed. Try again."
+msgstr ""
+
+#: dist/index.js:74
+msgid "Notification Master overview"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Documentation (opens in a new tab)"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Docs"
+msgstr ""
+
+#: dist/index.js:74
+msgid "Skip to content"
+msgstr ""
+
+#. translators: %d: number of days logs are kept.
+#: dist/index.js:77
+#, js-format
+msgid "Logs are kept for %d day"
+msgid_plural "Logs are kept for %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:77
+msgid "Day"
+msgstr ""
+
+#. translators: %s: number sent.
+#: dist/index.js:80
+#, js-format
+msgid "%s sent"
+msgid_plural "%s sent"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number failed.
+#: dist/index.js:83
+#, js-format
+msgid "%s failed"
+msgid_plural "%s failed"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of days, 2: "40 sent", 3: "2 failed".
+#: dist/index.js:86
+#, js-format
+msgid "Last %1$s days: %2$s, %3$s."
+msgstr ""
+
+#. translators: %s: number of days.
+#: dist/index.js:89
+#, js-format
+msgid "Nothing was sent in the last %s days."
+msgstr ""
+
+#: dist/index.js:89
+msgid "chart"
+msgstr ""
+
+#: dist/index.js:89
+msgid "Use the arrow keys to read each day."
+msgstr ""
+
+#. translators: %d: number of days logs are kept.
+#: dist/index.js:92
+#, js-format
+msgid "Logs are kept for %d day. Change this in Settings → Logs."
+msgid_plural "Logs are kept for %d days. Change this in Settings → Logs."
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:92
+msgid "Sent vs failed"
+msgstr ""
+
+#: dist/index.js:92
+msgid "Chart range"
+msgstr ""
+
+#: dist/index.js:92
+msgid "7d"
+msgstr ""
+
+#: dist/index.js:92
+msgid "30d"
+msgstr ""
+
+#: dist/index.js:92
+msgid "90d"
+msgstr ""
+
+#: dist/index.js:92
+msgid "New"
+msgstr ""
+
+#. translators: %s: how many more failures than before.
+#: dist/index.js:95
+#, js-format
+msgid "%s more"
+msgstr ""
+
+#. translators: %s: how many fewer failures than before.
+#: dist/index.js:98
+#, js-format
+msgid "%s fewer"
+msgstr ""
+
+#: dist/index.js:98
+msgid "No change"
+msgstr ""
+
+#. translators: %s: number of days.
+#: dist/index.js:101
+#, js-format
+msgid "in the last %s days"
+msgstr ""
+
+#. translators: %s: number of days.
+#: dist/index.js:104
+#, js-format
+msgid "vs previous %s days"
+msgstr ""
+
+#: dist/index.js:104
+#: dist/index.js:203
+msgid "Active notifications"
+msgstr ""
+
+#: dist/index.js:104
+#: dist/index.js:203
+msgid "Push subscribers"
+msgstr ""
+
+#. translators: %s: connection name, e.g. Discord.
+#: dist/index.js:107
+#, js-format
+msgid "%s didn’t accept this message"
+msgstr ""
+
+#. translators: %s: connection name, e.g. Webhook.
+#: dist/index.js:110
+#, js-format
+msgid "%s could not be reached"
+msgstr ""
+
+#. translators: 1: connection name, 2: technical error text.
+#: dist/index.js:113
+#, js-format
+msgid "%1$s could not finish the request. The error was: “%2$s”"
+msgstr ""
+
+#. translators: %s: message stored by the connection, e.g. "Error sending request."
+#: dist/index.js:116
+#, js-format
+msgid "No technical reason was saved. The connection only reported: “%s”"
+msgstr ""
+
+#: dist/index.js:116
+msgid "No reason was given."
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:119
+#, js-format
+msgid "%s says this webhook URL no longer exists (404). The webhook was deleted, or its channel was removed."
+msgstr ""
+
+#: dist/index.js:119
+msgid "In Discord, open Server settings → Integrations → Webhooks and copy a new URL. Paste it into this connection."
+msgstr ""
+
+#: dist/index.js:119
+msgid "Webhook not found (404)"
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:122
+#, js-format
+msgid "%s answered “not found” (404). The URL is wrong, or the endpoint was removed."
+msgstr ""
+
+#: dist/index.js:122
+msgid "Check the URL in this connection and copy it again from the service."
+msgstr ""
+
+#: dist/index.js:122
+msgid "URL not found (404)"
+msgstr ""
+
+#. translators: 1: connection name, 2: " (401)" HTTP code suffix.
+#: dist/index.js:125
+#, js-format
+msgid "%1$s refused the request%2$s. The key, token or URL it uses is no longer valid, or it lacks permission."
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:128
+#, js-format
+msgid "Create a new key or token in %s and paste it into this connection."
+msgstr ""
+
+#. translators: %s: " (401)" HTTP code suffix.
+#: dist/index.js:131
+#, js-format
+msgid "Not authorized%s"
+msgstr ""
+
+#. translators: 1: connection name, 2: " (400)" HTTP code suffix.
+#: dist/index.js:134
+#, js-format
+msgid "%1$s rejected the content%2$s. A required field may be empty, or the message is not in the format it expects."
+msgstr ""
+
+#: dist/index.js:134
+msgid "Check the fields and the message in this connection, then send a test."
+msgstr ""
+
+#. translators: %s: " (400)" HTTP code suffix.
+#: dist/index.js:137
+#, js-format
+msgid "Rejected%s"
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:140
+#, js-format
+msgid "Too many messages in a short time, so %s asked to slow down (429)."
+msgstr ""
+
+#: dist/index.js:140
+msgid "Usually nothing to change: it works again after a few minutes. If it keeps happening, send fewer notifications to this connection."
+msgstr ""
+
+#: dist/index.js:140
+msgid "Rate limited (429)"
+msgstr ""
+
+#. translators: 1: connection name, 2: " (500)" HTTP code suffix.
+#: dist/index.js:143
+#, js-format
+msgid "%1$s had a problem on its side%2$s. This is usually temporary."
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:146
+#, js-format
+msgid "Wait a little. If it keeps failing, check whether %s is down."
+msgstr ""
+
+#. translators: %s: " (500)" HTTP code suffix.
+#: dist/index.js:149
+#, js-format
+msgid "Server error%s"
+msgstr ""
+
+#: dist/index.js:149
+msgid "The server closed the connection without sending an answer. It may have crashed or restarted, or a firewall cut the request."
+msgstr ""
+
+#: dist/index.js:149
+msgid "Send a test in a few minutes. If it keeps failing, check the service’s status page or logs."
+msgstr ""
+
+#: dist/index.js:149
+msgid "Connection dropped"
+msgstr ""
+
+#: dist/index.js:149
+msgid "The URL kept sending WordPress to other addresses, so it gave up after several redirects."
+msgstr ""
+
+#: dist/index.js:149
+msgid "Open the URL in a browser, copy the address it ends on, and paste that into this connection."
+msgstr ""
+
+#: dist/index.js:149
+msgid "Too many redirects"
+msgstr ""
+
+#: dist/index.js:149
+msgid "The address in this connection is not valid"
+msgstr ""
+
+#: dist/index.js:149
+msgid "WordPress could not use the URL. It may be empty, have a typo, or not start with http:// or https://."
+msgstr ""
+
+#: dist/index.js:149
+msgid "Fix the URL in this connection, save, then send a test."
+msgstr ""
+
+#: dist/index.js:149
+msgid "Invalid URL"
+msgstr ""
+
+#: dist/index.js:149
+msgid "Your site blocked this request"
+msgstr ""
+
+#: dist/index.js:149
+msgid "Your site is set to block requests to outside services (WP_HTTP_BLOCK_EXTERNAL in wp-config.php), so nothing was sent."
+msgstr ""
+
+#. translators: %s: host name.
+#: dist/index.js:152
+#, js-format
+msgid "Ask your developer or host to add “%s” to WP_ACCESSIBLE_HOSTS."
+msgstr ""
+
+#: dist/index.js:152
+msgid "Ask your developer or host to allow this address in WP_ACCESSIBLE_HOSTS."
+msgstr ""
+
+#: dist/index.js:152
+msgid "Blocked by your site"
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:155
+#, js-format
+msgid "%s does not accept this kind of request (405). For example, it expects POST but got GET."
+msgstr ""
+
+#: dist/index.js:155
+msgid "Change the method in this connection to the one the service asks for, then send a test."
+msgstr ""
+
+#. translators: %s: " (405)" HTTP code suffix.
+#: dist/index.js:158
+#, js-format
+msgid "Wrong method%s"
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:161
+#, js-format
+msgid "The message was too large for %s (413)."
+msgstr ""
+
+#: dist/index.js:161
+msgid "Shorten the message or remove large fields, then send a test."
+msgstr ""
+
+#. translators: %s: " (413)" HTTP code suffix.
+#: dist/index.js:164
+#, js-format
+msgid "Message too large%s"
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:167
+#, js-format
+msgid "%s took too long to answer, so WordPress stopped waiting."
+msgstr ""
+
+#: dist/index.js:167
+msgid "Check that the URL is right and the service is online. If the service is slow, use a faster endpoint."
+msgstr ""
+
+#: dist/index.js:167
+msgid "Timed out"
+msgstr ""
+
+#. translators: %s: host name.
+#: dist/index.js:170
+#, js-format
+msgid "WordPress could not find the server “%s”. The address is misspelled, or the domain does not exist."
+msgstr ""
+
+#: dist/index.js:170
+msgid "WordPress could not find the server. The address is misspelled, or the domain does not exist."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Check the URL in this connection."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Server not found"
+msgstr ""
+
+#: dist/index.js:170
+msgid "The server refused the connection. It may be down, or a firewall blocks your site."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Check that the service is online and accepts requests from your site."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Connection refused"
+msgstr ""
+
+#: dist/index.js:170
+msgid "The secure (HTTPS) connection failed because of a certificate problem."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Check that the URL has a valid HTTPS certificate. If it does, ask your host to update the server’s certificate list."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Certificate problem"
+msgstr ""
+
+#: dist/index.js:170
+msgid "The email was not sent"
+msgstr ""
+
+#: dist/index.js:170
+msgid "WordPress could not hand the email to a mail server. Most hosts need an SMTP plugin to send email."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Install an SMTP plugin, connect it to your email provider, then send a test."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Mail server not set up"
+msgstr ""
+
+#: dist/index.js:170
+msgid "This browser no longer accepts notifications"
+msgstr ""
+
+#: dist/index.js:170
+msgid "The visitor unsubscribed, or the browser subscription expired. This is normal over time."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Nothing to fix. To clean up, turn on auto-delete for failed subscriptions in the Web Push settings."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Subscription expired"
+msgstr ""
+
+#: dist/index.js:170
+msgid "Your server could not send push messages"
+msgstr ""
+
+#: dist/index.js:170
+msgid "PHP cannot create the keys that encrypt push messages. The GMP extension is missing, or OpenSSL is not set up."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Ask your host to enable the PHP GMP extension. The Web Push health check shows what is missing."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Server can’t encrypt push"
+msgstr ""
+
+#: dist/index.js:170
+msgid "Your Web Push keys are not valid"
+msgstr ""
+
+#: dist/index.js:170
+msgid "The keys that sign push messages are missing or do not match."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Open the Web Push settings and generate new keys. Visitors may need to subscribe again."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Web Push keys problem"
+msgstr ""
+
+#: dist/index.js:170
+msgid "Instagram no longer accepts the saved access token. Tokens expire, or the app lost its permissions."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Create a new long-lived access token and paste it into this connection."
+msgstr ""
+
+#: dist/index.js:170
+msgid "Access token expired"
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:173
+#, js-format
+msgid "%s could not send this notification"
+msgstr ""
+
+#: dist/index.js:173
+msgid "Open the connection, check its settings, then send a test. The test shows the live error."
+msgstr ""
+
+#: dist/index.js:173
+msgid "Send failed"
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:176
+#, js-format
+msgid "This test was not delivered through %s."
+msgstr ""
+
+#. translators: 1: notification name, 2: connection name.
+#: dist/index.js:179
+#, js-format
+msgid "“%1$s” was not delivered through %2$s. Other connections of this notification are logged on their own rows."
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:182
+#, js-format
+msgid "This notification was not delivered through %s."
+msgstr ""
+
+#: dist/index.js:182
+msgid "Open Web Push settings"
+msgstr ""
+
+#: dist/index.js:182
+msgid "Open health check"
+msgstr ""
+
+#: dist/index.js:182
+msgid "Find an SMTP plugin"
+msgstr ""
+
+#: dist/index.js:182
+msgid "Untitled notification"
+msgstr ""
+
+#: dist/index.js:182
+msgid "Recent failures"
+msgstr ""
+
+#: dist/index.js:182
+msgid "View all in Log"
+msgstr ""
+
+#. translators: %s: number of days.
+#: dist/index.js:185
+#, js-format
+msgid "No failures in the last %s days."
+msgstr ""
+
+#. translators: %s: number of days.
+#: dist/index.js:188
+#, js-format
+msgid "Nothing went out in the last %s days."
+msgstr ""
+
+#. translators: 1: number of days, 2: number of notifications.
+#: dist/index.js:191
+#, js-format
+msgid "In the last %1$s days, <count>%2$s</count> notification went out."
+msgid_plural "In the last %1$s days, <count>%2$s</count> notifications went out."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of failed sends.
+#: dist/index.js:194
+#, js-format
+msgid "<bad>%s failed.</bad>"
+msgid_plural "<bad>%s failed.</bad>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of failed sends, 2: connection name.
+#: dist/index.js:197
+#, js-format
+msgid "<bad>%1$s failed</bad>, on %2$s."
+msgid_plural "<bad>%1$s failed</bad>, all on %2$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of failed sends, 2: connection name.
+#: dist/index.js:200
+#, js-format
+msgid "<bad>%1$s failed</bad>, most of them on %2$s."
+msgstr ""
+
+#. translators: 1: number of failed sends, 2: number of connection types.
+#: dist/index.js:203
+#, js-format
+msgid "<bad>%1$s failed</bad> across %2$s connection types."
+msgstr ""
+
+#: dist/index.js:203
+msgid "Check it"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Check them"
+msgstr ""
+
+#: dist/index.js:203
+msgid "None failed."
+msgstr ""
+
+#: dist/index.js:203
+msgid "Numbers, no data yet"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Create your first notification"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Start from a template. The trigger, connection and message are filled in, and you can change any of them before you turn it on."
+msgstr ""
+
+#: dist/index.js:203
+#: dist/index.js:233
+msgid "Email admins when a post needs review"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Post sent to review → Email to administrators"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Email admins about new users"
+msgstr ""
+
+#: dist/index.js:203
+msgid "User registered → Email to administrators"
+msgstr ""
+
+#: dist/index.js:203
+#: dist/index.js:233
+msgid "Post new articles to Discord"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Post published → Discord channel"
+msgstr ""
+
+#: dist/index.js:203
+#: dist/index.js:233
+msgid "Push new posts to subscribers"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Post published → Web Push to all subscribers"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Draft created. Review it, then turn it on."
+msgstr ""
+
+#: dist/index.js:203
+msgid "Could not create the notification from this template."
+msgstr ""
+
+#: dist/index.js:203
+msgid "Start from scratch instead, or try again."
+msgstr ""
+
+#: dist/index.js:203
+msgid "Creating…"
+msgstr ""
+
+#: dist/index.js:203
+#: dist/index.js:233
+#: dist/index.js:356
+msgid "Start from scratch"
+msgstr ""
+
+#: dist/index.js:203
+#: dist/index.js:233
+msgid "Choose a trigger and connections yourself."
+msgstr ""
+
+#: dist/index.js:203
+msgid "Could not load the overview."
+msgstr ""
+
+#: dist/index.js:203
+msgid "Could not load the overview"
+msgstr ""
+
+#: dist/index.js:203
+msgid "Nothing has been sent yet. Your numbers show up here after the first notification goes out."
+msgstr ""
+
+#. translators: 1: number of failed sends, 2: connection type, e.g. Discord.
+#: dist/index.js:206
+#, js-format
+msgid "%1$d failed on %2$s this week"
+msgid_plural "%1$d failed on %2$s this week"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of failed sends.
+#: dist/index.js:209
+#, js-format
+msgid "%d failed this week"
+msgid_plural "%d failed this week"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: connection type, e.g. Discord, 2: HTTP answer, e.g. "404 Unknown Webhook".
+#: dist/index.js:212
+#, js-format
+msgid "%1$s answered %2$s on the last send."
 msgstr ""
 
 #. translators: %d: number of notifications.
-#: dist/index.js:59
+#: dist/index.js:215
 #, js-format
-msgid "Import %d"
+msgid "%d notification moved to trash"
+msgid_plural "%d notifications moved to trash"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:215
+msgid "Moved to trash"
 msgstr ""
 
-#: dist/index.js:59
-msgid "Upload a JSON file previously exported from Notification Master."
+#: dist/index.js:215
+#: dist/index.js:326
+msgid "Undo"
 msgstr ""
 
-#: dist/index.js:59
+#: dist/index.js:215
+msgid "Notification restored"
+msgstr ""
+
+#. translators: %d: number of notifications.
+#: dist/index.js:218
+#, js-format
+msgid "%d notification restored"
+msgid_plural "%d notifications restored"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of notifications.
+#: dist/index.js:221
+#, js-format
+msgid "%d notification could not be restored"
+msgid_plural "%d notifications could not be restored"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:221
+msgid "It may have been deleted for good."
+msgstr ""
+
+#: dist/index.js:221
+msgid "Could not restore from the trash"
+msgstr ""
+
+#: dist/index.js:221
+msgid "(no name)"
+msgstr ""
+
+#: dist/index.js:221
+msgid "Search notifications"
+msgstr ""
+
+#: dist/index.js:221
+msgid "Filter by status"
+msgstr ""
+
+#: dist/index.js:221
+#: dist/index.js:384
+msgid "All"
+msgstr ""
+
+#: dist/index.js:221
+msgid "Bulk actions"
+msgstr ""
+
+#. translators: %d: number of selected notifications.
+#. translators: %d: number of templates selected.
+#: dist/index.js:224
+#: dist/index.js:236
+#, js-format
+msgid "%d selected"
+msgid_plural "%d selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:224
+msgid "Turn on"
+msgstr ""
+
+#: dist/index.js:224
+msgid "Pause"
+msgstr ""
+
+#: dist/index.js:224
+#: dist/index.js:227
+#: dist/index.js:230
+#: dist/index.js:275
+#: dist/index.js:332
+#: dist/index.js:356
+msgid "Move to trash"
+msgstr ""
+
+#. translators: %s: notification name.
+#: dist/index.js:227
+#, js-format
+msgid "Move “%s” to the trash?"
+msgstr ""
+
+#: dist/index.js:227
+msgid "It stops sending right away. To keep it but stop sending, pause it instead."
+msgstr ""
+
+#. translators: %d: number of notifications.
+#: dist/index.js:230
+#, js-format
+msgid "Move %d notification to the trash?"
+msgid_plural "Move %d notifications to the trash?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:230
+msgid "They stop sending right away."
+msgstr ""
+
+#: dist/index.js:230
+msgid "Could not load the notifications"
+msgstr ""
+
+#: dist/index.js:230
+msgid "The server did not answer."
+msgstr ""
+
+#. translators: %s: search text.
+#: dist/index.js:233
+#, js-format
+msgid "No notifications match “%s”"
+msgstr ""
+
+#: dist/index.js:233
+msgid "No notifications with this status"
+msgstr ""
+
+#: dist/index.js:233
+msgid "Try another search or status."
+msgstr ""
+
+#: dist/index.js:233
+#: dist/index.js:378
+#: dist/index.js:387
+msgid "Clear filters"
+msgstr ""
+
+#: dist/index.js:233
+msgid "Email admins when someone registers"
+msgstr ""
+
+#: dist/index.js:233
+msgid "Start from a template"
+msgstr ""
+
+#: dist/index.js:233
+msgid "Everything is filled in. You can change the trigger, connections and message before you save."
+msgstr ""
+
+#: dist/index.js:233
+msgid "Could not load the starter templates."
+msgstr ""
+
+#: dist/index.js:233
+msgid "All templates"
+msgstr ""
+
+#: dist/index.js:233
+msgid "Import from a file"
+msgstr ""
+
+#: dist/index.js:233
+msgid "Starter templates"
+msgstr ""
+
+#: dist/index.js:233
+msgid "Installed paused, with Email and Web Push filled in. Discord, Webhook and Instagram are added as connections you finish yourself."
+msgstr ""
+
+#: dist/index.js:233
+msgid "Select all shown"
+msgstr ""
+
+#. translators: %d: number of notifications installed.
+#: dist/index.js:239
+#, js-format
+msgid "%d starter notification installed. It is paused until you turn it on."
+msgid_plural "%d starter notifications installed. They are paused until you turn them on."
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:239
+msgid "Could not install the templates"
+msgstr ""
+
+#. translators: %d: number of templates to install.
+#: dist/index.js:242
+#, js-format
+msgid "Install %d template"
+msgid_plural "Install %d templates"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:242
+msgid "Could not load the starter templates"
+msgstr ""
+
+#: dist/index.js:242
+msgid "Template group"
+msgstr ""
+
+#. translators: %d: number of templates.
+#: dist/index.js:245
+#, js-format
+msgid "All templates (%d)"
+msgstr ""
+
+#: dist/index.js:245
+msgid "Search templates"
+msgstr ""
+
+#: dist/index.js:245
+msgid "No templates match your search."
+msgstr ""
+
+#: dist/index.js:245
+msgid "Selected"
+msgstr ""
+
+#: dist/index.js:245
+msgid "Import notifications"
+msgstr ""
+
+#: dist/index.js:245
+msgid "Choose a JSON file exported from Notification Master."
+msgstr ""
+
+#. translators: 1: imported count, 2: skipped count.
+#: dist/index.js:248
+#, js-format
+msgid "%1$d imported, %2$d skipped"
+msgstr ""
+
+#: dist/index.js:248
+msgid "Could not import the file"
+msgstr ""
+
+#. translators: %d: number of notifications.
+#: dist/index.js:251
+#, js-format
+msgid "Import %d notification"
+msgid_plural "Import %d notifications"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:251
+#: dist/index.js:275
+msgid "Import"
+msgstr ""
+
+#: dist/index.js:251
 msgid "No notifications found in this file."
 msgstr ""
 
-#: dist/index.js:59
-msgid "This file does not contain valid notifications."
+#: dist/index.js:251
+msgid "This file has no notifications Notification Master can read."
 msgstr ""
 
-#: dist/index.js:59
-msgid "Could not read this file."
+#: dist/index.js:251
+msgid "This file is not valid JSON. Choose a file made with Export."
 msgstr ""
 
-#. translators: %d: number of notifications found.
-#: dist/index.js:62
+#: dist/index.js:251
+msgid "Choose file"
+msgstr ""
+
+#: dist/index.js:251
+msgid "No file chosen"
+msgstr ""
+
+#. translators: %d: number of notifications found in the file.
+#: dist/index.js:254
 #, js-format
 msgid "%d notification found."
 msgid_plural "%d notifications found."
 msgstr[0] ""
 msgstr[1] ""
 
-#: dist/index.js:62
-msgid "No valid notifications."
+#: dist/index.js:254
+msgid "Import them paused (recommended)"
 msgstr ""
 
-#: dist/index.js:62
-msgid "Import as inactive (draft) — recommended"
+#: dist/index.js:254
+msgid "Notification turned on"
 msgstr ""
 
-#: dist/index.js:62
-#: dist/index.js:66
+#: dist/index.js:254
+msgid "Notification paused"
+msgstr ""
+
+#: dist/index.js:254
+msgid "Could not change the status"
+msgstr ""
+
+#. translators: %s: notification name.
+#. translators: %s: connection name.
+#: dist/index.js:257
+#: dist/index.js:323
+#: dist/index.js:356
+#, js-format
+msgid "%s (copy)"
+msgstr ""
+
+#: dist/index.js:257
+#: dist/index.js:356
+msgid "Notification duplicated. The copy is paused."
+msgstr ""
+
+#: dist/index.js:257
+msgid "Edit copy"
+msgstr ""
+
+#: dist/index.js:257
+#: dist/index.js:356
+msgid "Could not duplicate the notification"
+msgstr ""
+
+#: dist/index.js:257
+#: dist/index.js:353
+msgid "Could not move the notification to the trash"
+msgstr ""
+
+#. translators: %d: number of notifications.
+#: dist/index.js:260
+#, js-format
+msgid "%d notification turned on"
+msgid_plural "%d notifications turned on"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of notifications.
+#: dist/index.js:263
+#, js-format
+msgid "%d notification paused"
+msgid_plural "%d notifications paused"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of notifications.
+#: dist/index.js:266
+#, js-format
+msgid "%d notification could not be changed"
+msgid_plural "%d notifications could not be changed"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of notifications exported.
+#: dist/index.js:269
+#, js-format
+msgid "%d notification exported"
+msgid_plural "%d notifications exported"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:269
+msgid "Could not export the notifications"
+msgstr ""
+
+#: dist/index.js:269
+msgid "Select all notifications on this page"
+msgstr ""
+
+#: dist/index.js:272
+msgid "Its trigger is turned off in Settings"
+msgstr ""
+
+#: dist/index.js:272
+#: dist/index.js:281
+#: dist/index.js:359
+#: dist/index.js:387
 msgid "Trigger"
 msgstr ""
 
-#: dist/index.js:62
-msgid "Actions"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Is equal to"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Is not equal to"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Contains"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Does not contain"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Starts with"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Ends with"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Is greater than"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Is less than"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Enable conditional logic"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Conditions"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Merge Tag"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Operator"
-msgstr ""
-
-#: dist/index.js:62
-msgid "AND"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Minutes"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Hours"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Days"
-msgstr ""
-
-#: dist/index.js:62
-msgid "After"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Before"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Send immediately"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Skip notification"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Schedule"
-msgstr ""
-
-#: dist/index.js:62
-msgid "When enabled, this connection will be queued and dispatched later instead of firing immediately."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Delay after the trigger fires"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Relative to a date from a merge tag"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Send after"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Send"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Select a date merge tag…"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Loading…"
-msgstr ""
-
-#: dist/index.js:62
-msgid "No date merge tags available for this trigger."
-msgstr ""
-
-#: dist/index.js:62
-msgid "If the date is in the past"
-msgstr ""
-
-#: dist/index.js:62
-msgid "If the merge tag is empty or invalid"
-msgstr ""
-
-#: dist/index.js:62
-msgid "New connection"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Connection name is required"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Integration is required"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Please fill in all required fields"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Next"
-msgstr ""
-
-#: dist/index.js:62
-msgid "All changes will be lost. Are you sure?"
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "Yes"
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "No"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Back"
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "Save"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Add connection"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Select integration"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Select the integration you'd like to use to send your notifications."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Each integration has its own settings and requirements."
-msgstr ""
-
-#: dist/index.js:62
-msgid "This integration is not configured yet, please configure it first."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Go to settings"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Connection name"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Enable connection"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Fill in the required settings above before enabling this connection."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Complete the required settings above to enable this connection."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Invalid settings"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Close"
-msgstr ""
-
-#: dist/index.js:62
-msgid "No connections yet."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Add this connection’s required settings before enabling it."
-msgstr ""
-
-#: dist/index.js:62
-msgid "This integration isn’t set up yet. Configure it in Settings before enabling this connection."
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "Are you sure?"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Name:"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Integration:"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Failed to load merge tags"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Search merge tags"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Plugin Dependency Required"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Copy"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Copied to clipboard"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Connections"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Enabled"
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "Delete"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Update"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Saved"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Action"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Could not load scheduled notifications."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Notification"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Connection"
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "Integration"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Scheduled for"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Send now"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Notification dispatched."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Could not dispatch the notification."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Cancel this scheduled notification?"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Scheduled notification cancelled."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Could not cancel the scheduled notification."
-msgstr ""
-
-#: dist/index.js:62
-msgid "No scheduled notifications."
-msgstr ""
-
-#: dist/index.js:62
-msgid "Connections with a schedule configured will appear here while they wait to fire."
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "Total"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Statistics"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Overview"
-msgstr ""
-
-#: dist/index.js:62
-msgid "View all logs to see more details"
-msgstr ""
-
-#: dist/index.js:62
-msgid "View all"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Success"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Failed"
-msgstr ""
-
-#: dist/index.js:62
-msgid "All"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Active"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Inactive"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Sort by"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Order"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Descending"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Ascending"
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "Bulk Actions"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Deactive"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Activate"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Notifications deleted successfully"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Notifications inactivated successfully"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Notifications activated successfully"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Could not apply bulk action"
-msgstr ""
-
-#: dist/index.js:62
-msgid "Please select at least one notification"
-msgstr ""
-
-#: dist/index.js:62
-#: dist/index.js:66
-msgid "Apply"
-msgstr ""
-
-#: dist/index.js:62
+#: dist/index.js:272
 msgid "None"
 msgstr ""
 
-#: dist/index.js:62
-msgid "Notification status changed successfully"
+#: dist/index.js:272
+#: dist/index.js:320
+msgid "Connections"
 msgstr ""
 
-#: dist/index.js:62
-msgid "Could not change notification status"
+#: dist/index.js:272
+#: dist/index.js:427
+msgid "None yet"
 msgstr ""
 
-#: dist/index.js:62
-msgid "Trigger disabled from settings"
+#: dist/index.js:272
+msgid "Last sent"
 msgstr ""
 
-#. translators: %s: date
-#: dist/index.js:64
+#: dist/index.js:272
+msgid "Never"
+msgstr ""
+
+#. translators: %s: notification name.
+#: dist/index.js:275
 #, js-format
-msgid "Published on %s"
+msgid "%s active"
 msgstr ""
 
-#: dist/index.js:64
+#: dist/index.js:275
 msgid "Edit"
 msgstr ""
 
-#: dist/index.js:64
+#: dist/index.js:275
+#: dist/index.js:356
 msgid "Duplicate"
 msgstr ""
 
-#. translators: %s: post title
-#: dist/index.js:66
+#: dist/index.js:275
+#: dist/index.js:356
+msgid "Export"
+msgstr ""
+
+#: dist/index.js:275
+msgid "You don’t have any notifications yet."
+msgstr ""
+
+#: dist/index.js:275
+msgid "Each notification waits for a trigger, then sends through its connections."
+msgstr ""
+
+#: dist/index.js:275
+msgid "Templates"
+msgstr ""
+
+#: dist/index.js:275
+#: dist/index.js:406
+msgid "Export all"
+msgstr ""
+
+#. translators: 1: rows shown, 2: total notifications.
+#: dist/index.js:278
 #, js-format
-msgid "(Copy) %s"
+msgid "Showing %1$d of %2$d notification"
+msgid_plural "Showing %1$d of %2$d notifications"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:278
+msgid "Choose the event that sends this notification."
 msgstr ""
 
-#: dist/index.js:66
-msgid "Notification duplicated successfully"
+#. translators: %s: trigger group, e.g. WooCommerce Order.
+#: dist/index.js:281
+#, js-format
+msgid "%s · Pro"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Could not duplicate notification"
+#: dist/index.js:281
+msgid "Turned off in Settings"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Notification deleted successfully"
+#: dist/index.js:281
+msgid "Notification name"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Could not delete notification"
+#: dist/index.js:281
+msgid "This trigger is turned off."
 msgstr ""
 
-#: dist/index.js:66
-msgid "No notifications found"
+#: dist/index.js:281
+msgid "Turn it on in Settings"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Create your first notification"
+#: dist/index.js:281
+msgid "Choose a trigger"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Start from a ready-made template for common events like post published, new user, or new comment — or build one from scratch."
+#. translators: %s: connection name.
+#: dist/index.js:284
+#, js-format
+msgid "%s connection enabled"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Browse Starter Templates"
+#. translators: %s: connection name.
+#: dist/index.js:287
+#, js-format
+msgid "Collapse %s connection"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Are you sure you want to leave this page?"
+#. translators: %s: connection name.
+#: dist/index.js:290
+#, js-format
+msgid "Expand %s connection"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Notification saved successfully"
+#: dist/index.js:290
+msgid "Duplicate connection"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Failed to save notification"
+#: dist/index.js:290
+#: dist/index.js:299
+msgid "Remove connection"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Failed to delete notification"
+#: dist/index.js:290
+msgid "These settings could not be shown. Reload the page; your saved settings are safe."
 msgstr ""
 
-#: dist/index.js:66
-msgid "Back to Notifications"
+#: dist/index.js:290
+msgid "Minutes"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Manage Web Push Subscriptions"
+#: dist/index.js:290
+msgid "Hours"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Total Subscriptions"
+#: dist/index.js:290
+msgid "Days"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Transform Your Notifications Like Never Before 🚀"
+#: dist/index.js:290
+msgid "Send right away"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Upgrade to Notification Master Pro and experience next-level notifications! Unlock exclusive features, seamless integrations, and powerful capabilities designed to keep you ahead. Take the leap today and redefine your communication strategy 🔥."
+#: dist/index.js:290
+msgid "Skip this send"
 msgstr ""
 
-#: dist/index.js:66
+#: dist/index.js:290
+msgid "This trigger has no date merge tags."
+msgstr ""
+
+#: dist/index.js:290
+msgid "Choose a trigger first."
+msgstr ""
+
+#: dist/index.js:290
+#: dist/index.js:341
+msgid "Send"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Offset"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Offset unit"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Before or after"
+msgstr ""
+
+#: dist/index.js:290
+msgid "After"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Before"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Date merge tag"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Loading dates…"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Choose a date"
+msgstr ""
+
+#: dist/index.js:290
+msgid "If the date is in the past"
+msgstr ""
+
+#: dist/index.js:290
+msgid "If the date is empty or not valid"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Schedule"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Send immediately"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Send after a delay"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Relative to a date"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Delay"
+msgstr ""
+
+#: dist/index.js:290
+msgid "Delay unit"
+msgstr ""
+
+#: dist/index.js:290
+msgid "or"
+msgstr ""
+
+#. translators: %d: rule group number.
+#: dist/index.js:293
+#, js-format
+msgid "Rule group %d"
+msgstr ""
+
+#: dist/index.js:293
+msgid "and"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Merge tag"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Insert merge tag into Merge tag"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Comparison"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Is equal to"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Is not equal to"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Contains"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Does not contain"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Starts with"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Ends with"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Is greater than"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Is less than"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Insert merge tag into Value"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Remove rule"
+msgstr ""
+
+#: dist/index.js:293
+msgid "And"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Or another group"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Conditions"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Only send when rules match, like a post category."
+msgstr ""
+
+#: dist/index.js:293
+msgid "Remove all rules"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Add rule"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Connection name"
+msgstr ""
+
+#: dist/index.js:293
+msgid "e.g. Email to editors"
+msgstr ""
+
+#: dist/index.js:293
+msgid "Open settings"
+msgstr ""
+
+#. translators: %s: connection type, e.g. Web Push.
+#: dist/index.js:296
+#, js-format
+msgid "%s is not set up yet. Finish its setup in Settings, then come back."
+msgstr ""
+
+#: dist/index.js:296
+msgid "See Pro"
+msgstr ""
+
+#. translators: %s: connection type, e.g. Slack.
+#: dist/index.js:299
+#, js-format
+msgid "%s connections need Notification Master Pro. Its settings are kept."
+msgstr ""
+
+#: dist/index.js:299
+msgid "This connection type is not installed on this site, so it cannot send. You can remove it."
+msgstr ""
+
+#: dist/index.js:299
+msgid "Sends right away"
+msgstr ""
+
+#: dist/index.js:299
+msgid "Sends relative to a date"
+msgstr ""
+
+#. translators: %d: number of minutes.
+#: dist/index.js:302
+#, js-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of hours.
+#: dist/index.js:305
+#, js-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of days.
+#: dist/index.js:308
+#, js-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: delay, e.g. "30 minutes".
+#: dist/index.js:311
+#, js-format
+msgid "Sends %s after the trigger"
+msgstr ""
+
+#. translators: %s: date and time, e.g. "Today, 06:25".
+#: dist/index.js:314
+#, js-format
+msgid "Last failed %s"
+msgstr ""
+
+#: dist/index.js:314
+msgid "This connection failed recently"
+msgstr ""
+
+#. translators: %s: number of failed sends.
+#: dist/index.js:317
+#, js-format
+msgid "See %s failure in Log"
+msgid_plural "See all %s failures in Log"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:317
+msgid "This connection type is not installed."
+msgstr ""
+
+#: dist/index.js:317
+msgid "Needs Notification Master Pro"
+msgstr ""
+
+#: dist/index.js:317
+msgid "Not set up yet · finish the setup in Settings"
+msgstr ""
+
+#: dist/index.js:317
+msgid "Not set up yet · fill in the required fields"
+msgstr ""
+
+#: dist/index.js:317
+msgid "URL changed · Update to save"
+msgstr ""
+
+#. translators: 1: number of failed sends, 2: short reason, e.g. "Webhook not found (404)".
+#: dist/index.js:320
+#, js-format
+msgid "%1$d failed this week · %2$s"
+msgid_plural "%1$d failed this week · %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:320
+msgid "Finish this connection’s setup in Settings before turning it on."
+msgstr ""
+
+#: dist/index.js:320
+msgid "Fill in this connection’s required fields before turning it on."
+msgstr ""
+
+#: dist/index.js:320
+msgid "No connections yet. Add one to choose where this notification goes: email, Discord, a webhook and more."
+msgstr ""
+
+#: dist/index.js:320
+msgid "Add a connection"
+msgstr ""
+
+#: dist/index.js:320
+msgid "Add connection"
+msgstr ""
+
+#: dist/index.js:320
+msgid "Pro"
+msgstr ""
+
+#: dist/index.js:320
+msgid "Each connection sends on its own."
+msgstr ""
+
+#: dist/index.js:323
+msgid "Connection duplicated. The copy is off."
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:326
+#, js-format
+msgid "%s removed. Update to save."
+msgstr ""
+
+#. translators: %s: connection type, e.g. Discord.
+#: dist/index.js:329
+#, js-format
+msgid "%s connection added. It stays off until you turn it on."
+msgstr ""
+
+#: dist/index.js:329
+msgid "Saving…"
+msgstr ""
+
+#: dist/index.js:329
+msgid "Not saved yet"
+msgstr ""
+
+#: dist/index.js:329
+#: dist/index.js:409
+msgid "Unsaved changes"
+msgstr ""
+
+#. translators: %s: relative time, e.g. "2 minutes ago".
+#: dist/index.js:332
+#, js-format
+msgid "Saved %s"
+msgstr ""
+
+#: dist/index.js:332
+msgid "Sends when the trigger fires"
+msgstr ""
+
+#: dist/index.js:332
+msgid "Does not send until you turn it on"
+msgstr ""
+
+#: dist/index.js:332
+msgid "Save notification"
+msgstr ""
+
+#: dist/index.js:332
+msgid "Update"
+msgstr ""
+
+#. translators: 1: HTTP status code, 2: reason from the remote service.
+#: dist/index.js:335
+#, js-format
+msgid "HTTP %1$d · %2$s"
+msgstr ""
+
+#: dist/index.js:335
+msgid "No reason given"
+msgstr ""
+
+#: dist/index.js:335
+msgid "See it in the log"
+msgstr ""
+
+#: dist/index.js:335
+msgid "Sends this email once, with sample values. Leave the address empty to use the connection’s first recipient."
+msgstr ""
+
+#: dist/index.js:335
+msgid "Goes only to your own browser subscriptions, never to your subscribers."
+msgstr ""
+
+#. translators: %s: connection type, e.g. Instagram.
+#: dist/index.js:338
+#, js-format
+msgid "Publishes a real post to your %s account. There is no test mode."
+msgstr ""
+
+#. translators: %s: connection type, e.g. Discord.
+#: dist/index.js:341
+#, js-format
+msgid "Sends this %s connection once, with sample values."
+msgstr ""
+
+#: dist/index.js:341
+msgid "The test was not sent."
+msgstr ""
+
+#: dist/index.js:341
+msgid "The server did not answer. Check your connection and try again."
+msgstr ""
+
+#: dist/index.js:341
+msgid "Fill in this connection’s required fields first."
+msgstr ""
+
+#: dist/index.js:341
+msgid "Choose a trigger first. Merge tags get sample values from it."
+msgstr ""
+
+#: dist/index.js:341
+msgid "Add a connection to send a test."
+msgstr ""
+
+#: dist/index.js:341
+msgid "Enter a valid email address, like you@example.test."
+msgstr ""
+
+#: dist/index.js:341
+msgid "Sending…"
+msgstr ""
+
+#: dist/index.js:341
+msgid "Send a test"
+msgstr ""
+
+#: dist/index.js:341
+#: dist/index.js:359
+#: dist/index.js:384
+#: dist/index.js:387
+#: dist/index.js:394
+msgid "Connection"
+msgstr ""
+
+#: dist/index.js:341
+msgid "Email address"
+msgstr ""
+
+#: dist/index.js:341
+msgid "you@example.test"
+msgstr ""
+
+#: dist/index.js:341
+msgid "This can take a few seconds."
+msgstr ""
+
+#. translators: %s: connection type, e.g. Instagram.
+#: dist/index.js:344
+#, js-format
+msgid "Publish a real %s post?"
+msgstr ""
+
+#. translators: %s: connection type, e.g. Instagram.
+#: dist/index.js:347
+#, js-format
+msgid "%s has no test mode. This publishes the post to your account right away, with sample values."
+msgstr ""
+
+#: dist/index.js:347
+msgid "Publish post"
+msgstr ""
+
+#. translators: %s: connection type, e.g. Discord.
+#: dist/index.js:350
+#, js-format
+msgid "All on %s"
+msgstr ""
+
+#: dist/index.js:350
+#: dist/index.js:384
+msgid "Last 7 days"
+msgstr ""
+
+#: dist/index.js:350
+msgid "Could not load the numbers."
+msgstr ""
+
+#: dist/index.js:350
+msgid "Save and test"
+msgstr ""
+
+#: dist/index.js:350
+msgid "Pick a tag to copy it, then paste it into the field."
+msgstr ""
+
+#. translators: %s: merge tag, e.g. {{post.title}}.
+#: dist/index.js:353
+#, js-format
+msgid "Copied %s"
+msgstr ""
+
+#: dist/index.js:353
+#: dist/index.js:359
+#: dist/index.js:397
+msgid "Could not copy. Select the text and copy it yourself."
+msgstr ""
+
+#: dist/index.js:353
+msgid "Give the notification a name."
+msgstr ""
+
+#: dist/index.js:353
+msgid "This trigger is turned off in Settings. Turn it on there, or choose another trigger."
+msgstr ""
+
+#: dist/index.js:353
+msgid "Choose a trigger."
+msgstr ""
+
+#: dist/index.js:353
+msgid "Fix the highlighted fields, then save again."
+msgstr ""
+
+#: dist/index.js:353
+msgid "A connection is missing required fields. Fill them in, then save again."
+msgstr ""
+
+#: dist/index.js:353
+msgid "Enter a full address that starts with http:// or https://, then save again."
+msgstr ""
+
+#: dist/index.js:353
+msgid "Notification saved"
+msgstr ""
+
+#: dist/index.js:353
+msgid "Notification updated"
+msgstr ""
+
+#: dist/index.js:353
+msgid "Could not save the notification"
+msgstr ""
+
+#: dist/index.js:353
+#: dist/index.js:415
+#: dist/index.js:424
+#: dist/index.js:430
+msgid "The server did not answer. Try again."
+msgstr ""
+
+#: dist/index.js:356
+msgid "Open copy"
+msgstr ""
+
+#: dist/index.js:356
+msgid "Move this notification to the trash?"
+msgstr ""
+
+#: dist/index.js:356
+msgid "It stops sending right away and leaves the notifications list. To pause it instead, turn it off."
+msgstr ""
+
+#: dist/index.js:356
+msgid "Leave without saving?"
+msgstr ""
+
+#: dist/index.js:356
+msgid "Your changes to this notification will be lost."
+msgstr ""
+
+#: dist/index.js:356
+msgid "Leave without saving"
+msgstr ""
+
+#: dist/index.js:356
+msgid "Keep editing"
+msgstr ""
+
+#: dist/index.js:356
+msgid "Loading the notification"
+msgstr ""
+
+#: dist/index.js:356
+msgid "Could not load the starter template"
+msgstr ""
+
+#: dist/index.js:356
+msgid "Could not open this notification"
+msgstr ""
+
+#: dist/index.js:356
+msgid "Check your connection and try again, or start from scratch."
+msgstr ""
+
+#: dist/index.js:356
+msgid "It may have been moved to the trash, or the server did not answer. Try again, or go back to the list."
+msgstr ""
+
+#: dist/index.js:356
+msgid "Back to notifications"
+msgstr ""
+
+#: dist/index.js:356
+#: dist/index.js:436
+msgid "Edit notification"
+msgstr ""
+
+#. translators: 1: notification name, 2: connection, 3: status, 4: time.
+#: dist/index.js:359
+#, js-format
+msgid "Open details: %1$s, %2$s, %3$s, %4$s"
+msgstr ""
+
+#: dist/index.js:359
+#: dist/index.js:384
+#: dist/index.js:394
+msgid "Notification"
+msgstr ""
+
+#: dist/index.js:359
+#: dist/index.js:394
+msgid "Recipient"
+msgstr ""
+
+#: dist/index.js:359
+#: dist/index.js:394
+msgid "Time"
+msgstr ""
+
+#: dist/index.js:359
+msgid "What happened"
+msgstr ""
+
+#: dist/index.js:359
+msgid "Why"
+msgstr ""
+
+#: dist/index.js:359
+msgid "What to do"
+msgstr ""
+
+#: dist/index.js:359
+msgid "Edit connection"
+msgstr ""
+
+#: dist/index.js:359
+msgid "HTTP code"
+msgstr ""
+
+#: dist/index.js:359
+msgid "No response"
+msgstr ""
+
+#: dist/index.js:359
+msgid "Remote error"
+msgstr ""
+
+#: dist/index.js:359
+msgid "Entry ID"
+msgstr ""
+
+#: dist/index.js:359
+msgid "Technical details"
+msgstr ""
+
+#: dist/index.js:359
+#: dist/index.js:397
+msgid "Stored data"
+msgstr ""
+
+#: dist/index.js:359
+msgid "Email content"
+msgstr ""
+
+#: dist/index.js:359
+msgid "Email content preview"
+msgstr ""
+
+#: dist/index.js:359
+msgid "Could not load this log entry."
+msgstr ""
+
+#. translators: %s: log entry id.
+#: dist/index.js:362
+#, js-format
+msgid "Log entry #%s"
+msgstr ""
+
+#: dist/index.js:362
+msgid "Log entry"
+msgstr ""
+
+#. translators: %s: connection name.
+#: dist/index.js:365
+#, js-format
+msgid "via %s"
+msgstr ""
+
+#: dist/index.js:365
+msgid "Could not load this log entry"
+msgstr ""
+
+#: dist/index.js:365
+msgid "Delete every entry?"
+msgstr ""
+
+#. translators: %s: number of entries.
+#: dist/index.js:368
+#, js-format
+msgid "Delete %s entry?"
+msgid_plural "Delete %s entries?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:368
+msgid "This empties the whole list, not only the rows on screen. This cannot be undone."
+msgstr ""
+
+#: dist/index.js:368
+msgid "The selected rows are removed for good."
+msgstr ""
+
+#: dist/index.js:368
+msgid "Delete all"
+msgstr ""
+
+#: dist/index.js:368
+msgid "Delete"
+msgstr ""
+
+#: dist/index.js:368
+msgid "All entries deleted"
+msgstr ""
+
+#. translators: %s: number of entries.
+#: dist/index.js:371
+#, js-format
+msgid "%s entry deleted"
+msgid_plural "%s entries deleted"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:371
+msgid "Could not delete the entries."
+msgstr ""
+
+#: dist/index.js:371
+msgid "Selected entries"
+msgstr ""
+
+#: dist/index.js:374
+msgid "Delete selected"
+msgstr ""
+
+#. translators: %s: number of days.
+#: dist/index.js:375
+#, js-format
+msgid " in the last %s days"
+msgstr ""
+
+#: dist/index.js:375
+msgid "Could not load the log"
+msgstr ""
+
+#: dist/index.js:375
+msgid "Show all time"
+msgstr ""
+
+#. translators: %s: " in the last 7 days" or empty.
+#: dist/index.js:378
+#, js-format
+msgid "No entries match these filters%s"
+msgstr ""
+
+#: dist/index.js:378
+msgid "Try another connection, other words, or a wider date range."
+msgstr ""
+
+#. translators: %s: " in the last 7 days" or empty.
+#: dist/index.js:381
+#, js-format
+msgid "No failures%s."
+msgstr ""
+
+#: dist/index.js:381
+msgid "Every notification in this period was delivered."
+msgstr ""
+
+#: dist/index.js:381
+msgid "Nothing has been sent yet"
+msgstr ""
+
+#: dist/index.js:381
+msgid "Every send shows up here, with what happened and why."
+msgstr ""
+
+#: dist/index.js:381
+msgid "Create a notification"
+msgstr ""
+
+#. translators: %s: " in the last 7 days" or empty.
+#: dist/index.js:384
+#, js-format
+msgid "Nothing was sent%s"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Sends show up here as soon as a notification fires."
+msgstr ""
+
+#: dist/index.js:384
+msgid "All connections"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Last 30 days"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Last 90 days"
+msgstr ""
+
+#: dist/index.js:384
+msgid "All time"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Filter by result"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Date range"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Search log"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Sent now"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Scheduled send cancelled"
+msgstr ""
+
+#: dist/index.js:384
+msgid "Could not send it now."
+msgstr ""
+
+#: dist/index.js:384
+msgid "Could not cancel the scheduled send."
+msgstr ""
+
+#. translators: %d: notification id.
+#: dist/index.js:387
+#, js-format
+msgid "Notification #%d"
+msgstr ""
+
+#: dist/index.js:387
+msgid "Scheduled for"
+msgstr ""
+
+#: dist/index.js:387
+msgid "Send now"
+msgstr ""
+
+#: dist/index.js:387
+msgid "Could not load scheduled sends"
+msgstr ""
+
+#: dist/index.js:387
+msgid "No scheduled sends match these filters"
+msgstr ""
+
+#: dist/index.js:387
+msgid "Nothing is waiting to be sent"
+msgstr ""
+
+#: dist/index.js:387
+msgid "Connections with a delay or a schedule show up here until they send."
+msgstr ""
+
+#: dist/index.js:387
+msgid "Scheduled sends"
+msgstr ""
+
+#. translators: %s: number of scheduled sends.
+#: dist/index.js:390
+#, js-format
+msgid "%s scheduled send"
+msgid_plural "%s scheduled sends"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:390
+msgid "Cancel this scheduled send?"
+msgstr ""
+
+#: dist/index.js:390
+msgid "It will not be sent. This cannot be undone."
+msgstr ""
+
+#: dist/index.js:390
+msgid "Cancel send"
+msgstr ""
+
+#: dist/index.js:390
+msgid "Keep it"
+msgstr ""
+
+#: dist/index.js:390
+msgid "Could not load the log."
+msgstr ""
+
+#: dist/index.js:390
+msgid "Could not load scheduled sends."
+msgstr ""
+
+#: dist/index.js:390
+#: dist/index.js:415
+msgid "Updating…"
+msgstr ""
+
+#: dist/index.js:390
+#, js-format
+msgid "Updated %s"
+msgstr ""
+
+#: dist/index.js:390
+msgid "Refresh"
+msgstr ""
+
+#: dist/index.js:391
+#: dist/index.js:397
+msgid "Select all on this page"
+msgstr ""
+
+#. translators: %s: log entry id.
+#. translators: %s: debug entry id.
+#: dist/index.js:394
+#: dist/index.js:400
+#, js-format
+msgid "Select entry #%s"
+msgstr ""
+
+#: dist/index.js:394
+msgid "Every send, with what happened and why."
+msgstr ""
+
+#: dist/index.js:394
+#: dist/index.js:406
+#: dist/index.js:436
+msgid "Debug log"
+msgstr ""
+
+#: dist/index.js:394
+msgid "More log actions"
+msgstr ""
+
+#: dist/index.js:394
+#: dist/index.js:406
+msgid "Delete all entries…"
+msgstr ""
+
+#: dist/index.js:394
+msgid "Notification log"
+msgstr ""
+
+#: dist/index.js:394
+#: dist/index.js:400
+msgid "Action"
+msgstr ""
+
+#. translators: %s: debug entry id.
+#: dist/index.js:397
+#, js-format
+msgid "Debug entry #%s"
+msgstr ""
+
+#: dist/index.js:397
+msgid "Debug entry"
+msgstr ""
+
+#: dist/index.js:397
+msgid "Could not load the debug log."
+msgstr ""
+
+#. translators: %s: debug entry id.
+#: dist/index.js:403
+#, js-format
+msgid "View entry #%s"
+msgstr ""
+
+#. translators: %d: number of days.
+#: dist/index.js:406
+#, js-format
+msgid "Technical messages that help support find a problem. Entries older than %d days are deleted."
+msgstr ""
+
+#: dist/index.js:406
+msgid "Technical messages that help support find a problem."
+msgstr ""
+
+#: dist/index.js:406
+msgid "Debug log exported"
+msgstr ""
+
+#: dist/index.js:406
+msgid "Could not export the debug log."
+msgstr ""
+
+#: dist/index.js:406
+msgid "More debug log actions"
+msgstr ""
+
+#. translators: 1: entry id, 2: message.
+#: dist/index.js:409
+#, js-format
+msgid "Open debug entry #%1$s: %2$s"
+msgstr ""
+
+#: dist/index.js:409
+msgid "Could not load the debug log"
+msgstr ""
+
+#: dist/index.js:409
+msgid "The debug log is empty"
+msgstr ""
+
+#: dist/index.js:409
+msgid "Technical messages appear here when something needs a closer look."
+msgstr ""
+
+#: dist/index.js:409
+msgid "Fix the marked fields first"
+msgstr ""
+
+#: dist/index.js:409
+msgid "Settings saved"
+msgstr ""
+
+#: dist/index.js:409
+msgid "Settings were not saved"
+msgstr ""
+
+#: dist/index.js:409
+#: dist/index.js:412
+msgid "The server did not answer. Check your connection, then try again."
+msgstr ""
+
+#: dist/index.js:409
+msgid "Discard"
+msgstr ""
+
+#: dist/index.js:409
+msgid "No changes to save"
+msgstr ""
+
+#: dist/index.js:409
+msgid "Save changes"
+msgstr ""
+
+#. translators: %s: field name, e.g. "Background".
+#: dist/index.js:412
+#, js-format
+msgid "Pick a colour for %s"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Loading settings…"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Could not load your settings"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Shortcode"
+msgstr ""
+
+#: dist/index.js:412
+msgid "shortcode"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Top"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Right"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Bottom"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Left"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Opacity when subscribed"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Goes back to full on hover. 100 = no fade."
+msgstr ""
+
+#: dist/index.js:412
+msgid "Show tooltip"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Text above the bell when someone hovers it."
+msgstr ""
+
+#: dist/index.js:412
+#: dist/index.js:424
+msgid "Subscribe text"
+msgstr ""
+
+#: dist/index.js:412
+#: dist/index.js:424
+msgid "Unsubscribe text"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Animation"
+msgstr ""
+
+#: dist/index.js:412
+msgid "A soft pulse around the bell until the visitor subscribes."
+msgstr ""
+
+#: dist/index.js:412
+msgid "Animation colour"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Hide on desktop"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Hide on tablet"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Hide on mobile"
+msgstr ""
+
+#: dist/index.js:412
+msgid "More options"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Devices"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Z-index"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Raise it if the bell hides behind other parts of the page."
+msgstr ""
+
+#: dist/index.js:412
+#: dist/index.js:424
+msgid "Extra class"
+msgstr ""
+
+#: dist/index.js:412
+#: dist/index.js:424
+msgid "Add extra class to the button for custom styling."
+msgstr ""
+
+#: dist/index.js:412
+msgid "Add ID to the button for custom styling."
+msgstr ""
+
+#: dist/index.js:412
+msgid "Default"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Custom SVG"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Custom Icon Preview"
+msgstr ""
+
+#: dist/index.js:412
+msgid "WordPress Media Library is not available"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Select SVG Icon"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Use this icon"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Please select an SVG file."
+msgstr ""
+
+#: dist/index.js:412
+msgid "Change icon"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Select SVG icon"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Remove"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Parts of your SVG without their own colour use the icon colour."
+msgstr ""
+
+#: dist/index.js:412
+msgid "Without an SVG the default bell shows."
+msgstr ""
+
+#: dist/index.js:412
+msgid "Top offset"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Bottom offset"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Left offset"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Right offset"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Position"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Device to set the position for"
+msgstr ""
+
+#: dist/index.js:412
+#: dist/index.js:415
+msgid "Desktop"
+msgstr ""
+
+#: dist/index.js:412
+#: dist/index.js:415
+msgid "Tablet"
+msgstr ""
+
+#: dist/index.js:412
+#: dist/index.js:415
+msgid "Mobile"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Top left"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Top right"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Bottom left"
+msgstr ""
+
+#: dist/index.js:412
+msgid "Bottom right"
+msgstr ""
+
+#. translators: %s: device name, e.g. "Desktop".
+#: dist/index.js:415
+#, js-format
+msgid "Corner and offsets for %s. Each device can have its own."
+msgstr ""
+
+#: dist/index.js:415
+#: dist/index.js:433
+msgid "Floating bell"
+msgstr ""
+
+#: dist/index.js:415
+msgid "Stays in a corner of every page. You can also place it with <code />."
+msgstr ""
+
+#: dist/index.js:415
+msgid "Show the bell on every page"
+msgstr ""
+
+#: dist/index.js:415
+msgid "The bell already shows on every page. Turn the switch above off to show it only where you paste this shortcode."
+msgstr ""
+
+#: dist/index.js:415
+msgid "The bell shows only where you paste this shortcode."
+msgstr ""
+
+#: dist/index.js:415
+msgid "Width"
+msgstr ""
+
+#: dist/index.js:415
+msgid "Height"
+msgstr ""
+
+#: dist/index.js:415
+#: dist/index.js:424
+msgid "Colours"
+msgstr ""
+
+#: dist/index.js:415
+#: dist/index.js:424
+msgid "Background"
+msgstr ""
+
+#: dist/index.js:415
+msgid "Icon colour"
+msgstr ""
+
+#: dist/index.js:415
+#: dist/index.js:424
+msgid "Background on hover"
+msgstr ""
+
+#: dist/index.js:415
+msgid "Icon colour on hover"
+msgstr ""
+
+#: dist/index.js:415
+#: dist/index.js:424
+msgid "Border radius"
+msgstr ""
+
+#: dist/index.js:415
+msgid "50% makes a circle."
+msgstr ""
+
+#: dist/index.js:415
+msgid "Loading preview…"
+msgstr ""
+
+#: dist/index.js:415
+msgid "The preview could not load"
+msgstr ""
+
+#: dist/index.js:415
+msgid "Preview"
+msgstr ""
+
+#: dist/index.js:415
+msgid "Preview device"
+msgstr ""
+
+#. translators: %s: device name, e.g. "Desktop".
+#: dist/index.js:418
+#, js-format
+msgid "Preview of your site on %s"
+msgstr ""
+
+#: dist/index.js:418
+msgid "The latest change could not be previewed. Showing the last good preview."
+msgstr ""
+
+#: dist/index.js:418
+msgid "Visitor state"
+msgstr ""
+
+#: dist/index.js:418
+msgid "Not subscribed"
+msgstr ""
+
+#: dist/index.js:418
+msgid "Subscribed"
+msgstr ""
+
+#. translators: %d: page width in px.
+#: dist/index.js:421
+#, js-format
+msgid "Scaled preview of your site at %d px. Visitors see changes after you save."
+msgstr ""
+
+#: dist/index.js:421
+msgid "desktop"
+msgstr ""
+
+#: dist/index.js:421
+msgid "tablet"
+msgstr ""
+
+#: dist/index.js:421
+msgid "mobile"
+msgstr ""
+
+#. translators: %s: device name in lower case, e.g. "mobile".
+#: dist/index.js:424
+#, js-format
+msgid "The bell is hidden on %s. Change it under More options."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Enter a size in px, 1 or more."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Enter a percent from 0 to 100."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Enter a whole number."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Enter a number in px for each device."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Use letters, numbers, - and _. Separate classes with spaces."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Use letters, numbers, - and _ only."
+msgstr ""
+
+#: dist/index.js:424
+#: dist/index.js:433
+msgid "Subscribe button"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Add it to any post or page with this shortcode."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Text colour"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Text colour on hover"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Size and shape"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Font size"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Empty uses your theme’s size."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Padding"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Margin"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Advanced"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Add ID to the button for custom styling. The subscribed button gets the same ID plus “-subscribed”."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Enter a size from 1 to 200, or leave it empty."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Enter 0 or a positive number."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Enter a number for each side."
+msgstr ""
+
+#: dist/index.js:424
+msgid "Web Push is ready"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Web Push is ready, nobody has subscribed yet"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Web Push needs attention"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Running checks…"
+msgstr ""
+
+#: dist/index.js:424
+msgid "The checks could not run"
+msgstr ""
+
+#: dist/index.js:424
+msgid "Checking Web Push…"
+msgstr ""
+
+#. translators: 1: checks passed, 2: total checks, 3: date and time of the check.
+#: dist/index.js:427
+#, js-format
+msgid "%1$d of %2$d check passed · Last run: %3$s"
+msgid_plural "%1$d of %2$d checks passed · Last run: %3$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:427
+msgid "This takes a few seconds."
+msgstr ""
+
+#: dist/index.js:427
+msgid "Run checks"
+msgstr ""
+
+#: dist/index.js:427
+msgid "Paste the key exactly as generated: letters, numbers, - and _ only."
+msgstr ""
+
+#: dist/index.js:427
+msgid "This is not a valid key. Paste the whole key as generated, or generate new keys."
+msgstr ""
+
+#: dist/index.js:427
+msgid "Keys saved"
+msgstr ""
+
+#: dist/index.js:427
+msgid "New keys saved"
+msgstr ""
+
+#: dist/index.js:427
+msgid "New keys generated. Save them to start using them."
+msgstr ""
+
+#: dist/index.js:427
+msgid "Keys were not generated"
+msgstr ""
+
+#: dist/index.js:427
+msgid "The key service did not answer. Turn off caching plugins for a moment, then try again."
+msgstr ""
+
+#. translators: %s: number of subscribers.
+#: dist/index.js:430
+#, js-format
+msgid "New keys mean your %s subscriber has to subscribe again."
+msgid_plural "New keys mean all %s subscribers have to subscribe again."
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/index.js:430
+msgid "Keys"
+msgstr ""
+
+#: dist/index.js:430
+msgid "They sign your push messages. Generate them once, or paste your own."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Web Push public key"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Identifies your site to the browser’s push service."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Copy public key"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Web Push private key"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Proves the messages come from you. Keep it secret."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Hide private key"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Show private key"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Generate keys"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Automatically save the keys after generating"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Save keys"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Generate new keys?"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Their browsers only trust the current keys."
+msgstr ""
+
+#: dist/index.js:430
+msgid "The current keys stop working."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Generate new keys"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Make sure you have allowed notifications in your browser and operating system settings."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Check that you have enabled notifications for this site in your browser."
+msgstr ""
+
+#: dist/index.js:430
+msgid "If your device has \"Do Not Disturb\" mode enabled, please disable it to allow notifications."
+msgstr ""
+
+#: dist/index.js:430
+msgid "If you’re having trouble generating the keys, try temporarily disabling any caching plugins and try again."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Notifications not arriving?"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Still stuck with keys or delivery? Write to us through the <a>contact form</a>."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Step-by-step setup is in the <a>documentation</a>."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Subscribe button saved"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Floating bell saved"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Subscriber counts could not load"
+msgstr ""
+
+#: dist/index.js:430
+msgid "No subscribers yet"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Visitors subscribe with the floating bell or the subscribe button. Check that both look right, then share your site."
+msgstr ""
+
+#: dist/index.js:430
+msgid "Set up the bell"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Check Web Push"
+msgstr ""
+
+#: dist/index.js:430
+msgid "Active subscribers"
+msgstr ""
+
+#. translators: %s: number of browsers that unsubscribed.
+#: dist/index.js:433
+#, js-format
+msgid "+%s unsubscribed"
+msgstr ""
+
+#: dist/index.js:433
+msgid "Browsers that allowed push notifications on your site."
+msgstr ""
+
+#: dist/index.js:433
+msgid "See and remove single subscriptions"
+msgstr ""
+
+#: dist/index.js:433
+msgid "Let visitors subscribe in their browser, then send them push notifications."
+msgstr ""
+
+#: dist/index.js:433
+msgid "Web Push section"
+msgstr ""
+
+#: dist/index.js:433
+msgid "Keys & health"
+msgstr ""
+
+#: dist/index.js:433
+msgid "days"
+msgstr ""
+
+#: dist/index.js:433
+msgid "Available in Pro"
+msgstr ""
+
+#. translators: %s: list name in lower case, e.g. "post types".
+#: dist/index.js:436
+#, js-format
+msgid "With no %s selected, these triggers never fire."
+msgstr ""
+
+#: dist/index.js:436
 msgid "General"
 msgstr ""
 
-#: dist/index.js:66
+#: dist/index.js:436
+msgid "How sending works."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Process notifications in the background"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Sends run after the page finishes, so publishing a post stays fast."
+msgstr ""
+
+#: dist/index.js:436
 msgid "Triggers"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Web Push"
+#: dist/index.js:436
+msgid "Turn off groups you don’t use. They leave the trigger list."
 msgstr ""
 
-#: dist/index.js:66
-msgid "Settings saved successfully"
+#: dist/index.js:436
+msgid "WooCommerce"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Failed to save settings"
+#: dist/index.js:436
+msgid "Orders, products and reviews."
 msgstr ""
 
-#: dist/index.js:66
-msgid "History"
+#: dist/index.js:436
+msgid "Post status change"
 msgstr ""
 
-#: dist/index.js:66
-msgid "No logs found."
+#: dist/index.js:436
+msgid "Published, scheduled, sent to review, trashed."
 msgstr ""
 
-#: dist/index.js:66
-msgid "Please select a log."
+#: dist/index.js:436
+msgid "Post types"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Delete All"
+#: dist/index.js:436
+msgid "Status changes of these post types can send notifications."
 msgstr ""
 
-#: dist/index.js:66
-msgid "Log Details"
+#: dist/index.js:436
+msgid "Add post type"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Details"
+#: dist/index.js:436
+msgid "Taxonomy term change"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Email Content"
+#: dist/index.js:436
+msgid "Category or tag created, edited, deleted."
 msgstr ""
 
-#: dist/index.js:66
-msgid "Export All"
+#: dist/index.js:436
+msgid "Taxonomies"
 msgstr ""
 
-#: dist/index.js:66
-msgid "Help"
+#: dist/index.js:436
+msgid "Term changes in these taxonomies can send notifications."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Add taxonomy"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Comment change"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Added, approved, trashed."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Comment types"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Status changes of these comment types can send notifications."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Add comment type"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Media change"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Uploaded, edited, deleted."
+msgstr ""
+
+#: dist/index.js:436
+msgid "User change"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Registered, profile updated, deleted."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Theme change"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Switched, updated."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Plugin change"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Activated, deactivated, updated."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Data export and erase requests."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Enter a whole number from 1 to 50."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Enter some text, or turn the welcome notification off."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Subscriber rules. Keys, the bell and the button are on the <a>Web Push</a> page."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Welcome notification"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Sent right after someone allows push notifications."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Auto-delete failed subscriptions"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Removes a browser after it keeps failing, like when someone clears their data."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Failure threshold"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Failed sends in a row, 1 to 50. A successful send resets the count. 3 to 5 works for most sites."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Auto display web push prompt"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Shows the browser’s permission prompt after the visitor’s first click on the page."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Enter a whole number of days, 1 or more."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Logs"
+msgstr ""
+
+#: dist/index.js:436
+msgid "How long entries are kept."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Delete notification logs older than"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Older entries are removed once a day."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Delete debug logs older than"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Debug logs help support find problems."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Technical messages for support."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Open debug log"
+msgstr ""
+
+#: dist/index.js:436
+msgid "(unsaved changes)"
+msgstr ""
+
+#: dist/index.js:436
+msgid "Settings sections"
+msgstr ""
+
+#: dist/index.js:436
+msgid "How Notification Master works across your site."
+msgstr ""
+
+#: dist/index.js:436
+msgid "UI kit"
+msgstr ""
+
+#: dist/index.js:436
+msgid "This page does not exist"
+msgstr ""
+
+#: dist/index.js:436
+msgid "The link may be old. Go back to the overview."
+msgstr ""
+
+#: dist/index.js:436
+msgid "Open Overview"
 msgstr ""

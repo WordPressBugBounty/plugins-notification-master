@@ -188,25 +188,35 @@ class Subscription_Model {
 	 *
 	 * @since 1.4.0
 	 *
-	 * @param int    $per_page Per page.
-	 * @param int    $page Page.
-	 * @param string $status Status.
+	 * @param int    $per_page  Per page.
+	 * @param int    $page      Page.
+	 * @param string $status    Status.
+	 * @param int    $before_id Only rows with a lower id than this (keyset paging); 0 for none.
 	 *
 	 * @return array
 	 */
-	public static function get_rows( $per_page = 10, $page = 1, $status = 'all' ) {
+	public static function get_rows( $per_page = 10, $page = 1, $status = 'all', $before_id = 0 ) {
 		global $wpdb;
 
 		$offset = ( $page - 1 ) * $per_page;
-		$result = array();
+		$where  = array();
+		$args   = array();
 
-		if ( 'all' === $status ) {
-			$result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}ntfm_subscriptions ORDER BY id DESC LIMIT %d, %d", $offset, $per_page ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No caching needed.
-		} else {
-			$result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}ntfm_subscriptions WHERE `status` = %s ORDER BY id DESC LIMIT %d, %d", $status, $offset, $per_page ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- No caching needed.
+		if ( 'all' !== $status ) {
+			$where[] = '`status` = %s';
+			$args[]  = $status;
 		}
 
-		return $result;
+		if ( $before_id > 0 ) {
+			$where[] = 'id < %d';
+			$args[]  = (int) $before_id;
+		}
+
+		$sql    = "SELECT * FROM {$wpdb->prefix}ntfm_subscriptions" . ( $where ? ' WHERE ' . implode( ' AND ', $where ) : '' ) . ' ORDER BY id DESC LIMIT %d, %d';
+		$args[] = $offset;
+		$args[] = $per_page;
+
+		return $wpdb->get_results( $wpdb->prepare( $sql, $args ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Placeholders only; no caching needed.
 	}
 
 	/**
@@ -220,10 +230,11 @@ class Subscription_Model {
 	 * @param int    $per_page Number of results per page. Default 10.
 	 * @param int    $page     Current page. Default 1.
 	 * @param string $status   Subscription status. Default 'all'.
+	 * @param int    $before_id Only rows with a lower id than this (keyset paging); 0 for none.
 	 *
 	 * @return array Retrieved subscription rows.
 	 */
-	public static function get_subscriptions_by_user_ids( $user_ids = array(), $per_page = 10, $page = 1, $status = 'all' ) {
+	public static function get_subscriptions_by_user_ids( $user_ids = array(), $per_page = 10, $page = 1, $status = 'all', $before_id = 0 ) {
 		global $wpdb;
 
 		if ( empty( $user_ids ) || ! is_array( $user_ids ) ) {
@@ -238,13 +249,22 @@ class Subscription_Model {
 		// Prepare base SQL query
 		$sql = "SELECT * FROM {$wpdb->prefix}ntfm_subscriptions WHERE `user_id` IN ($user_ids_placeholder)";
 
+		$query_args = $user_ids;
+
 		// Filter by status if needed
 		if ( 'all' !== $status ) {
-			$sql       .= ' AND `status` = %s';
-			$query_args = array_merge( $user_ids, array( $status, $offset, $per_page ) );
-		} else {
-			$query_args = array_merge( $user_ids, array( $offset, $per_page ) );
+			$sql         .= ' AND `status` = %s';
+			$query_args[] = $status;
 		}
+
+		// Keyset paging: rows that sat after the previous page, whatever happened to the rows before them.
+		if ( $before_id > 0 ) {
+			$sql         .= ' AND id < %d';
+			$query_args[] = (int) $before_id;
+		}
+
+		$query_args[] = $offset;
+		$query_args[] = $per_page;
 
 		// Add sorting and pagination
 		$sql .= ' ORDER BY id DESC LIMIT %d, %d';

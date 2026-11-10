@@ -11,10 +11,14 @@ namespace Notification_Master\REST_API;
 
 use Notification_Master\REST_API\Controllers\V1\Rest_Settings_Controller;
 use Notification_Master\REST_API\Controllers\V1\Rest_Notification_Controller;
+use Notification_Master\REST_API\Controllers\V1\Rest_Notification_Restore_Controller;
 use Notification_Master\REST_API\Controllers\V1\Rest_Logs_Controller;
 use Notification_Master\REST_API\Controllers\V1\Rest_Notification_Logs_Controller;
 use Notification_Master\REST_API\Controllers\V1\Rest_Subscriptions_Controller;
 use Notification_Master\REST_API\Controllers\V1\Rest_Scheduled_Controller;
+use Notification_Master\REST_API\Controllers\V1\Rest_Overview_Controller;
+use Notification_Master\REST_API\Controllers\V1\Rest_Test_Controller;
+use Notification_Master\REST_API\Controllers\V1\Rest_Webpush_Controller;
 
 /**
  * REST_API class.
@@ -62,10 +66,14 @@ class REST_API {
 		$controllers = array(
 			Rest_Settings_Controller::class,
 			Rest_Notification_Controller::class,
+			Rest_Notification_Restore_Controller::class,
 			Rest_Logs_Controller::class,
 			Rest_Notification_Logs_Controller::class,
 			Rest_Subscriptions_Controller::class,
 			Rest_Scheduled_Controller::class,
+			Rest_Overview_Controller::class,
+			Rest_Test_Controller::class,
+			Rest_Webpush_Controller::class,
 		);
 
 		foreach ( $controllers as $controller ) {

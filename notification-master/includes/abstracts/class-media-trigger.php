@@ -74,8 +74,16 @@ abstract class Media_Trigger extends Trigger {
 	 * @return string
 	 */
 	public function get_description() {
-		/* translators: %s: Media name */
-		return sprintf( __( 'Triggered when %s media.', 'notification-master' ), $this->name );
+		switch ( $this->slug ) {
+			case 'published':
+				return __( 'This trigger fires when a file is uploaded to the media library.', 'notification-master' );
+			case 'updated':
+				return __( 'This trigger fires when a media file is edited.', 'notification-master' );
+			case 'trashed':
+				return __( 'This trigger fires when a media file is deleted.', 'notification-master' );
+		}
+
+		return $this->description;
 	}
 
 	/**

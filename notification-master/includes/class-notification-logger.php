@@ -30,6 +30,15 @@ class Notification_Logger {
 	private static $instance;
 
 	/**
+	 * Active capture: { extra, entries } or null.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @var array|null
+	 */
+	private $capture = null;
+
+	/**
 	 * Get instance of this class.
 	 *
 	 * @since 1.0.0
@@ -88,13 +97,54 @@ class Notification_Logger {
 	 * @param array  $content Content.
 	 */
 	public function log( $integration, $status, $content = array() ) {
-		Notification_Logs_Model::insert(
+		if ( null !== $this->capture && is_array( $content ) ) {
+			$content = array_merge( $content, $this->capture['extra'] );
+		}
+
+		$id = Notification_Logs_Model::insert(
 			array(
 				'integration' => $integration,
 				'status'      => $status,
 				'content'     => maybe_serialize( $content ),
 			)
 		);
+
+		if ( null !== $this->capture ) {
+			$this->capture['entries'][] = array(
+				'id'          => (int) $id,
+				'integration' => $integration,
+				'status'      => $status,
+				'content'     => $content,
+			);
+		}
+	}
+
+	/**
+	 * Start recording log writes (used by test sends).
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $extra Keys merged into every logged content array.
+	 */
+	public function start_capture( $extra = array() ) {
+		$this->capture = array(
+			'extra'   => (array) $extra,
+			'entries' => array(),
+		);
+	}
+
+	/**
+	 * Stop recording and return what was logged.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return array List of { id, integration, status, content }.
+	 */
+	public function stop_capture() {
+		$entries       = null !== $this->capture ? $this->capture['entries'] : array();
+		$this->capture = null;
+
+		return $entries;
 	}
 
 	/**
